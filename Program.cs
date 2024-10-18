@@ -8,8 +8,6 @@ string userInput = Console.ReadLine();
 
 while (userInput.ToLower() != "exit")
 {
-    Console.WriteLine("Press 1 to add a Product");
-    Console.WriteLine("Type 'exit' to quit");
     userInput = Console.ReadLine();
     if (userInput == "1")
     {
