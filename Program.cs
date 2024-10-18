@@ -27,5 +27,6 @@ while (userInput.ToLower() != "exit")
         userInput = Console.ReadLine();
         Console.WriteLine("If adding another product press 1");
         Console.WriteLine("To quit type exit");
+        userInput = Console.ReadLine();
     }
 }
