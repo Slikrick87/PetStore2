@@ -8,7 +8,6 @@ string userInput = Console.ReadLine();
 
 while (userInput.ToLower() != "exit")
 {
-    userInput = Console.ReadLine();
     if (userInput == "1")
     {
         DogLeash daRizzler = new DogLeash();
@@ -25,14 +24,8 @@ while (userInput.ToLower() != "exit")
         Console.Write("Material:");
         daRizzler.Material = Console.ReadLine();
         Console.WriteLine(JsonSerializer.Serialize(daRizzler));
-    }
-    else if (userInput == "exit")
-    {
-        Console.WriteLine("Exitting PetStore. Press any key.");
-        Console.ReadLine();
-    }
-    else
-    {
-        Console.WriteLine("Not a valid input");
+        userInput = Console.ReadLine();
+        Console.WriteLine("If adding another product press 1");
+        Console.WriteLine("To quit type exit");
     }
 }
