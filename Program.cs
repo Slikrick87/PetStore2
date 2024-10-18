@@ -30,7 +30,11 @@ while (userInput.ToLower() != "exit")
     }
     else if (userInput == "exit")
     {
-        Console.WriteLine("Exitting PetSTore. Press any key.");
+        Console.WriteLine("Exitting PetStore. Press any key.");
         Console.ReadLine();
+    }
+    else
+    {
+        Console.WriteLine("Not a valid input");
     }
 }
