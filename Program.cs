@@ -6,6 +6,7 @@ using System.Text.Json;
 
 Console.WriteLine("Press 1 to add a product.");
 Console.WriteLine("Type 'exit' to quit");
+var productLogic = new ProductLogic();
 string userInput = Console.ReadLine();
 
 while (userInput.ToLower() != "exit")
@@ -25,6 +26,7 @@ while (userInput.ToLower() != "exit")
         daRizzler.LengthInches = int.Parse(Console.ReadLine());
         Console.Write("Material:");
         daRizzler.Material = Console.ReadLine();
+        productLogic.AddProduct();
         Console.WriteLine($"Product added: " + daRizzler.Name );
         Console.WriteLine(JsonSerializer.Serialize(daRizzler));
         Console.WriteLine();
