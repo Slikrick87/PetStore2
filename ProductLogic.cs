@@ -11,14 +11,21 @@ namespace PetStore
     internal class ProductLogic
     {
         List<Product> _products = new List<Product>();
-        
-            public ProductLogic()
+
+        public ProductLogic()
         {
             _products = new List<Product>();
         }
         public void AddProduct()
-            { _products.Add(new Product()); }
+        { _products.Add(new Product()); }
+
+
+        public List<Product> GetAllProducts()
+        {
+            return _products;
         }
-        
+
     }
+
+}
 
