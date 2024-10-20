@@ -8,21 +8,21 @@ namespace PetStore
 {
     public class Product
     {
-        public string Name;
-        public decimal Price;
-        public int Quantity;
-        public string Description;
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public string Description { get; set; }
     }
 
     public class CatFood:Product
     {
-        public double WeightPounds;
-        public bool KittenFood;
+        public double WeightPounds { get; set; }
+        public bool KittenFood { get; set; }
     }
 
     public class DogLeash:Product
     {
-        public int LengthInches;
-        public string Material;
+        public int LengthInches { get; set; }
+        public string Material { get; set; }
     }
 }

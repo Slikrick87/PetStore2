@@ -1,5 +1,6 @@
 ﻿
 using PetStore;
+using System;
 using System.Text.Json;
 
 Console.WriteLine("Press 1 to add a product.");
@@ -27,6 +28,8 @@ while (userInput.ToLower() != "exit")
         userInput = Console.ReadLine();
         Console.WriteLine("If adding another product press 1");
         Console.WriteLine("To quit type exit");
+        Console.WriteLine(daRizzler.Name);
         userInput = Console.ReadLine();
     }
+
 }
