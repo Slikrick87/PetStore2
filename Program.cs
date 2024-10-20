@@ -1,6 +1,7 @@
 ﻿
 using PetStore;
 using System;
+using System.ComponentModel.Design;
 using System.Text.Json;
 
 Console.WriteLine("Press 1 to add a product.");
@@ -24,12 +25,13 @@ while (userInput.ToLower() != "exit")
         daRizzler.LengthInches = int.Parse(Console.ReadLine());
         Console.Write("Material:");
         daRizzler.Material = Console.ReadLine();
+        Console.WriteLine($"Product added: " + daRizzler.Name );
         Console.WriteLine(JsonSerializer.Serialize(daRizzler));
-        userInput = Console.ReadLine();
-        Console.WriteLine("If adding another product press 1");
-        Console.WriteLine("To quit type exit");
-        Console.WriteLine(daRizzler.Name);
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("Press 1 to add another Product");
+        Console.WriteLine("Type exit to quit program");
+        //Console.WriteLine(daRizzler.Name);
         userInput = Console.ReadLine();
     }
-
-}
+    }
