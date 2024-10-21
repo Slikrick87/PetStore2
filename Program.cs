@@ -11,7 +11,7 @@ Console.WriteLine("Type 'exit' to quit");
 var productLogic = new Product();
 string userInput = Console.ReadLine();
 
-while (userInput.ToLower() != "exit")
+while (userInput.ToLower().Trim() != "exit")
 {
     if (userInput == "1")
     {
