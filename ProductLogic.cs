@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PetStore;
 
-namespace Logic
+/*namespace Logic
 {
     public class Logic
     {
@@ -30,6 +30,6 @@ namespace Logic
         }
 
     }
-}
+}*/
 
 
