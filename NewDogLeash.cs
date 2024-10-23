@@ -10,7 +10,7 @@ namespace PetStore
 {
     public class NewDogLeash
     {
-        public void newDogLeash(DogLeash dogLeash)
+        public void newDogLeash()
         {
             DogLeash newDogLeash = new DogLeash();
             Console.Write("Name:");

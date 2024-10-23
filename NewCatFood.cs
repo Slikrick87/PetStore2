@@ -26,7 +26,7 @@ namespace PetStore
             Console.Write("Safe for Kittens to eat?: Y/N");
             string Safe = Console.ReadLine();
             catFood.KittenFood = Safe.ToLower().Replace(" ", "").StartsWith("y");
-            ProductLogic.AddProduct(catFood);
+            ProductLogic.AddProduct(new newCatFood);
             Console.WriteLine($"Product added: " + catFood.Name);
             Console.WriteLine(JsonSerializer.Serialize(catFood));
 

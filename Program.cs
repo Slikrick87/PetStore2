@@ -21,7 +21,7 @@ while (userInput.ToLower().Trim() != "exit")
         if (productType.ToLower().Replace(" ", "") == "dogleash")
         {
             NewDogLeash dog_leash = new NewDogLeash();
-            dog_leash.newDogLeash(new DogLeash, Product);
+            dog_leash.newDogLeash();
 
         }
         else if (productType.ToLower().Replace(" ","") == "catfood")
