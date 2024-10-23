@@ -7,29 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using PetStore;
 
-/*namespace Logic
+namespace logic
 {
-    public class Logic
+    public class ProdcutLogic
     {
-        private static List<Product> _products = new List<Product>();
-
-        //public void ProductLogic()
-        //{
-        //  var _products = new List<Product>();
-
-        //}
-        public void AddProduct(Product product)
-        { _products.Add(new Product()); }
-        public static List<Product> GetAllProducts()
-        {
         
-            foreach (Product product in _products)
-            {
-                Console.WriteLine(_products);
-            }
-        }
 
     }
-}*/
+}
 
 
