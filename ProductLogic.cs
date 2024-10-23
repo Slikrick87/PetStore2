@@ -12,28 +12,29 @@ namespace PetStore
 {
     public class ProductLogic
     {
-        private List<Product>? _products;
-        public ProductLogic()
-        {
-            _products = new List<Product>();
-            new Product();
+        //private List<Product>? _products { get;  init; }
+        //public ProductLogic()
+        
+            public List <Product> _products = new List<Product>();
 
 
-
-        }
-        public void AddProduct(Product product)
-        {
-            _products.Add(product);
-        }
-        public void GetAllProducts()
-        {
-            foreach (Product product in _products)
+            public static Product AddProduct(DogLeash dog_leash)
             {
-                Console.WriteLine(product);
+                    List<Product> _products = new List<Product>();
+                    _products.Add(new Product());
+                    return new Product();
+                
             }
-
+            public static void GetAllProducts(List<Product> _products)
+            {
+                //foreach (Product product in list)
+                //{
+                    _products.ForEach((p) => Console.WriteLine(p));
+                
+                //}
+            //return null;
+            }
         }
     }
-}
 
 
