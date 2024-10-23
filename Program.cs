@@ -20,23 +20,9 @@ while (userInput.ToLower().Trim() != "exit")
         string productType = Console.ReadLine();
         if (productType.ToLower().Replace(" ", "") == "dogleash")
         {
-            DogLeash newDogLeash = new DogLeash();
-            Console.Write("Name:");
-            newDogLeash.Name = Console.ReadLine();
-            Console.Write("Price:");
-            newDogLeash.Price = decimal.Parse(Console.ReadLine());
-            Console.Write("Quantity:");
-            newDogLeash.Quantity = int.Parse(Console.ReadLine());
-            Console.Write("Description:");
-            newDogLeash.Description = Console.ReadLine();
-            Console.Write("Length in inches:");
-            string length = Console.ReadLine();
-            newDogLeash.LengthInches = int.Parse(length.Replace("\"", ""));
-            Console.Write("Material:");
-            newDogLeash.Material = Console.ReadLine();
-            //AddProduct(newDogLeash);
-            Console.WriteLine($"Product added: " + newDogLeash.Name);
-            Console.WriteLine(JsonSerializer.Serialize(newDogLeash));
+            NewDogLeash dog_leash = new NewDogLeash();
+            dog_leash.newDogLeash();
+
         }
         else if (productType.ToLower().Replace(" ","") == "catfood")
         {

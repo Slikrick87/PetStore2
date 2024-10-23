@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PetStore
 {
-    public class NewDogFood
+    public class NewDogLeash
     {
-        public void newDogFood()
+        public void newDogLeash()
         {
             DogLeash newDogLeash = new DogLeash();
             Console.Write("Name:");
