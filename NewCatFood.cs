@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PetStore;
 
 namespace PetStore
 {
@@ -11,30 +12,23 @@ namespace PetStore
     {
         public void NewCatFood() 
         {
-            CatFood newCatFood = new CatFood();
+            CatFood catFood = new CatFood();
             Console.Write("Name:");
-            newCatFood.Name = Console.ReadLine().Trim();
+            catFood.Name = Console.ReadLine().Trim();
             Console.Write("Price:");
-            newCatFood.Price = int.Parse(Console.ReadLine());
+            catFood.Price = int.Parse(Console.ReadLine());
             Console.Write("Quantity:");
-            newCatFood.Quantity = int.Parse(Console.ReadLine());
+            catFood.Quantity = int.Parse(Console.ReadLine());
             Console.Write("Description:");
-            newCatFood.Description = Console.ReadLine();
+            catFood.Description = Console.ReadLine();
             Console.Write("Weight in pounds:");
-            newCatFood.WeightPounds = int.Parse(Console.ReadLine());
+            catFood.WeightPounds = int.Parse(Console.ReadLine());
             Console.Write("Safe for Kittens to eat?: Y/N");
             string Safe = Console.ReadLine();
-            if (Safe.ToLower().Replace(" ", "").StartsWith("y"))
-            {
-                newCatFood.KittenFood = true;
-            }
-            else
-            {
-                newCatFood.KittenFood = false;
-            }
-            //AddProduct(newDogLeash);
-            Console.WriteLine($"Product added: " + newCatFood.Name);
-            Console.WriteLine(JsonSerializer.Serialize(newCatFood));
+            catFood.KittenFood = Safe.ToLower().Replace(" ", "").StartsWith("y");
+            ProductLogic.AddProduct(catFood);
+            Console.WriteLine($"Product added: " + catFood.Name);
+            Console.WriteLine(JsonSerializer.Serialize(catFood));
 
         }
     }

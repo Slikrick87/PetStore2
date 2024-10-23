@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PetStore;
 
 namespace PetStore
 {
     public class NewDogLeash
     {
-        public void newDogLeash()
+        public void newDogLeash(DogLeash dogLeash)
         {
             DogLeash newDogLeash = new DogLeash();
             Console.Write("Name:");
@@ -25,6 +26,7 @@ namespace PetStore
             newDogLeash.LengthInches = int.Parse(length.Replace("\"", ""));
             Console.Write("Material:");
             newDogLeash.Material = Console.ReadLine();
+            ProductLogic.AddProduct(new NewDogLeash);
             Console.WriteLine($"Product added: " + newDogLeash.Name);
             Console.WriteLine(JsonSerializer.Serialize(newDogLeash));
         }
