@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using PetStore;
+﻿using System.Text.Json;
 
 namespace PetStore
 {
     public class newCatFood
     {
-        public static CatFood NewCatFood(ProductLogic productLogic) 
+        public static CatFood NewCatFood(ProductLogic productLogic)
         {
 
             CatFood catFood = new CatFood();

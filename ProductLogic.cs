@@ -1,50 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using PetStore;
-
-namespace PetStore
+﻿namespace PetStore
 {
     public class ProductLogic
     {
-        //private List<Product>? _products { get;  init; }
-        //public ProductLogic()
-        
-            public List <Product> _products = new List<Product>();
+        public List<Product> _products = new List<Product>();
+        public Dictionary<string, DogLeash> _DogLeash = new Dictionary<string, DogLeash>();
+        public Dictionary<string, CatFood> _CatFood = new Dictionary<string, CatFood>();
 
+        public Product AddProduct(Product product)
+        {
+            _products.Add(product);
 
-            public Product AddProduct(Product product)
+            if (product.GetType() == typeof(CatFood))
             {
-                    //List<Product> _products = new List<Product>();
-                    _products.Add(product);
-                    return product;
-                    
+                _CatFood.Add(product.Name, product as CatFood);
             }
-            public void GetAllProducts(List<Product> _products)
+            else if (product.GetType() == typeof(DogLeash))
             {
-            //foreach (Product product in list)
-            //{
-                foreach (Product product in _products) 
-                {
-                
-                Console.WriteLine($"\nProduct Name:    " +  product.Name);
+                _DogLeash.Add(product.Name, product as DogLeash);
+            }
+            return product;
+        }
+        public void GetAllProducts(List<Product> _products)
+        {
+            foreach (Product product in _products)
+            {
+
+                Console.WriteLine($"\nProduct Name:  " + product.Name);
                 Console.WriteLine($"Description:     " + product.Description);
                 Console.WriteLine($"Price:           " + product.Price);
                 Console.WriteLine($"Quantity:        " + product.Quantity);
-                     if (product.GetType() == typeof(CatFood)) { }
-                //return;
-                }
-            
-                
+                //if (product.GetType() == typeof(CatFood)) 
+                //{
+                //    Console.WriteLine($"Weight:           " + product.WeightPounds);
                 //}
-            //return null;
             }
         }
+
+        public Product GetDogLeashByName(string name)
+        {
+            return _DogLeash[name];
+        }
+
     }
+}
 
 

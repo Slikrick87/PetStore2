@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PetStore
+﻿namespace PetStore
 {
     public class Product
     {
@@ -14,13 +8,13 @@ namespace PetStore
         public string? Description { get; set; } // should i use a ? or =string.empty
     }
 
-    public class CatFood:Product
+    public class CatFood : Product
     {
         public double WeightPounds { get; set; }
         public bool KittenFood { get; set; }
     }
 
-    public class DogLeash:Product
+    public class DogLeash : Product
     {
         public int LengthInches { get; set; }
         public string? Material { get; set; }
