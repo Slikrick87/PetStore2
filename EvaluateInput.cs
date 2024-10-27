@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using PetStore;
 
 namespace PetStore
 {
     public class EvaluateInput
     {
-        
+        //ProductLogic = new ProductLogic();
         public static void CheckInput(string userInput) 
         {
             var ProductLogic = new ProductLogic();
@@ -32,6 +33,20 @@ namespace PetStore
                     }
                 case "2":
                     {
+                        Console.WriteLine("Enter product type:");
+                        userInput = Console.ReadLine();
+                        if (userInput.Trim().ToLower() == "dogleash")
+                        {
+                            Console.WriteLine("Enter Name of Dog Leash.");
+                            userInput = Console.ReadLine();
+                            ProductLogic.GetDogLeashByName(userInput);
+                        }
+                        else if (userInput.Trim().ToLower() == "catfood") ;
+                        {
+                            Console.WriteLine(" Enter Name of Cat Food.");
+                            userInput = Console.ReadLine();
+                            ProductLogic.GetCatFoodByName(userInput);
+                        }
                         break;
                     }
                 case "8":

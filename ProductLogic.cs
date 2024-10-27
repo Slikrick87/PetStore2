@@ -1,10 +1,12 @@
-﻿namespace PetStore
+﻿using System.Collections.Generic;
+
+namespace PetStore
 {
     public class ProductLogic
     {
         public List<Product> _products = new List<Product>();
-        public Dictionary<string, DogLeash> _DogLeash = new Dictionary<string, DogLeash>();
-        public Dictionary<string, CatFood> _CatFood = new Dictionary<string, CatFood>();
+        public Dictionary<string, DogLeash> _DogLeash = new();
+        public Dictionary<string, CatFood> _CatFood = new();
 
         public Product AddProduct(Product product)
         {
@@ -24,8 +26,9 @@
         {
             foreach (Product product in _products)
             {
-
-                Console.WriteLine($"\nProduct Name:  " + product.Name);
+                //Console.WriteLine("Hey");
+                Console.WriteLine();
+                Console.WriteLine($"Product Name:    " + product.Name);
                 Console.WriteLine($"Description:     " + product.Description);
                 Console.WriteLine($"Price:           " + product.Price);
                 Console.WriteLine($"Quantity:        " + product.Quantity);
@@ -36,11 +39,26 @@
             }
         }
 
-        public Product GetDogLeashByName(string name)
+        public void /*Dictionary <string, DogLeash>*/ GetDogLeashByName(string name)
         {
-            return _DogLeash[name];
+            //string key = Console.ReadLine();
+            Console.WriteLine($"Product Name:              " + _DogLeash[name].Name);
+            Console.WriteLine($"Product Description:       " + _DogLeash[name].Description);
+            Console.WriteLine($"Product Price:             " + _DogLeash[name].Price);
+            Console.WriteLine($"Product Quantity:          " + _DogLeash[name].Quantity);
+            Console.WriteLine($"Product Material:          " + _DogLeash[name].Material);
+            Console.WriteLine($"Product Length:            " + _DogLeash[name].LengthInches +"\"");
         }
-
+        public void /*Dictionary <string, CatFood>*/ GetCatFoodByName(string name)
+            {
+            //string key = Console.ReadLine();
+            Console.WriteLine($"Product Name:              " + _CatFood[name].Name);
+            Console.WriteLine($"Product Description:       " + _CatFood[name].Description);
+            Console.WriteLine($"Product Price:             " + _CatFood[name].Price);
+            Console.WriteLine($"Product Quantity:          " + _CatFood[name].Quantity);
+            Console.WriteLine($"Product Weight:            " + _CatFood[name].WeightPounds + "lbs");
+            Console.WriteLine($"Product Safe for Kittens:  " + _CatFood[name].KittenFood);
+            }
     }
 }
 
