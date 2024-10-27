@@ -10,7 +10,7 @@ namespace PetStore
 {
     public class newDogLeash
     {
-        public static DogLeash NewDogLeash()
+        public static DogLeash NewDogLeash(ProductLogic productLogic)
         {
             DogLeash dog_leash = new DogLeash();
             Console.Write("Name:");
@@ -26,7 +26,7 @@ namespace PetStore
             dog_leash.LengthInches = int.Parse(length.Replace("\"", ""));
             Console.Write("Material:");
             dog_leash.Material = Console.ReadLine();
-            ProductLogic.AddProduct(dog_leash);
+            productLogic.AddProduct(dog_leash);
             Console.WriteLine($"Product added: " + dog_leash.Name);
             Console.WriteLine(JsonSerializer.Serialize(dog_leash));
             return dog_leash;

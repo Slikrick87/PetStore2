@@ -18,18 +18,28 @@ namespace PetStore
             public List <Product> _products = new List<Product>();
 
 
-            public static Product AddProduct(DogLeash dog_leash)
+            public Product AddProduct(Product product)
             {
-                    List<Product> _products = new List<Product>();
-                    _products.Add(new Product());
-                    return new Product();
-                
+                    //List<Product> _products = new List<Product>();
+                    _products.Add(product);
+                    return product;
+                    
             }
-            public static void GetAllProducts(List<Product> _products)
+            public void GetAllProducts(List<Product> _products)
             {
-                //foreach (Product product in list)
-                //{
-                    _products.ForEach((p) => Console.WriteLine(p));
+            //foreach (Product product in list)
+            //{
+                foreach (Product product in _products) 
+                {
+                
+                Console.WriteLine($"\nProduct Name:    " +  product.Name);
+                Console.WriteLine($"Description:     " + product.Description);
+                Console.WriteLine($"Price:           " + product.Price);
+                Console.WriteLine($"Quantity:        " + product.Quantity);
+                     if (product.GetType() == typeof(CatFood)) { }
+                //return;
+                }
+            
                 
                 //}
             //return null;

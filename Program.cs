@@ -8,9 +8,9 @@ using System.Text.Json;
 
 //Console.WriteLine("Press 1 to add a product.");
 //Console.WriteLine("Type 'exit' to quit");
-var ProductLogic = new ProductLogic();
+var ProductLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline if private
 //string userInput = null;
-string userInput = null; ;
+string userInput = string.Empty; ;
 
 
 while (userInput == null || userInput.ToLower().Trim() != "exit")
@@ -34,13 +34,13 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
 
         if (userInput.ToLower().Replace(" ", "") == "dogleash")
         {
-            newDogLeash.NewDogLeash();
+            newDogLeash.NewDogLeash(ProductLogic);
             //dog_leash.NewDogLeash();
 
         }
         else if (userInput.ToLower().Replace(" ", "") == "catfood")
         {
-            newCatFood.NewCatFood();
+            newCatFood.NewCatFood(ProductLogic);
             //cat_food.NewCatFood();
         }
         //userInput = Console.ReadLine();
@@ -51,12 +51,5 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
         ProductLogic.GetAllProducts(ProductLogic._products);
     }
 
-    
-    
-        //Console.WriteLine("Press 1 to add another Product");
-        //Console.WriteLine("Press 8 to display list of added products");
-        //Console.WriteLine("Type exit to quit program");
-        //userInput = Console.ReadLine();
-    
     }
 
