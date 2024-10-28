@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
@@ -10,8 +11,8 @@ namespace PetStore
 {
     public class EvaluateInput
     {
-        //ProductLogic = new ProductLogic();
-        public static void CheckInput(string userInput) 
+        //ProductLogic productLogic = new ProductLogic();
+        public static void CheckInput(string userInput)
         {
             var ProductLogic = new ProductLogic();
             switch (userInput)
@@ -22,7 +23,6 @@ namespace PetStore
                         userInput = Console.ReadLine();
                         if (userInput.ToLower().Replace(" ", "") == "dogleash")
                         {
-                            
                             newDogLeash.NewDogLeash(ProductLogic);
                         }
                         else if (userInput.ToLower().Replace(" ", "") == "catfood")

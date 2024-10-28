@@ -9,14 +9,36 @@ namespace PetStore
             Console.Write("Name:");
             dog_leash.Name = Console.ReadLine();
             Console.Write("Price:");
-            dog_leash.Price = decimal.Parse(Console.ReadLine());
+            string price = Console.ReadLine();
+            while (!decimal.TryParse(price, out decimal value))
+            {
+                Console.Write("Price");
+                price = Console.ReadLine();
+                dog_leash.Price = value;
+            }
+            //dog_leash.Price = decimal.Parse(Console.ReadLine());
+            //Console.Write("Quantity:");
             Console.Write("Quantity:");
-            dog_leash.Quantity = int.Parse(Console.ReadLine());
+            string quantity = Console.ReadLine();
+            while (!int.TryParse(quantity, out int value))
+            {
+                Console.Write("Quantity:");
+                quantity = Console.ReadLine();
+                dog_leash.Quantity = value;
+            }
+            
+            //dog_leash.Quantity = int.Parse(Console.ReadLine());
             Console.Write("Description:");
             dog_leash.Description = Console.ReadLine();
             Console.Write("Length in inches:");
             string length = Console.ReadLine();
-            dog_leash.LengthInches = int.Parse(length.Replace("\"", ""));
+            while (!int.TryParse (length.Replace("\"", ""), out int value))
+            {
+                Console.Write("Length in inches:");
+                length = Console.ReadLine();
+                dog_leash.LengthInches = value;
+            }
+            //dog_leash.LengthInches = int.Parse(length.Replace("\"", ""));
             Console.Write("Material:");
             dog_leash.Material = Console.ReadLine();
             productLogic.AddProduct(dog_leash);

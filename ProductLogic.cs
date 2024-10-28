@@ -14,7 +14,7 @@ namespace PetStore
 
             if (product.GetType() == typeof(CatFood))
             {
-                _CatFood.Add(product.Name, product as CatFood);
+                    _CatFood.Add(product.Name, product as CatFood);
             }
             else if (product.GetType() == typeof(DogLeash))
             {
@@ -26,7 +26,6 @@ namespace PetStore
         {
             foreach (Product product in _products)
             {
-                //Console.WriteLine("Hey");
                 Console.WriteLine();
                 Console.WriteLine($"Product Name:    " + product.Name);
                 Console.WriteLine($"Description:     " + product.Description);
@@ -39,9 +38,8 @@ namespace PetStore
             }
         }
 
-        public void /*Dictionary <string, DogLeash>*/ GetDogLeashByName(string name)
+        public void GetDogLeashByName(string name)
         {
-            //string key = Console.ReadLine();
             Console.WriteLine($"Product Name:              " + _DogLeash[name].Name);
             Console.WriteLine($"Product Description:       " + _DogLeash[name].Description);
             Console.WriteLine($"Product Price:             " + _DogLeash[name].Price);
@@ -49,9 +47,8 @@ namespace PetStore
             Console.WriteLine($"Product Material:          " + _DogLeash[name].Material);
             Console.WriteLine($"Product Length:            " + _DogLeash[name].LengthInches +"\"");
         }
-        public void /*Dictionary <string, CatFood>*/ GetCatFoodByName(string name)
+        public void GetCatFoodByName(string name)
             {
-            //string key = Console.ReadLine();
             Console.WriteLine($"Product Name:              " + _CatFood[name].Name);
             Console.WriteLine($"Product Description:       " + _CatFood[name].Description);
             Console.WriteLine($"Product Price:             " + _CatFood[name].Price);
