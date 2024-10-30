@@ -1,7 +1,8 @@
 ﻿
 using PetStore;
+using System.ComponentModel.Design;
 
-        var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline if private
+var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline if private
                                    
         string userInput = "cool";
         var EvaluateInput = new EvaluateInput();
@@ -36,23 +37,47 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                     continue;
                 }
             case "2":
+            {
+                do
                 {
                     Console.WriteLine("Enter product type:");
                     userInput = Console.ReadLine();
-                    if (userInput.Trim().ToLower() == "dogleash")
-                    {
-                        Console.WriteLine("Enter Name of Dog Leash.");
-                        userInput = Console.ReadLine();
-                        productLogic.GetDogLeashByName(userInput.Trim());
-                    }
-                    else if (userInput.Trim().ToLower() == "catfood") ;
-                    {
-                        Console.WriteLine("Enter Name of Cat Food.");
-                        userInput = Console.ReadLine();
-                        productLogic.GetCatFoodByName(userInput.Trim());
-                    }
-                    continue;
+                    userInput.Trim().ToLower();
+                } while (userInput != "dogleash" && userInput != "catfood");
+                switch (userInput)
+                {
+                    case "dogleash":
+                        {
+                            do
+                            {
+                                    Console.WriteLine("Enter Name of Dog Leash.");
+                                    userInput = Console.ReadLine();
+                                    productLogic.GetDogLeashByName(userInput.Trim());
+                                
+                                continue;
+                            } while (productLogic.dogLeashSearchValid == false);
+                            break;
+                        }
+                    case "catfood":
+                        {
+                            do
+                            {
+                                //try
+                                //{
+                                    Console.WriteLine("Enter Name of Cat Food.");
+                                    userInput = Console.ReadLine();
+                                    productLogic.GetCatFoodByName(userInput.Trim());
+                                //}
+                                //catch (KeyNotFoundException e)
+                                //{ 
+                                   // Console.WriteLine($"\n" + e.Message + "\n"); //}
+                                continue;
+                            } while (productLogic.catFoodSearchValid == false);
+                            break;
+                        }
                 }
+                break;
+            }
             case "8":
                 {
                     productLogic.GetAllProducts(productLogic._products);
