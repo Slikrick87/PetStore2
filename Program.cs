@@ -7,6 +7,7 @@ var productLogic = new ProductLogic(); //use lowercase to not confuse instance w
         string userInput = "cool";
         var EvaluateInput = new EvaluateInput();
         //var ProductLogic = new ProductLogic();
+        var DisplayProducts = new DisplayProducts();
 while (userInput == null || userInput.ToLower().Trim() != "exit")
     {
         Console.WriteLine("Press 1 to add a product.");
@@ -62,15 +63,9 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                         {
                             do
                             {
-                                //try
-                                //{
                                     Console.WriteLine("Enter Name of Cat Food.");
                                     userInput = Console.ReadLine();
                                     productLogic.GetCatFoodByName(userInput.Trim());
-                                //}
-                                //catch (KeyNotFoundException e)
-                                //{ 
-                                   // Console.WriteLine($"\n" + e.Message + "\n"); //}
                                 continue;
                             } while (productLogic.catFoodSearchValid == false);
                             break;
@@ -80,7 +75,7 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
             }
             case "8":
                 {
-                    productLogic.GetAllProducts(productLogic._products);
+                    DisplayProducts.GetAllProducts(productLogic._products);
                     continue;
                 }
             default:

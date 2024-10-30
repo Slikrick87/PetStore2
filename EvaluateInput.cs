@@ -15,6 +15,7 @@ namespace PetStore
         public static void CheckInput(string userInput)
         {
             var ProductLogic = new ProductLogic();
+            var DisplayProducts = new DisplayProducts();
             switch (userInput)
             {
                 case "1":
@@ -52,7 +53,7 @@ namespace PetStore
                 case "8":
                     {
                         Console.WriteLine("hey");
-                        ProductLogic.GetAllProducts(ProductLogic._products);
+                        DisplayProducts.GetAllProducts(ProductLogic._products);
                         break;
                     }
                 default:

@@ -24,57 +24,56 @@ namespace PetStore
             }
             return product;
         }
-        public void GetAllProducts(List<Product> _products)
-        {
-            foreach (CatFood product in _products.OfType<CatFood>())
-            {
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine($"Product Name:    " + product.Name);
-                Console.WriteLine($"Description:     " + product.Description);
-                Console.WriteLine($"Price:           " + product.Price);
-                Console.WriteLine($"Quantity:        " + product.Quantity);
-                Console.WriteLine($"Weight:          " + product.WeightPounds + " lbs");
-                Console.WriteLine($"Safe for Kittens:" + product.KittenFood);
-                Console.WriteLine("------------------------------------------");
-            }
-            foreach (DogLeash product in _products.OfType<DogLeash>())
-            {
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine($"Product Name:    " + product.Name);
-                Console.WriteLine($"Description:     " + product.Description);
-                Console.WriteLine($"Price:           " + product.Price);
-                Console.WriteLine($"Quantity:        " + product.Quantity);
-                Console.WriteLine($"Length:          " + product.LengthInches + "\"");
-                Console.WriteLine($"Material:        " + product.Material);
-                Console.WriteLine("------------------------------------------");
-            }
-        }
+        //public void GetAllProducts(List<Product> _products)
+        //{
+        //    foreach (CatFood product in _products.OfType<CatFood>())
+        //    {
+        //        Console.WriteLine("------------------------------------------");
+        //        Console.WriteLine($"Product Name:    " + product.Name);
+        //        Console.WriteLine($"Description:     " + product.Description);
+        //        Console.WriteLine($"Price:           " + product.Price);
+        //        Console.WriteLine($"Quantity:        " + product.Quantity);
+        //        Console.WriteLine($"Weight:          " + product.WeightPounds + " lbs");
+        //        Console.WriteLine($"Safe for Kittens:" + product.KittenFood);
+        //        Console.WriteLine("------------------------------------------");
+        //    }
+        //    foreach (DogLeash product in _products.OfType<DogLeash>())
+        //    {
+        //        Console.WriteLine("------------------------------------------");
+        //        Console.WriteLine($"Product Name:    " + product.Name);
+        //        Console.WriteLine($"Description:     " + product.Description);
+        //        Console.WriteLine($"Price:           " + product.Price);
+        //        Console.WriteLine($"Quantity:        " + product.Quantity);
+        //        Console.WriteLine($"Length:          " + product.LengthInches + "\"");
+        //        Console.WriteLine($"Material:        " + product.Material);
+        //        Console.WriteLine("------------------------------------------");
+        //    }
+        //}
 
-        
+
         public void GetDogLeashByName(string name)
         {
             try
             {
                 Console.WriteLine("----------------------------------------------");
                 Console.WriteLine($"Name:              " + _DogLeash[name].Name);
-                //Console.WriteLine();
                 Console.WriteLine($"Description:       " + _DogLeash[name].Description);
                 Console.WriteLine($"Price:             " + _DogLeash[name].Price);
                 Console.WriteLine($"Quantity:          " + _DogLeash[name].Quantity);
                 Console.WriteLine($"Length:            " + _DogLeash[name].LengthInches + "\"");
                 Console.WriteLine($"Material:          " + _DogLeash[name].Material);
-                //Console.WriteLine($"Length:            " + _DogLeash[name].LengthInches +"\"");
                 Console.WriteLine("----------------------------------------------");
                 dogLeashSearchValid = true;
             }
-            catch (KeyNotFoundException e) {
+            catch (KeyNotFoundException e)
+            {
                 dogLeashSearchValid = false;
                 Console.WriteLine("\nDog Leash does not exist in database\n");
                 Console.WriteLine("----------------------------------------------");
             }
         }
-        
-    
+
+
         public void GetCatFoodByName(string name)
             {
             try
@@ -92,7 +91,6 @@ namespace PetStore
             catch (KeyNotFoundException e)
             {
                 catFoodSearchValid = false;
-                //Console.WriteLine("----------------------------------------------");
                 Console.WriteLine("\nCat Food doesn't exist in database.\n");
                 Console.WriteLine("----------------------------------------------");
             }
