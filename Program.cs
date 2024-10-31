@@ -5,15 +5,16 @@ using System.ComponentModel.Design;
 var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline if private
                                    
         string userInput = "cool";
-        var EvaluateInput = new EvaluateInput();
-        //var ProductLogic = new ProductLogic();
+        var EvaluateInput = new EvaluateInput(); //we create a product logic and call it with new products
         var DisplayProducts = new DisplayProducts();
 while (userInput == null || userInput.ToLower().Trim() != "exit")
     {
-        Console.WriteLine("Press 1 to add a product.");
-        Console.WriteLine("Press 2 to search for product.");
-        Console.WriteLine("Press 8 to view entered products");
-        Console.WriteLine("Type 'exit' to quit");
+        Console.Write("[1 add a product]");
+        Console.Write(" [2 to search]");
+        Console.Write(" [8 to view entered products]");
+        Console.Write(" [0 to Edit Product]");
+        Console.WriteLine(" [Type 'exit' to quit]");
+        Console.WriteLine();
         Console.Write("User Input:");
         userInput = Console.ReadLine();
         //EvaluateInput.CheckInput(userInput);
@@ -32,7 +33,8 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                     }
                     else if (userInput.ToLower().Replace(" ", "") == "catfood")
                     {
-                        newCatFood.NewCatFood(productLogic);
+                    var catFood = newCatFood.NewCatFood(productLogic);
+                    catFood.PrintCatFood();
                         break;
                     }
                     continue;
@@ -66,6 +68,7 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                                     Console.WriteLine("Enter Name of Cat Food.");
                                     userInput = Console.ReadLine();
                                     productLogic.GetCatFoodByName(userInput.Trim());
+                                    
                                 continue;
                             } while (productLogic.catFoodSearchValid == false);
                             break;
@@ -73,12 +76,24 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                 }
                 break;
             }
-            case "8":
+        //case "0":
+        //    {
+        //        userInput = Console.ReadLine();
+        //        productLogic.EditProductDogLeash();
+        //        continue;
+        //    }
+        case "8":
                 {
                     DisplayProducts.GetAllProducts(productLogic._products);
                     continue;
                 }
-            default:
+        case "0":
+            {
+                userInput = Console.ReadLine();
+                productLogic.EditProductDogLeash();
+                continue;
+            }
+        default:
                 {
                     break;
                 }

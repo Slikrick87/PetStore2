@@ -75,7 +75,7 @@ namespace PetStore
 
 
         public void GetCatFoodByName(string name)
-            {
+        {
             try
             {
                 Console.WriteLine("----------------------------------------------");
@@ -94,6 +94,90 @@ namespace PetStore
                 Console.WriteLine("\nCat Food doesn't exist in database.\n");
                 Console.WriteLine("----------------------------------------------");
             }
+        }
+        public DogLeash EditProductDogLeash()
+        {
+            Console.WriteLine("Please enter name of dog leash:");
+            string key = Console.ReadLine();
+            DogLeash dogLeashToEdit = _DogLeash[key];
+            Console.WriteLine("Please enter parameter to edit");
+            string userInput = Console.ReadLine();
+            switch (userInput.ToLower().Trim())
+            {
+                case "name":
+                    {
+                        Console.WriteLine("Enter new name:");
+                        string newInput = Console.ReadLine();
+                        //dogLeashToEdit = _DogLeash[key];
+                        dogLeashToEdit.Name = newInput;
+                        break;
+                    }
+                case "description":
+                    {
+                        Console.WriteLine("Enter new description:");
+                        string newDescription = Console.ReadLine();
+                        dogLeashToEdit.Description = newDescription;
+                        break;
+                    }
+                case "price":
+                    {
+                        string newPrice;
+                        decimal newDogLeashPrice;
+                        do
+                        {
+                            Console.WriteLine("Enter new price:");
+                            newPrice = Console.ReadLine();
+                        }
+                        while (!decimal.TryParse(newPrice, out newDogLeashPrice));
+                        dogLeashToEdit.Price = newDogLeashPrice;
+                        break;
+                    }
+                case "quantity":
+                    {
+                        string newQuantity;
+                        int newDogLeashQuantity;
+                        do
+                        {
+                            Console.WriteLine("Enter new Quantity:");
+                            newQuantity = Console.ReadLine();
+                        }
+                        while (!int.TryParse(newQuantity, out newDogLeashQuantity));
+                        dogLeashToEdit.Quantity = newDogLeashQuantity;
+                        break;
+                    }
+                case "length":
+                    {
+                        string newLength;
+                        int lengthInches;
+                        do
+                        {
+                            Console.WriteLine("Enter Length in Inches:");
+                            newLength = Console.ReadLine();
+                        }
+                        while (!int.TryParse(newLength, out lengthInches));
+                        dogLeashToEdit.LengthInches = lengthInches;
+                        break;
+                    }
+                case "material":
+                    {
+                        string newMaterial;
+                        do
+                        {
+                            Console.WriteLine("Enter Updated Material");
+                            newMaterial = Console.ReadLine();
+                        }
+                        while (newMaterial == null || newMaterial == "") ;
+                        dogLeashToEdit.Material = newMaterial;
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Error occured.");
+                        break;
+                    }
+
+            }
+            return dogLeashToEdit;
         }
     }
 }

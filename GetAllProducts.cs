@@ -11,7 +11,7 @@ namespace PetStore
     {
         public void GetAllProducts(List<Product> _products)
         {
-            foreach (CatFood product in _products.OfType<CatFood>())
+            foreach (CatFood product in _products.OfType<CatFood>()) //
             {
                 Console.WriteLine("------------------------------------------");
                 Console.WriteLine($"Product Name:    " + product.Name);
