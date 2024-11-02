@@ -179,6 +179,98 @@ namespace PetStore
             }
             return dogLeashToEdit;
         }
+        public CatFood EditProductCatFood()
+        {
+            Console.WriteLine("Please enter name of Cat Food:");
+            string key = Console.ReadLine();
+            CatFood catFoodToEdit = _CatFood[key];
+            Console.WriteLine("Please enter parameter to edit");
+            string userInput = Console.ReadLine();
+            switch (userInput.ToLower().Trim())
+            {
+                case "name":
+                    {
+                        Console.WriteLine("Enter new name:");
+                        string newInput = Console.ReadLine();
+                        //dogLeashToEdit = _DogLeash[key];
+                        catFoodToEdit.Name = newInput;
+                        break;
+                    }
+                case "description":
+                    {
+                        Console.WriteLine("Enter new description:");
+                        string newDescription = Console.ReadLine();
+                        catFoodToEdit.Description = newDescription;
+                        break;
+                    }
+                case "price":
+                    {
+                        string newPrice;
+                        decimal newCatFoodPrice;
+                        do
+                        {
+                            Console.WriteLine("Enter new price:");
+                            newPrice = Console.ReadLine();
+                        }
+                        while (!decimal.TryParse(newPrice, out newCatFoodPrice));
+                        catFoodToEdit.Price = newCatFoodPrice;
+                        break;
+                    }
+                case "quantity":
+                    {
+                        string newQuantity;
+                        int newCatFoodQuantity;
+                        do
+                        {
+                            Console.WriteLine("Enter new Quantity:");
+                            newQuantity = Console.ReadLine();
+                        }
+                        while (!int.TryParse(newQuantity, out newCatFoodQuantity));
+                        catFoodToEdit.Quantity = newCatFoodQuantity;
+                        break;
+                    }
+                case "weight":
+                    {
+                        string newWeight;
+                        double Weight;
+                        do
+                        {
+                            Console.WriteLine("Enter Updated Weight in pounds");
+                            newWeight = Console.ReadLine();
+
+                        }
+                        while (!double.TryParse(newWeight, out Weight));
+                        catFoodToEdit.WeightPounds = Weight;
+                        break;
+                    }
+                case "safe for kittens":
+                    {
+                        string KittenFoodAnswer = null;
+                        do
+                        {
+                            Console.WriteLine("Safe For Kittens: y/n?");
+                            if (KittenFoodAnswer.StartsWith("y"))
+                            {
+                                catFoodToEdit.KittenFood = true;
+                            }
+                            else if (KittenFoodAnswer.ToLower().StartsWith("n"))
+                            {
+                                catFoodToEdit.KittenFood = false;
+                            }
+                        }
+                        while (!KittenFoodAnswer.ToLower().StartsWith("n") || !KittenFoodAnswer.ToLower().StartsWith("y"));
+
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Error occured.");
+                        break;
+                    }
+
+            }
+            return catFoodToEdit;
+        }
     }
 }
 

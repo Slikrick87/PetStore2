@@ -1,42 +1,50 @@
 ﻿
 using PetStore;
+using PetStore.TestCode;
 using System.ComponentModel.Design;
 
 var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline if private
-                                   
+//var testCode = new TestCode();                                
         string userInput = "cool";
-        var EvaluateInput = new EvaluateInput(); //we create a product logic and call it with new products
-        var DisplayProducts = new DisplayProducts();
+//var EvaluateInput = new EvaluateInput(); //we create a product logic and call it with new products
+    //var ProductLogic = new ProductLogic();
+    var DisplayProducts = new DisplayProducts();
 while (userInput == null || userInput.ToLower().Trim() != "exit")
     {
-        Console.Write("[1 add a product]");
-        Console.Write(" [2 to search]");
-        Console.Write(" [8 to view entered products]");
-        Console.Write(" [0 to Edit Product]");
+        Console.WriteLine("------------------------------- [Please Select An Option] ------------------------------");
+        Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Console.Write("[1 Add Product]");
+        Console.Write(" [2 Search]");
+        Console.Write(" [8 View Product List]");
+        Console.Write(" [0 Edit Product]");
         Console.WriteLine(" [Type 'exit' to quit]");
-        Console.WriteLine();
-        Console.Write("User Input:");
+        Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         userInput = Console.ReadLine();
         //EvaluateInput.CheckInput(userInput);
         switch (userInput)
         {
             case "1":
                 {
-                    Console.WriteLine("Please type Product type to be added.\n*Compatible Types:Dog Leash, Cat Food");
-                Console.Write("User Input:");
+                    do
+                    { 
+                    Console.WriteLine("Select Product Type.\n[1:Dog Leash] [2:Cat Food]");
+                    Console.Write("User Input:");
                     userInput = Console.ReadLine();
-                    if (userInput.ToLower().Replace(" ", "") == "dogleash")
+                
+                    if (userInput.ToLower().Replace(" ", "") == "1")
                     {
-
+                        Console.WriteLine("You've Selected Dog Leash");
                         newDogLeash.NewDogLeash(productLogic);
                         break;
                     }
-                    else if (userInput.ToLower().Replace(" ", "") == "catfood")
+                    else if (userInput.ToLower().Replace(" ", "") == "2")
                     {
-                    var catFood = newCatFood.NewCatFood(productLogic);
-                    catFood.PrintCatFood();
+                        Console.WriteLine("You've Selected Cat Food.");
+                        var catFood = newCatFood.NewCatFood(productLogic);
+                        catFood.PrintCatFood();
                         break;
                     }
+                } while (userInput.ToLower().Trim() != "1" && userInput.Trim() != "2");
                     continue;
                 }
             case "2":
@@ -89,10 +97,22 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
                 }
         case "0":
             {
+                Console.WriteLine("Please Enter Product Type:");
                 userInput = Console.ReadLine();
-                productLogic.EditProductDogLeash();
-                continue;
+                if (userInput.ToLower().Trim() == "dogleash")
+                {
+                    productLogic.EditProductDogLeash();
+                }
+                else if (userInput.ToLower().Trim() == "catfood")
+                {
+                    productLogic.EditProductCatFood();
+                }
+                    continue;
             }
+        //case "*":
+        //    {
+        //        PetStore.TestCode.TestCodeDict();
+        //    }
         default:
                 {
                     break;

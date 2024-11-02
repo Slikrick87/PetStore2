@@ -4,7 +4,7 @@ namespace PetStore
     public class newDogLeash
     {
         public static DogLeash NewDogLeash(ProductLogic productLogic)
-        {   
+        {
             DogLeash dog_leash = new DogLeash();
             Console.Write("Name:");                                  //Naming Dog Leash
             dog_leash.Name = Console.ReadLine();
@@ -15,9 +15,9 @@ namespace PetStore
             {
                 Console.Write("Price:");                             //Pricing Dog Leash
                 price = Console.ReadLine();
-            }while (!decimal.TryParse(price, out dog_leashPrice));
+            } while (!decimal.TryParse(price, out dog_leashPrice));
             dog_leash.Price = dog_leashPrice;
-            
+
             string quantity;
             int dog_leashQuantity;
             do
@@ -27,7 +27,7 @@ namespace PetStore
             }
             while (!int.TryParse(quantity, out dog_leashQuantity));
             dog_leash.Quantity = dog_leashQuantity;
-            
+
             Console.Write("Description:");                              //Dog Leash Description
             dog_leash.Description = Console.ReadLine();
 
@@ -40,10 +40,10 @@ namespace PetStore
             }
             while (!int.TryParse(length.Replace("\"", ""), out dog_leashLength));
             dog_leash.LengthInches = dog_leashLength;
-            
+
             Console.Write("Material:");                                 //Dog Leash Material
             dog_leash.Material = Console.ReadLine();
-            
+
             productLogic.AddProduct(dog_leash);
             Console.WriteLine($"Product added: " + dog_leash.Name);
             productLogic.GetDogLeashByName(dog_leash.Name);
