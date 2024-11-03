@@ -119,10 +119,13 @@ namespace PetStore
             {
                 case "name":
                     {
+                        _DogLeash.TryGetValue(key, out var value);
                         Console.WriteLine("Enter new name:");
                         string newInput = Console.ReadLine();
                         //dogLeashToEdit = _DogLeash[key];
                         dogLeashToEdit.Name = newInput;
+                        string newKey = dogLeashToEdit.Name;
+                        _DogLeash.Add(newKey, value);
                         break;
                     }
                 case "description":
@@ -194,9 +197,24 @@ namespace PetStore
         }
         public DogLeash AddDogLeash(DogLeash dogLeash)
         {
+            
             _DogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
-            //productLogic.AddProduct(dogLeash);
             return dogLeash;
+        }
+
+        public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash)
+        {
+            foreach (var dogLeashEntry in _DogLeash) //Why Wouldn't CatFood as a type for variable work here
+            {
+                //Console.WriteLine("------------------------------------------");
+                //Console.WriteLine($"Product Name:    " + catFoodEntry.Value.Name);
+                //Console.WriteLine($"Description:     " + catFoodEntry.Value.Description);
+                //Console.WriteLine($"Price:           " + catFoodEntry.Value.Price);
+                //Console.WriteLine($"Quantity:        " + catFoodEntry.Value.Quantity);
+                //Console.WriteLine($"Weight:          " + catFoodEntry.Value.WeightPounds + " lbs");
+                //Console.WriteLine($"Safe for Kittens:" + catFoodEntry.Value.KittenFood);
+                GetDogLeashByName(dogLeashEntry.Value.Name);
+            }
         }
 
     }

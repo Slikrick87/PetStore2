@@ -5,7 +5,7 @@ namespace PetStore
 {
     public class ProductLogic
     {
-        public List<Product> _products = new List<Product>();
+        //public List<Product> _products = new List<Product>();
         
 
         //public Product AddProduct()

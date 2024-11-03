@@ -102,10 +102,13 @@ namespace PetStore
                 {
                     case "name":
                         {
+                            _CatFood.TryGetValue(key, out var value);
                             Console.WriteLine("Enter new name:");
                             string newInput = Console.ReadLine();
-                            //dogLeashToEdit = _DogLeash[key];
+                            //catFoodToEdit = _CatFood[key];
                             catFoodToEdit.Name = newInput;
+                            string newKey = catFoodToEdit.Name;
+                            _CatFood.Add(newKey, value);
                             break;
                         }
                     case "description":
@@ -213,15 +216,16 @@ namespace PetStore
         }
         public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
         {
-            foreach (var catFood in _CatFood) //Why Wouldn't CatFood as a type for variable work here
+            foreach (var catFoodEntry in _CatFood)
             {
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine($"Product Name:    " + catFood.Name);
-                Console.WriteLine($"Description:     " + catFood.Description);
-                Console.WriteLine($"Price:           " + catFood.Price);
-                Console.WriteLine($"Quantity:        " + catFood.Quantity);
-                Console.WriteLine($"Weight:          " + catFood.WeightPounds + " lbs");
-                Console.WriteLine($"Safe for Kittens:" + catFood.KittenFood);
+                //Console.WriteLine("------------------------------------------");
+                //Console.WriteLine($"Product Name:    " + catFoodEntry.Value.Name);
+                //Console.WriteLine($"Description:     " + catFoodEntry.Value.Description);
+                //Console.WriteLine($"Price:           " + catFoodEntry.Value.Price);
+                //Console.WriteLine($"Quantity:        " + catFoodEntry.Value.Quantity);
+                //Console.WriteLine($"Weight:          " + catFoodEntry.Value.WeightPounds + " lbs");
+                //Console.WriteLine($"Safe for Kittens:" + catFoodEntry.Value.KittenFood);
+                GetCatFoodByName(catFoodEntry.Value.Name);
             }
         }
     }

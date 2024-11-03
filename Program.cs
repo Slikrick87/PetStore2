@@ -3,12 +3,16 @@ using PetStore;
 using PetStore.TestCode;
 using System.ComponentModel.Design;
 
-//class Program
-//{
-//    static void Main(string[] args)
-//    {
+class Program
+{
+    
+        public CatFoodLogic catFoodClass = new CatFoodLogic();
+        public DogLeashLogic dogLeashClass = new DogLeashLogic();
+    
+    public static void Main(string[] args)
+    {
 
-        var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline                      
+        //var productLogic = new ProductLogic(); //use lowercase to not confuse instance with class underline                      
         string userInput = "cool";
         var DisplayProducts = new DisplayProducts();
         var catFoodClass = new CatFoodLogic();
@@ -47,7 +51,7 @@ using System.ComponentModel.Design;
                             {
                                 Console.WriteLine("You've Selected Cat Food.");
                                 catFoodClass.NewCatFood();
-                                
+
                                 //catFood.PrintCatFood();
                                 break;
                             }
@@ -93,7 +97,9 @@ using System.ComponentModel.Design;
                     }
                 case "8":
                     {
-                        DisplayProducts.GetAllProducts(productLogic._products);
+                        dogLeashClass.DisplayAllDogLeash(dogLeashClass._DogLeash);
+                        catFoodClass.DisplayAllCatFood(catFoodClass._CatFood);
+                        //DisplayProducts.GetAllProducts(productLogic._products);
                         continue;
                     }
                 case "0":
@@ -112,7 +118,7 @@ using System.ComponentModel.Design;
                     }
                 //case "*":
                 //    {
-                //        TestCode.TestCodeDict(dogLeashClass._DogLeash, catFoodClass._CatFood, productLogic._products);
+                //        TestCode.TestCodeDict(dogLeashClass._DogLeash, catFoodClass._CatFood);
                 //        continue;
                 //    }
                 default:
@@ -122,6 +128,7 @@ using System.ComponentModel.Design;
 
             }
         }
-    
+    }
+}
 
     
