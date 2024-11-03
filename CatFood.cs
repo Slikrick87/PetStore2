@@ -211,6 +211,19 @@ namespace PetStore
             _CatFood.Add(catFood.Name, catFood as CatFood);
             return catFood;
         }
+        public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
+        {
+            foreach (var catFood in _CatFood) //Why Wouldn't CatFood as a type for variable work here
+            {
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine($"Product Name:    " + catFood.Name);
+                Console.WriteLine($"Description:     " + catFood.Description);
+                Console.WriteLine($"Price:           " + catFood.Price);
+                Console.WriteLine($"Quantity:        " + catFood.Quantity);
+                Console.WriteLine($"Weight:          " + catFood.WeightPounds + " lbs");
+                Console.WriteLine($"Safe for Kittens:" + catFood.KittenFood);
+            }
+        }
     }
     }
 
