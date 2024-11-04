@@ -74,7 +74,7 @@ using System.ComponentModel.Design;
                                     {
                                         Console.WriteLine("Enter Name of Dog Leash.");
                                         userInput = Console.ReadLine();
-                                        dogLeashClass.GetDogLeashByName(userInput.Trim());
+                                        dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
 
                                         continue;
                                     } while (dogLeashClass.dogLeashSearchValid == false);
@@ -86,7 +86,7 @@ using System.ComponentModel.Design;
                                     {
                                         Console.WriteLine("Enter Name of Cat Food.");
                                         userInput = Console.ReadLine();
-                                        catFoodClass.GetCatFoodByName(userInput.Trim());
+                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
 
                                         continue;
                                     } while (catFoodClass.catFoodSearchValid == false);

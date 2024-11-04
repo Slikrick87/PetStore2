@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;              
 using PetStore;
 
 namespace PetStore.TestCode
 {
     public class TestCode
     {
-        public List<Product> _products = new List<Product>();
-        public Dictionary<string, DogLeash> _DogLeash = new();
-        public Dictionary<string, CatFood> _CatFood = new();
+        //    public List<Product> _products = new List<Product>();
+        //    public Dictionary<string, DogLeash> _DogLeash = new();
+        //    public Dictionary<string, CatFood> _CatFood = new();
 
         //public void ProductRepository()
         //{
@@ -20,15 +20,16 @@ namespace PetStore.TestCode
         //    object Dictionary<string, DogLeash> _DogLeash { get; set}
         //        }
 
-        DogLeashLogic? TestRepositoryDogLeash { get; set; }
-        CatFoodLogic? TestRepositoryCatFood { get; set; }
-
-        //public void TestRepository(Dictionary<string, DogLeash> Dog_Leashes, Dictionary<string, CatFood> Cat_Food)
+        //DogLeashLogic? TestRepositoryDogLeash { get; set; }
+        //CatFoodLogic? TestRepositoryCatFood { get; set; }
+                                                                   //tried many things below have to revisit
+        //public void TestRepository(Program catFoodClass, Program dogLeashClass)
         //{
         //    //var DogLeashDict = new Dictionary<string, DogLeash>();
         //    //var CatFoodDict = new Dictionary<string, CatFood>();
         //    //var dogLeashClassTest = dogLeashClass as DogLeashLogic; 
         //    //var catFoodClassTest = Program.dogLeashClass;
+        //    var _DogLeash = Program._DogLeash();
         //    DogLeash dogLeash1 = new DogLeash();
         //    dogLeash1.Name = "Da Rizzler";
         //    dogLeash1.Price = 14.99m;
@@ -36,7 +37,7 @@ namespace PetStore.TestCode
         //    dogLeash1.Description = "BadAss";
         //    dogLeash1.LengthInches = 12;
         //    dogLeash1.Material = "Leather";
-        //    Dog_Leashes.Add(dogLeash1.Name, dogLeash1);
+        //    _DogLeash.Add(dogLeash1.Name, dogLeash1);
         //    //_products.Add(dogLeash1);
 
 
