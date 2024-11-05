@@ -9,33 +9,8 @@ namespace PetStore
 {
     public class TestCode
     {
-        //public List<Product> _products = new List<Product>();
-        //public Dictionary<string, DogLeash> _DogLeash = new();
-        //public Dictionary<string, CatFood> _CatFood = new();
-
-        //public void ProductRepository()
-        //{
-        //    object TestRepositoryDogLeash = new DogLeashLogic();
-        //    object TestRepositoryCatFood = new CatFoodLogic();
-        //    object Dictionary<string, DogLeash> _DogLeash { get; set}
-        //}
-
-        //DogLeashLogic? TestRepositoryDogLeash { get; set; }
-        //CatFoodLogic? TestRepositoryCatFood { get; set; }
-
-        /*tried many things below have to revisit*/
-
-        //DogLeashLogic TestRepositoryDogLeash = new DogLeashLogic();
-        //CatFoodLogic TestRepositoryCatFood = new CatFoodLogic();
         public static void DogLeashRepo(DogLeashLogic TestRepositoryDogLeash)
         {
-            //DogLeashLogic TestRepositoryDogLeash = new DogLeashLogic();
-            //CatFoodLogic TestRepositoryCatFood = new CatFoodLogic();
-            //var DogLeashDict = new Dictionary<string, DogLeash>();
-            //var CatFoodDict = new Dictionary<string, CatFood>();
-            //var dogLeashClassTest = dogLeashClass as DogLeashLogic; 
-            //var catFoodClassTest = Program.dogLeashClass;
-            //var _DogLeash = Program._DogLeash();
             DogLeash dogLeash1 = new DogLeash();
             dogLeash1.Name = "Da Rizzler";
             dogLeash1.Price = 14.99m;
@@ -67,7 +42,6 @@ namespace PetStore
             TestRepositoryDogLeash.AddDogLeash(dogLeash3);
             //_products.Add(dogLeash3);
 
-            //return CatFoodDict;
         }
         public static void CatFoodRepo(CatFoodLogic TestRepositoryCatFood)
         {
