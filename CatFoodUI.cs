@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 //namespace PetStore
 //{
-//    public class CatFoodUI
+//    public class CatFoodUI(CatFoodLogic catFoodUI)
 //    {
-//        public void GetVariablesCatFood(CatFoodLogic catFoodClass)
+        
+//        public static void GetCatFoodByName(CatFoodLogic catFoodClass, string name)   //don't know how to call on instance of cat food logic in main entry point
 //        {
+//            bool catFoodSearchValid = false;
 
-//        }
-//        public void GetCatFoodByName(string name)   //don't know how to call on instance of cat food logic in main entry point
-//        {
 //            try
 //            {
 //                Console.WriteLine("----------------------------------------------");
@@ -34,4 +33,4 @@ using System.Threading.Tasks;
 //            }
 //        }
 //    }
-//}
+//}     

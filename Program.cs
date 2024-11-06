@@ -63,7 +63,7 @@ using System.ComponentModel.Design;
                         {
                             Console.WriteLine("Enter product type:");
                             userInput = Console.ReadLine();
-                            userInput.Trim().ToLower();
+                            userInput.ToLower().Replace(" ","");
                         } while (userInput != "dogleash" && userInput != "catfood");
                         switch (userInput)
                         {
@@ -85,7 +85,7 @@ using System.ComponentModel.Design;
                                     {
                                         Console.WriteLine("Enter Name of Cat Food.");
                                         userInput = Console.ReadLine();
-                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
+                                        //CatFoodUI.GetCatFoodByName(catFoodClass, userInput.ToLower().Trim());
 
                                         continue;
                                     } while (catFoodClass.catFoodSearchValid == false);
@@ -105,17 +105,17 @@ using System.ComponentModel.Design;
                     {
                         Console.WriteLine("Please Enter Product Type:");
                         userInput = Console.ReadLine();
-                        if (userInput.ToLower().Trim() == "dogleash")
+                        if (userInput.ToLower().Replace(" ","") == "dogleash")
                         {
                             dogLeashClass.EditProductDogLeash();
                         }
-                        else if (userInput.ToLower().Trim() == "catfood")
+                        else if (userInput.ToLower().Replace(" ","") == "catfood")
                         {
                             catFoodClass.EditProductCatFood();
                         }
                         continue;
                     }
-                case "*Test*":
+                case "**":
                     {
                         TestCode.CatFoodRepo(catFoodClass);
                         TestCode.DogLeashRepo(dogLeashClass);

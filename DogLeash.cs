@@ -12,77 +12,87 @@ namespace PetStore
         public int LengthInches { get; set; }
         public string? Material { get; set; }
 
-        //public Dictionary<string, DogLeash> _DogLeash = new();
-        //public bool dogLeashSearchValid = false;
+        public DogLeash(string Name, decimal Price, int Quantity, string Description, int LengthInches, string Material)
+        {
+            this.Name = Name;
+            this.Price = Price;
+            this.Quantity = Quantity;
+            this.Description = Description;
+            this.LengthInches = LengthInches;
+            this.Material = Material;
+        }
     }
     public class DogLeashLogic
     {
         public Dictionary<string, DogLeash> _DogLeash = new();
         public bool dogLeashSearchValid = false;
 
-        public void PrintDogLeash(DogLeash dogLeash)
-        {
-            {
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine($"Product Name:    " + dogLeash.Name);
-                Console.WriteLine($"Description:     " + dogLeash.Description);
-                Console.WriteLine($"Price:           " + dogLeash.Price);
-                Console.WriteLine($"Quantity:        " + dogLeash.Quantity);
-                Console.WriteLine($"Weight:          " + dogLeash.LengthInches + " lbs");
-                Console.WriteLine($"Safe for Kittens:" + dogLeash.Material);
-                Console.WriteLine("------------------------------------------");
-            }
+        //public void PrintDogLeash(DogLeash dogLeash)
+        //{
+        //    {
+        //        Console.WriteLine("------------------------------------------");
+        //        Console.WriteLine($"Product Name:              " + dogLeash.Name);
+        //        Console.WriteLine($"Description:               " + dogLeash.Description);
+        //        Console.WriteLine($"Price:                     " + dogLeash.Price);
+        //        Console.WriteLine($"Quantity:                  " + dogLeash.Quantity);
+        //        Console.WriteLine($"Weight:                    " + dogLeash.LengthInches + " lbs");
+        //        Console.WriteLine($"Safe for Kittens:           " + dogLeash.Material);
+        //        Console.WriteLine("------------------------------------------");
+        //    }
 
-        }
+        //}
 
         public DogLeash NewDogLeash()
         {
-            DogLeash dog_leash = new DogLeash();
+            //DogLeash dog_leash = new DogLeash();
             Console.Write("Name:");                                  //Naming Dog Leash
-            dog_leash.Name = Console.ReadLine();
+            string dogLeashName = Console.ReadLine();
 
             string price;
-            decimal dog_leashPrice;
+            decimal dogLeashPrice;
             do
             {
                 Console.Write("Price:");                             //Pricing Dog Leash
                 price = Console.ReadLine();
-            } while (!decimal.TryParse(price, out dog_leashPrice));
-            dog_leash.Price = dog_leashPrice;
+            } while (!decimal.TryParse(price, out dogLeashPrice));
+            dogLeashPrice = dogLeashPrice;
 
             string quantity;
-            int dog_leashQuantity;
+            int dogLeashQuantity;
             do
             {
                 Console.Write("Quantity:");                            //Quantifying Dog Leash Product
                 quantity = Console.ReadLine();
             }
-            while (!int.TryParse(quantity, out dog_leashQuantity));
-            dog_leash.Quantity = dog_leashQuantity;
+            while (!int.TryParse(quantity, out dogLeashQuantity));
+            dogLeashQuantity = dogLeashQuantity;
 
-            Console.Write("Description:");                              //Dog Leash Description
-            dog_leash.Description = Console.ReadLine();
+            string dogLeashDescription;
+            do {
+                Console.Write("Description:");                              //Dog Leash Description
+                dogLeashDescription = Console.ReadLine();
+                } while (dogLeashDescription == null || dogLeashDescription == "");
 
             string length;
-            int dog_leashLength;
+            int dogLeashLength;
             do
             {
                 Console.Write("Length in inches:");                     //Dog Leash Length
                 length = Console.ReadLine();
             }
-            while (!int.TryParse(length.Replace("\"", ""), out dog_leashLength));
-            dog_leash.LengthInches = dog_leashLength;
+            while (!int.TryParse(length.Replace("\"", ""), out dogLeashLength));
+            dogLeashLength = dogLeashLength;
 
             Console.Write("Material:");                                 //Dog Leash Material
-            dog_leash.Material = Console.ReadLine();
+            string dogLeashMaterial = Console.ReadLine();
 
-            AddDogLeash(dog_leash);
-            Console.WriteLine($"Product added: " + dog_leash.Name);
-            //GetDogLeashByName(dog_leash.Name);
-            PrintDogLeash(dog_leash);
+            DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
+            AddDogLeash(dogLeash);
+            Console.WriteLine($"----------------New Product Added!----------------");
+            GetDogLeashByName(dogLeash.Name);
             //ProductLogic.AddProduct(dog_leash);
             //Console.WriteLine(JsonSerializer.Serialize(dog_leash));
-            return dog_leash;
+            return dogLeash;
         }
 
 
@@ -91,14 +101,14 @@ namespace PetStore
         {
             try
             {
-                Console.WriteLine("----------------------------------------------");
-                Console.WriteLine($"Name:              " + _DogLeash[name].Name);
-                Console.WriteLine($"Description:       " + _DogLeash[name].Description);
-                Console.WriteLine($"Price:             " + _DogLeash[name].Price);
-                Console.WriteLine($"Quantity:          " + _DogLeash[name].Quantity);
-                Console.WriteLine($"Length:            " + _DogLeash[name].LengthInches + "\"");
-                Console.WriteLine($"Material:          " + _DogLeash[name].Material);
-                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine($"Name:                    " + _DogLeash[name].Name);
+                Console.WriteLine($"Description:             " + _DogLeash[name].Description);
+                Console.WriteLine($"Price:                   " + _DogLeash[name].Price);
+                Console.WriteLine($"Quantity:                " + _DogLeash[name].Quantity);
+                Console.WriteLine($"Length:                  " + _DogLeash[name].LengthInches + "\"");
+                Console.WriteLine($"Material:                " + _DogLeash[name].Material);
+                Console.WriteLine("--------------------------------------------------");
                 dogLeashSearchValid = true;
             }
             catch (KeyNotFoundException e)
@@ -204,6 +214,7 @@ namespace PetStore
 
         public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash)
         {
+            Console.WriteLine("---------------[Dog Leash Products]---------------");
             foreach (var dogLeashEntry in _DogLeash) //Why Wouldn't CatFood as a type for variable work here
             {
                 //Console.WriteLine("------------------------------------------");
