@@ -16,14 +16,17 @@ using System.ComponentModel.Design;
         var DisplayProducts = new DisplayProducts();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
-        //public List<Product> _products = new List<Product>();
-        while (userInput == null || userInput.ToLower().Trim() != "exit")
+        TestCode.CatFoodRepo(catFoodClass);
+        TestCode.DogLeashRepo(dogLeashClass);
+while (userInput == null || userInput.ToLower().Trim() != "exit")
         {
             Console.WriteLine("------------------------------- [Please Select An Option] ------------------------------");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.Write("[1 Add Product]");
             Console.Write(" [2 Search]");
-            Console.Write(" [8 View Product List]");
+            Console.Write(" [7 To View Out Of Stock Products]");
+            Console.WriteLine(" [8 View Product List]");
+            Console.Write(" [9 For In Stock Products]");
             Console.Write(" [0 Edit Product]");
             Console.WriteLine(" [Type 'exit' to quit]");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -101,27 +104,39 @@ using System.ComponentModel.Design;
                         //DisplayProducts.GetAllProducts(productLogic._products);
                         continue;
                     }
-                case "0":
-                    {
-                        Console.WriteLine("Please Enter Product Type:");
-                        userInput = Console.ReadLine();
-                        if (userInput.ToLower().Replace(" ","") == "dogleash")
-                        {
-                            dogLeashClass.EditProductDogLeash();
-                        }
-                        else if (userInput.ToLower().Replace(" ","") == "catfood")
-                        {
-                            catFoodClass.EditProductCatFood();
-                        }
-                        continue;
-                    }
-                case "**":
-                    {
-                        TestCode.CatFoodRepo(catFoodClass);
-                        TestCode.DogLeashRepo(dogLeashClass);
-                        continue;
-                    }
-                default:
+        //case "**":
+        //    {
+        //        TestCode.CatFoodRepo(catFoodClass);
+        //        TestCode.DogLeashRepo(dogLeashClass);
+        //        continue;
+        //    }
+        case "9":
+            {
+                dogLeashClass.GetOnlyInStockDogLeashes();
+                catFoodClass.GetOnlyInStockCatFood();
+                continue;
+            }
+        case "10":
+            {
+                dogLeashClass.GetOutOfStockDogLeashes();
+                catFoodClass.GetOutOfStockCatFood();
+                continue;
+            }
+        case "0":
+            {
+                Console.WriteLine("Please Enter Product Type:");
+                userInput = Console.ReadLine();
+                if (userInput.ToLower().Replace(" ", "") == "dogleash")
+                {
+                    dogLeashClass.EditProductDogLeash();
+                }
+                else if (userInput.ToLower().Replace(" ", "") == "catfood")
+                {
+                    catFoodClass.EditProductCatFood();
+                }
+                continue;
+            }
+        default:
                     {
                         break;
                     }

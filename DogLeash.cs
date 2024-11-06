@@ -20,27 +20,14 @@ namespace PetStore
             this.Description = Description;
             this.LengthInches = LengthInches;
             this.Material = Material;
+            // can i add to dictionary when creating new objects through constructor?
         }
     }
-    public class DogLeashLogic
+    public class DogLeashLogic : IDogLeash
     {
+        public List<DogLeash> _DogLeashList = new();
         public Dictionary<string, DogLeash> _DogLeash = new();
         public bool dogLeashSearchValid = false;
-
-        //public void PrintDogLeash(DogLeash dogLeash)
-        //{
-        //    {
-        //        Console.WriteLine("------------------------------------------");
-        //        Console.WriteLine($"Product Name:              " + dogLeash.Name);
-        //        Console.WriteLine($"Description:               " + dogLeash.Description);
-        //        Console.WriteLine($"Price:                     " + dogLeash.Price);
-        //        Console.WriteLine($"Quantity:                  " + dogLeash.Quantity);
-        //        Console.WriteLine($"Weight:                    " + dogLeash.LengthInches + " lbs");
-        //        Console.WriteLine($"Safe for Kittens:           " + dogLeash.Material);
-        //        Console.WriteLine("------------------------------------------");
-        //    }
-
-        //}
 
         public DogLeash NewDogLeash()
         {
@@ -207,7 +194,7 @@ namespace PetStore
         }
         public DogLeash AddDogLeash(DogLeash dogLeash)
         {
-            
+            _DogLeashList.Add(dogLeash);
             _DogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
             return dogLeash;
         }
@@ -227,7 +214,26 @@ namespace PetStore
                 GetDogLeashByName(dogLeashEntry.Value.Name);
             }
         }
+        public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes()
+        {
+            Dictionary<string, DogLeash> inStockDogLeashNames = new();
+            foreach (var dogLeashEntry in _DogLeash)
+            {
+                if (dogLeashEntry.Value.Quantity > 0) { inStockDogLeashNames.Add(dogLeashEntry.Value.Name, dogLeashEntry.Value); }
+            }
+            foreach (var inStockDL in inStockDogLeashNames)
+            {
+                Console.WriteLine(inStockDL.Value.Name);
+            }
+            return inStockDogLeashNames;
+        }
 
+        public /*List<DogLeash>*/ void GetOutOfStockDogLeashes()
+        {
+            var OutOfStockLeashes = _DogLeashList.Where(p => p.Quantity == 0);
+            foreach (var DogLeashEntry in OutOfStockLeashes) { Console.WriteLine(DogLeashEntry.Name); }
+            //return _DogLeashList.Where(p => p.Quantity == 0).Select(p => p.Name).ToList();
+        }
     }
 }
 

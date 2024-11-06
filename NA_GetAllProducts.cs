@@ -18,7 +18,7 @@ namespace PetStore
                 Console.WriteLine($"Description:     " + product.Description);
                 Console.WriteLine($"Price:           " + product.Price);
                 Console.WriteLine($"Quantity:        " + product.Quantity);
-                Console.WriteLine($"Weight:          " + product.WeightPounds + " lbs");
+                //Console.WriteLine($"Weight:          " + product.WeightPounds + " lbs");
                 Console.WriteLine($"Safe for Kittens:" + product.KittenFood);
                 Console.WriteLine("------------------------------------------");
             }

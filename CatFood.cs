@@ -9,37 +9,39 @@ namespace PetStore
 {
     public class CatFood : Product
     {
-        public double WeightPounds { get; set; }
+        //public double WeightPounds { get; set; }
         public bool KittenFood { get; set; }
-        public CatFood(string Name, decimal Price, int Quantity, string Description, double Weight, bool KittenFood)
+        public CatFood(string Name, decimal Price, int Quantity, string Description, bool KittenFood)
         {
             this.Name = Name;
             this.Price = Price;
             this.Quantity = Quantity;
             this.Description = Description;
-            this.WeightPounds = Weight;
+            //this.WeightPounds = Weight;
             this.KittenFood = KittenFood;
         }
     }
-    public class CatFoodLogic
+    public class DryCatFood : CatFood
+    {
+        public double WeightPounds { get; set; }
+
+        public DryCatFood(string Name, decimal Price, int Quantity, string Description, bool KittenFood, double Weight) : base(Name, Price, Quantity, Description, KittenFood)
+        {
+            //this.Name = Name;
+            //this.Price = Price;
+            //this.Quantity = Quantity;
+            //this.Description = Description;
+            //this.KittenFood= KittenFood;
+            this.WeightPounds = Weight;
+        }
+    }
+
+    public class CatFoodLogic : ICatFood
     {
         
         public Dictionary<string, CatFood> _CatFood = new();
+        public List<CatFood> _CatFoodList = new();
         public bool catFoodSearchValid = false;
-        //public void PrintCatFood(CatFood catFood)
-        //{
-        //    {
-        //        Console.WriteLine("------------------------------------------");
-        //        Console.WriteLine($"Product Name:              " + catFood.Name);
-        //        Console.WriteLine($"Description:               " + catFood.Description);
-        //        Console.WriteLine($"Price:                     " + catFood.Price);
-        //        Console.WriteLine($"Quantity:                  " + catFood.Quantity);
-        //        Console.WriteLine($"Weight:                    " + catFood.WeightPounds + " lbs");
-        //        Console.WriteLine($"Safe for Kittens:          " + catFood.KittenFood);
-        //        Console.WriteLine("------------------------------------------");
-        //    }
-
-        //}
 
 
         public CatFood NewCatFood()
@@ -96,7 +98,7 @@ namespace PetStore
                 while (!Safe.ToLower().Replace(" ", "").StartsWith("y") && !Safe.ToLower().Replace(" ", "").StartsWith("n"));
                 bool KittenFood = Safe.StartsWith("y") ? true : false;
             //catFood.KittenFood = Safe.ToLower().Replace(" ", "").StartsWith("y");
-            CatFood catFood = new CatFood(catFoodName, catFoodPrice, catFoodQuantity, catFoodDescription, catFoodWeight, KittenFood);
+            CatFood catFood = new CatFood(catFoodName, catFoodPrice, catFoodQuantity, catFoodDescription, KittenFood);
                 AddCatFood(catFood);
             //ProductLogic.AddProduct(catFood);
             //Console.WriteLine($"Product added: " + catFood.Name);
@@ -158,20 +160,20 @@ namespace PetStore
                             catFoodToEdit.Quantity = newCatFoodQuantity;
                             break;
                         }
-                    case "weight":
-                        {
-                            string newWeight;
-                            double Weight;
-                            do
-                            {
-                                Console.WriteLine("Enter Updated Weight in pounds");
-                                newWeight = Console.ReadLine();
+                    //case "weight":
+                    //    {
+                    //        string newWeight;
+                    //        double Weight;
+                    //        do
+                    //        {
+                    //            Console.WriteLine("Enter Updated Weight in pounds");
+                    //            newWeight = Console.ReadLine();
 
-                            }
-                            while (!double.TryParse(newWeight, out Weight));
-                            catFoodToEdit.WeightPounds = Weight;
-                            break;
-                        }
+                    //        }
+                    //        while (!double.TryParse(newWeight, out Weight));
+                    //        catFoodToEdit.WeightPounds = Weight;
+                    //        break;
+                    //    }
                     case "safe for kittens":
                         {
                             string KittenFoodAnswer = null;
@@ -210,7 +212,7 @@ namespace PetStore
                 Console.WriteLine($"Description:             " + _CatFood[name].Description);
                 Console.WriteLine($"Price:                   " + _CatFood[name].Price);
                 Console.WriteLine($"Quantity:                " + _CatFood[name].Quantity);
-                Console.WriteLine($"Weight:                  " + _CatFood[name].WeightPounds + " lbs");
+                //Console.WriteLine($"Weight:                  " + _CatFood[name].WeightPounds + " lbs");
                 Console.WriteLine($"Safe for Kittens:        " + _CatFood[name].KittenFood);
                 Console.WriteLine("--------------------------------------------------");
                 catFoodSearchValid = true;
@@ -225,6 +227,7 @@ namespace PetStore
 
         public CatFood AddCatFood(CatFood catFood)
         {
+            _CatFoodList.Add(catFood);
             _CatFood.Add(catFood.Name, catFood as CatFood);
             return catFood;
         }
@@ -242,6 +245,24 @@ namespace PetStore
                 //Console.WriteLine($"Safe for Kittens:" + catFoodEntry.Value.KittenFood);
                 GetCatFoodByName(catFoodEntry.Value.Name);
             }
+        }
+        public Dictionary<string, CatFood> GetOnlyInStockCatFood()
+        {
+            Dictionary<string, CatFood> inStockCatFoodNames = new();
+            foreach (var catFoodEntry in _CatFood)
+            {
+                if (catFoodEntry.Value.Quantity > 0) { inStockCatFoodNames.Add(catFoodEntry.Value.Name, catFoodEntry.Value); }
+            }
+            foreach (var inStockCF in inStockCatFoodNames)
+            {
+                Console.WriteLine(inStockCF.Value.Name);
+            }
+            return inStockCatFoodNames;
+        }
+        public void GetOutOfStockCatFood()
+        {
+            var OutOfStockCatFood = _CatFoodList.Where(p => p.Quantity == 0);
+            foreach ( var catFoodEntry in OutOfStockCatFood) { Console.WriteLine(catFoodEntry.Name); }
         }
     }
     }
