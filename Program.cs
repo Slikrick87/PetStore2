@@ -27,6 +27,7 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
             Console.Write(" [7 To View Out Of Stock Products]");
             Console.WriteLine(" [8 View Product List]");
             Console.Write(" [9 For In Stock Products]");
+            Console.WriteLine(" [10 For Out Of Stock Products]");
             Console.Write(" [0 Edit Product]");
             Console.WriteLine(" [Type 'exit' to quit]");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
