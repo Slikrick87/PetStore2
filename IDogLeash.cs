@@ -14,7 +14,7 @@ namespace PetStore
         public DogLeash AddDogLeash(DogLeash dogLeash);
         public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash);
         public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes();
-        public /*List<DogLeash>*/ void GetOutOfStockDogLeashes(); //not the way assignment said to do it couldn't get it to work their way
+        public List<String> GetOutOfStockDogLeashes(); //not the way assignment said to do it couldn't get it to work their way
     }
    
 }

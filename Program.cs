@@ -13,7 +13,7 @@ using System.ComponentModel.Design;
                                 //when making 
 
         string userInput = "cool";
-        var DisplayProducts = new DisplayProducts();
+        //var DisplayProducts = new DisplayProducts();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
@@ -118,8 +118,9 @@ while (userInput == null || userInput.ToLower().Trim() != "exit")
             }
         case "10":
             {
-                dogLeashClass.GetOutOfStockDogLeashes();
+                Console.WriteLine(String.Join(", ",dogLeashClass.GetOutOfStockDogLeashes()));
                 catFoodClass.GetOutOfStockCatFood();
+                //Console.WriteLine(printDogLeash);
                 continue;
             }
         case "0":

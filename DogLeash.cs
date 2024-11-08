@@ -228,11 +228,15 @@ namespace PetStore
             return inStockDogLeashNames;
         }
 
-        public /*List<DogLeash>*/ void GetOutOfStockDogLeashes()
+        public List<String> GetOutOfStockDogLeashes()  //try to get lambda to work with return somehow room to grow for sure
         {
-            var OutOfStockLeashes = _DogLeashList.Where(p => p.Quantity == 0);
-            foreach (var DogLeashEntry in OutOfStockLeashes) { Console.WriteLine(DogLeashEntry.Name); }
-            //return _DogLeashList.Where(p => p.Quantity == 0).Select(p => p.Name).ToList();
+            //IEnumerable<DogLeash> dogLeashList =
+            //    (IEnumerable<DogLeash>)(from dogLeash in _DogLeash
+            //    where dogLeash.Value.Quantity == 0
+            //    select dogLeash);
+            return _DogLeash.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
+            ;
+            
         }
     }
 }
