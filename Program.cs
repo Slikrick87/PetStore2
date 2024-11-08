@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 public class Program
 {
 
-    public void Main()
+    static void Main(string[] args)
     {
         //when making 
 
@@ -89,7 +89,7 @@ public class Program
                                     {
                                         Console.WriteLine("Enter Name of Cat Food.");
                                         userInput = Console.ReadLine();
-                                        //CatFoodUI.GetCatFoodByName(catFoodClass, userInput.ToLower().Trim());
+                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
 
                                         continue;
                                     } while (catFoodClass.catFoodSearchValid == false);
