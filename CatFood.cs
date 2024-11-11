@@ -39,7 +39,7 @@ namespace PetStore
     public class CatFoodLogic : ICatFood
     {
         
-        public Dictionary<string, CatFood> _CatFood = new();
+        public Dictionary<string, CatFood> _CatFood = new(StringComparer.InvariantCultureIgnoreCase);
         public List<CatFood> _CatFoodList = new();
         public bool catFoodSearchValid = false;
 
@@ -102,7 +102,7 @@ namespace PetStore
                 AddCatFood(catFood);
             //ProductLogic.AddProduct(catFood);
             //Console.WriteLine($"Product added: " + catFood.Name);
-            Console.WriteLine($"----------------New Product Added!----------------");
+            Console.WriteLine($"--------------------------------- New Product Added! ----------------------------------");
             //Console.WriteLine(JsonSerializer.Serialize(catFood));
             GetCatFoodByName(catFood.Name);
                 return catFood;
@@ -124,6 +124,7 @@ namespace PetStore
                             //catFoodToEdit = _CatFood[key];
                             catFoodToEdit.Name = newInput;
                             string newKey = catFoodToEdit.Name;
+                            _CatFood.Remove(key);
                             _CatFood.Add(newKey, value);
                             break;
                         }
@@ -207,17 +208,15 @@ namespace PetStore
         {
             try
             {
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine($"Name:                    " + _CatFood[name].Name);
-                Console.WriteLine($"Description:             " + _CatFood[name].Description);
-                Console.WriteLine($"Price:                   {_CatFood[name].Price}");
-                Console.WriteLine($"Discounted Price:        {DecimalExtensions.DiscountPrice(_CatFood[name].Price)}");
-                Console.WriteLine($"This Price Discounted:   {_CatFood[name].Price.DiscountThisPrice()}");
-                Console.WriteLine($"Quantity:                " + _CatFood[name].Quantity);
-                //Console.WriteLine($"Weight:                  " + _CatFood[name].WeightPounds + " lbs");
-                Console.WriteLine($"Safe for Kittens:        " + _CatFood[name].KittenFood);
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine($"Name:                           { _CatFood[name].Name}");
+                Console.WriteLine($"Description:                    {_CatFood[name].Description}");
+                Console.WriteLine($"Price:                          {_CatFood[name].Price}");
+                Console.WriteLine($"Discounted Price:               {_CatFood[name].Price.DiscountThisPrice()}");
+                Console.WriteLine($"Quantity:                       {_CatFood[name].Quantity}");
+                Console.WriteLine($"Safe for Kittens:               {_CatFood[name].KittenFood}");
                 
-                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
                 
                 catFoodSearchValid = true;
             }
@@ -225,7 +224,7 @@ namespace PetStore
             {
                 catFoodSearchValid = false;
                 Console.WriteLine("\nCat Food doesn't exist in database.\n");
-                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
         }
 
@@ -237,7 +236,7 @@ namespace PetStore
         }
         public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
         {
-            Console.WriteLine("---------------[Cat Food Products]----------------");
+            Console.WriteLine("--------------------------------- [Cat Food Products] ----------------------------------");
             foreach (var catFoodEntry in _CatFood)
             {
                 //Console.WriteLine("------------------------------------------");
@@ -263,10 +262,9 @@ namespace PetStore
             }
             return inStockCatFoodNames;
         }
-        public void GetOutOfStockCatFood()
+        public List<String> GetOutOfStockCatFood()
         {
-            var OutOfStockCatFood = _CatFoodList.Where(p => p.Quantity == 0);
-            foreach ( var catFoodEntry in OutOfStockCatFood) { Console.WriteLine(catFoodEntry.Name); }
+            return _CatFood.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
         }
     }
     }

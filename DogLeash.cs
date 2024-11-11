@@ -26,7 +26,7 @@ namespace PetStore
     public class DogLeashLogic : IDogLeash
     {
         public List<DogLeash> _DogLeashList = new();
-        public Dictionary<string, DogLeash> _DogLeash = new();
+        public Dictionary<string, DogLeash> _DogLeash = new(StringComparer.InvariantCultureIgnoreCase);
         public bool dogLeashSearchValid = false;
 
         public DogLeash NewDogLeash()
@@ -75,7 +75,7 @@ namespace PetStore
 
             DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
             AddDogLeash(dogLeash);
-            Console.WriteLine($"----------------New Product Added!----------------");
+            Console.WriteLine($"---------------------------------- New Product Added! ----------------------------------");
             GetDogLeashByName(dogLeash.Name);
             //ProductLogic.AddProduct(dog_leash);
             //Console.WriteLine(JsonSerializer.Serialize(dog_leash));
@@ -88,21 +88,23 @@ namespace PetStore
         {
             try
             {
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine($"Name:                    " + _DogLeash[name].Name);
-                Console.WriteLine($"Description:             " + _DogLeash[name].Description);
-                Console.WriteLine($"Price:                   " + _DogLeash[name].Price);
-                Console.WriteLine($"Quantity:                " + _DogLeash[name].Quantity);
-                Console.WriteLine($"Length:                  " + _DogLeash[name].LengthInches + "\"");
-                Console.WriteLine($"Material:                " + _DogLeash[name].Material);
-                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine($"Name:                           {_DogLeash[name].Name}");
+                Console.WriteLine($"Description:                    {_DogLeash[name].Description}");
+                Console.WriteLine($"Price:                          {_DogLeash[name].Price}");
+                Console.WriteLine($"Discounted Price:               {_DogLeash[name].Price.DiscountThisPrice()}");
+                Console.WriteLine($"Quantity:                       {_DogLeash[name].Quantity}");
+                Console.WriteLine($"Length:                         {_DogLeash[name].LengthInches}\"");
+                Console.WriteLine($"Material:                       {_DogLeash[name].Material}");
+                Console.WriteLine($"Description:                    {_DogLeash[name].Description}");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
                 dogLeashSearchValid = true;
             }
             catch (KeyNotFoundException e)
             {
                 dogLeashSearchValid = false;
-                Console.WriteLine("\nDog Leash does not exist in database\n");
-                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("\n                     * Dog Leash does not exist in database *                       \n");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
             }
         }
         public DogLeash EditProductDogLeash()
@@ -118,10 +120,11 @@ namespace PetStore
                     {
                         _DogLeash.TryGetValue(key, out var value);
                         Console.WriteLine("Enter new name:");
-                        string newInput = Console.ReadLine();
-                        //dogLeashToEdit = _DogLeash[key];
-                        dogLeashToEdit.Name = newInput;
+                        string newInput = Console.ReadLine();  ///changes and adds to list
+                        dogLeashToEdit = _DogLeash[key];
+                        value.Name = newInput;
                         string newKey = dogLeashToEdit.Name;
+                        _DogLeash.Remove(key);
                         _DogLeash.Add(newKey, value);
                         break;
                     }
@@ -201,7 +204,7 @@ namespace PetStore
 
         public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash)
         {
-            Console.WriteLine("---------------[Dog Leash Products]---------------");
+            Console.WriteLine("--------------------------------- [Dog Leash Products] ---------------------------------");
             foreach (var dogLeashEntry in _DogLeash) //Why Wouldn't CatFood as a type for variable work here
             {
                 //Console.WriteLine("------------------------------------------");
