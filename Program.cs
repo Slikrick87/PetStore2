@@ -5,12 +5,24 @@ using System.ComponentModel.Design;
 
 
 
+
 public class Program
 {
 
     static void Main(string[] args)
     {
-        //when making 
+        //when makin 
+        Console.Beep(392, 250);
+        Console.Beep(349, 250);
+        Console.Beep(294, 250);
+        Console.Beep(220, 250);
+        Console.Beep(196, 250);
+        Console.Beep(330, 250);
+        Console.Beep(392, 250);
+        Console.Beep(494, 250);
+        Console.WriteLine("------------------------------ Welcome To The Pet Store! -------------------------------");
+
+        Console.WriteLine($"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n                                                                |\\_/|  \r\n                                                      \t        | @ @   Woof!\r\n           __..--''``---....___   _..._    __         \t        |   <>\r\n /// //_.-'    .-/\";  `        ``<._  ``.''_ `. / // /\t        |  _/\\------____ ((| |))\r\n///_.-' _..--.'_    \\                    `( ) ) // //           |               `--' |\r\n/ (_..-' // (< _     ;_..__               ; `' / ///        ____|_       ___|   |___.'\r\n / // // //  `-._,_)' // / ``--...____..-' /// / //        /_/_____/____/_______|\r\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         string userInput = "cool";
         //var DisplayProducts = new DisplayProducts();
