@@ -249,18 +249,10 @@ namespace PetStore
                 GetCatFoodByName(catFoodEntry.Value.Name);
             }
         }
-        public Dictionary<string, CatFood> GetOnlyInStockCatFood()
+        public List<String> GetOnlyInStockCatFood()
         {
-            Dictionary<string, CatFood> inStockCatFoodNames = new();
-            foreach (var catFoodEntry in _CatFood)
-            {
-                if (catFoodEntry.Value.Quantity > 0) { inStockCatFoodNames.Add(catFoodEntry.Value.Name, catFoodEntry.Value); }
-            }
-            foreach (var inStockCF in inStockCatFoodNames)
-            {
-                Console.WriteLine(inStockCF.Value.Name);
-            }
-            return inStockCatFoodNames;
+            
+            return _CatFood.Where(cF => cF.Value.Quantity > 0).Select(cF => cF.Value.Name).ToList();
         }
         public List<String> GetOutOfStockCatFood()
         {

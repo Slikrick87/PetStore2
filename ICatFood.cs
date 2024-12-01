@@ -15,5 +15,6 @@ namespace PetStore
         public CatFood AddCatFood(CatFood catFood);
         public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);
         public List<String> GetOutOfStockCatFood();
+        public List<String> GetOnlyInStockCatFood();
     }
 }

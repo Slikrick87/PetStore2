@@ -126,8 +126,8 @@ public class Program
                 //    }
                 case "9":
                     {
-                        dogLeashClass.GetOnlyInStockDogLeashes();
-                        catFoodClass.GetOnlyInStockCatFood();
+                        Console.WriteLine(String.Join("\n", dogLeashClass.GetOnlyInStockDogLeashes()));
+                        Console.WriteLine(String.Join("\n", catFoodClass.GetOnlyInStockCatFood()));
                         continue;
                     }
                 case "10":

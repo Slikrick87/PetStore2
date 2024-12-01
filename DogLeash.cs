@@ -26,7 +26,7 @@ namespace PetStore
     public class DogLeashLogic : IDogLeash
     {
         public List<DogLeash> _DogLeashList = new();
-        public Dictionary<string, DogLeash> _DogLeash = new(StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<String, DogLeash> _DogLeash = new(StringComparer.InvariantCultureIgnoreCase);
         public bool dogLeashSearchValid = false;
 
         public DogLeash NewDogLeash()
@@ -217,20 +217,24 @@ namespace PetStore
                 GetDogLeashByName(dogLeashEntry.Value.Name);
             }
         }
-        public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes()
+        //public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes()
+        //{
+        //    Dictionary<string, DogLeash> inStockDogLeashNames = new();
+        //    foreach (var dogLeashEntry in _DogLeash)
+        //    {
+        //        if (dogLeashEntry.Value.Quantity > 0) { inStockDogLeashNames.Add(dogLeashEntry.Value.Name, dogLeashEntry.Value); }
+        //    }
+        //    foreach (var inStockDL in inStockDogLeashNames)
+        //    {
+        //        Console.WriteLine(inStockDL.Value.Name);
+        //    }
+        //    return inStockDogLeashNames;
+        //}
+        public List<DogLeash> GetOnlyInStockDogLeashes()
         {
-            Dictionary<string, DogLeash> inStockDogLeashNames = new();
-            foreach (var dogLeashEntry in _DogLeash)
-            {
-                if (dogLeashEntry.Value.Quantity > 0) { inStockDogLeashNames.Add(dogLeashEntry.Value.Name, dogLeashEntry.Value); }
-            }
-            foreach (var inStockDL in inStockDogLeashNames)
-            {
-                Console.WriteLine(inStockDL.Value.Name);
-            }
-            return inStockDogLeashNames;
+            return _DogLeashList.InStockDogLeashes();
+           //return _DogLeash.Where(x => x.Value.Quantity > 0).Select(x => x.Value.Name).ToList();
         }
-
         public List<String> GetOutOfStockDogLeashes()  //try to get lambda to work with return somehow room to grow for sure
         {
             //IEnumerable<DogLeash> dogLeashList =
