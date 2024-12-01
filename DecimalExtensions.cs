@@ -24,7 +24,7 @@ namespace PetStore
     {
         public static List<T> InStockDogLeashes<T>(this List<T> list) where T : DogLeash
         {
-            return (List<T>)list.Where(dL => dL.Quantity > 0).Select(dL => dL.Name);
+            return list.Where(dL => dL.Quantity > 0).ToList();
         }
         //Why Doesnt this work??
     }
