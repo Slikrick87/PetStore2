@@ -36,7 +36,7 @@ public class Program
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.Write(" [1 Add Product]");
             Console.Write(" [2 Search]");
-            //Console.Write(" [7 To View Out Of Stock Products]");
+            Console.Write(" [7 Total Inventory Price]");
             Console.WriteLine(" [8 View Product List]");
             Console.Write(" [9 For In Stock Products]");
             Console.WriteLine(" [10 For Out Of Stock Products]");
@@ -111,6 +111,11 @@ public class Program
                         }
                         break;
                     }
+                case "7":
+                    {
+                        Console.WriteLine($"Total Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}");
+                        continue;
+                    }
                 case "8":
                     {
                         dogLeashClass.DisplayAllDogLeash(dogLeashClass._DogLeash);
@@ -126,9 +131,10 @@ public class Program
                 //    }
                 case "9":
                     {
-                        List <DogLeash> dogLeashes = dogLeashClass.GetOnlyInStockDogLeashes();
-                        Console.WriteLine(String.Join("\n", dogLeashes.Select(dL => dL.Name)));
-                        Console.WriteLine(String.Join("\n", catFoodClass.GetOnlyInStockCatFood()));
+                        List <DogLeash> inStockDogLeashes = dogLeashClass.GetOnlyInStockDogLeashes();
+                        List <CatFood> inStockCatFood = catFoodClass.GetOnlyInStockCatFood();
+                        Console.WriteLine(String.Join("\n", inStockDogLeashes.Select(dL => dL.Name)));
+                        Console.WriteLine(String.Join("\n", inStockCatFood.Select(cF => cF.Name)));
                         continue;
                     }
                 case "10":

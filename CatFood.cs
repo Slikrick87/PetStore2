@@ -249,10 +249,14 @@ namespace PetStore
                 GetCatFoodByName(catFoodEntry.Value.Name);
             }
         }
-        public List<String> GetOnlyInStockCatFood()
+        public List<CatFood> GetOnlyInStockCatFood()
         {
-            
-            return _CatFood.Where(cF => cF.Value.Quantity > 0).Select(cF => cF.Value.Name).ToList();
+            return _CatFoodList.InStockCatFood();
+            //return _CatFood.Where(cF => cF.Value.Quantity > 0).Select(cF => cF.Value.Name).ToList();
+        }
+        public decimal GetCatFoodInventoryTotal()
+        {
+            return _CatFoodList.InStockCatFood().Select(cF => cF.Price * cF.Quantity).Sum();
         }
         public List<String> GetOutOfStockCatFood()
         {

@@ -20,7 +20,6 @@ namespace PetStore
             this.Description = Description;
             this.LengthInches = LengthInches;
             this.Material = Material;
-            // can i add to dictionary when creating new objects through constructor?
         }
     }
     public class DogLeashLogic : IDogLeash
@@ -205,15 +204,8 @@ namespace PetStore
         public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash)
         {
             Console.WriteLine("--------------------------------- [Dog Leash Products] ---------------------------------");
-            foreach (var dogLeashEntry in _DogLeash) //Why Wouldn't CatFood as a type for variable work here
+            foreach (var dogLeashEntry in _DogLeash)
             {
-                //Console.WriteLine("------------------------------------------");
-                //Console.WriteLine($"Product Name:    " + catFoodEntry.Value.Name);
-                //Console.WriteLine($"Description:     " + catFoodEntry.Value.Description);
-                //Console.WriteLine($"Price:           " + catFoodEntry.Value.Price);
-                //Console.WriteLine($"Quantity:        " + catFoodEntry.Value.Quantity);
-                //Console.WriteLine($"Weight:          " + catFoodEntry.Value.WeightPounds + " lbs");
-                //Console.WriteLine($"Safe for Kittens:" + catFoodEntry.Value.KittenFood);
                 GetDogLeashByName(dogLeashEntry.Value.Name);
             }
         }
@@ -235,12 +227,12 @@ namespace PetStore
             return _DogLeashList.InStockDogLeashes();
            //return _DogLeash.Where(x => x.Value.Quantity > 0).Select(x => x.Value.Name).ToList();
         }
+        public decimal GetDogLeashInventoryTotal()
+        {
+            return _DogLeashList.InStockDogLeashes().Select(dL => dL.Price * dL.Quantity).Sum();
+        }
         public List<String> GetOutOfStockDogLeashes()  //try to get lambda to work with return somehow room to grow for sure
         {
-            //IEnumerable<DogLeash> dogLeashList =
-            //    (IEnumerable<DogLeash>)(from dogLeash in _DogLeash
-            //    where dogLeash.Value.Quantity == 0
-            //    select dogLeash);
             return _DogLeash.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
             ;
             

@@ -26,7 +26,10 @@ namespace PetStore
         {
             return list.Where(dL => dL.Quantity > 0).ToList();
         }
-        //Why Doesnt this work??
+        public static List<T> InStockCatFood<T>(this List<T> list) where T: CatFood
+        {
+            return list.Where(cF => cF.Quantity > 0).ToList();
+        }
     }
 }
 

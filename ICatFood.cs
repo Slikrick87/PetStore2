@@ -15,6 +15,8 @@ namespace PetStore
         public CatFood AddCatFood(CatFood catFood);
         public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);
         public List<String> GetOutOfStockCatFood();
-        public List<String> GetOnlyInStockCatFood();
+        public List<CatFood> GetOnlyInStockCatFood();
+        //public List<T> InStockCatFood<T>();
     }
+    ///Should I put Extensions in Interface?
 }

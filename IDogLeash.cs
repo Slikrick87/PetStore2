@@ -16,6 +16,8 @@ namespace PetStore
         //public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes();
         public List<String> GetOutOfStockDogLeashes(); //not the way assignment said to do it couldn't get it to work their way
         public List<DogLeash> GetOnlyInStockDogLeashes();
+        //public List<T> InStockDogLeashes<T>();
+        public decimal GetDogLeashInventoryTotal();
     }
-   
+   ///Should I put Extensions in Interface?
 }
