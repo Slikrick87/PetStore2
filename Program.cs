@@ -25,7 +25,6 @@ public class Program
         Console.WriteLine($"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n                                                                |\\_/|  \r\n                                                      \t        | @ @   Woof!\r\n           __..--''``---....___   _..._    __         \t        |   <>\r\n /// //_.-'    .-/\";  `        ``<._  ``.''_ `. / // /\t        |  _/\\------____ ((| |))\r\n///_.-' _..--.'_    \\                    `( ) ) // //           |               `--' |\r\n/ (_..-' // (< _     ;_..__               ; `' / ///        ____|_       ___|   |___.'\r\n / // // //  `-._,_)' // / ``--...____..-' /// / //        /_/_____/____/_______|\r\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         string userInput = "cool";
-        //var DisplayProducts = new DisplayProducts();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
@@ -59,8 +58,6 @@ public class Program
                             {
                                 Console.WriteLine("You've Selected Dog Leash");
                                 dogLeashClass.NewDogLeash();
-                                //DogLeashLogic.AddDogLeash();
-                                //productLogic.AddProduct();
                                 break;
                             }
                             else if (userInput.ToLower().Replace(" ", "") == "2")
@@ -68,7 +65,6 @@ public class Program
                                 Console.WriteLine("You've Selected Cat Food.");
                                 catFoodClass.NewCatFood();
 
-                                //catFood.PrintCatFood();
                                 break;
                             }
                         } while (userInput.ToLower().Trim() != "1" && userInput.Trim() != "2");
@@ -113,22 +109,15 @@ public class Program
                     }
                 case "7":
                     {
-                        Console.WriteLine($"Total Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}");
+                        Console.WriteLine($"\nTotal Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}\nl");
                         continue;
                     }
                 case "8":
                     {
                         dogLeashClass.DisplayAllDogLeash(dogLeashClass._DogLeash);
                         catFoodClass.DisplayAllCatFood(catFoodClass._CatFood);
-                        //DisplayProducts.GetAllProducts(productLogic._products);
                         continue;
                     }
-                //case "**":
-                //    {
-                //        TestCode.CatFoodRepo(catFoodClass);
-                //        TestCode.DogLeashRepo(dogLeashClass);
-                //        continue;
-                //    }
                 case "9":
                     {
                         List <DogLeash> inStockDogLeashes = dogLeashClass.GetOnlyInStockDogLeashes();
@@ -141,7 +130,6 @@ public class Program
                     {
                         Console.WriteLine(String.Join("\n", dogLeashClass.GetOutOfStockDogLeashes()));
                         Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
-                        //Console.WriteLine(printDogLeash);
                         continue;
                     }
                 case "0":

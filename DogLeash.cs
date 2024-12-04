@@ -30,10 +30,12 @@ namespace PetStore
 
         public DogLeash NewDogLeash()
         {
-            //DogLeash dog_leash = new DogLeash();
-            Console.Write("Name:");                                  //Naming Dog Leash
-            string dogLeashName = Console.ReadLine();
-
+            string dogLeashName;
+            do
+            {
+                Console.Write("Name:");                                  //Naming Dog Leash
+                dogLeashName = Console.ReadLine();
+            } while(string.IsNullOrWhiteSpace(dogLeashName));
             string price;
             decimal dogLeashPrice;
             do
@@ -41,7 +43,6 @@ namespace PetStore
                 Console.Write("Price:");                             //Pricing Dog Leash
                 price = Console.ReadLine();
             } while (!decimal.TryParse(price, out dogLeashPrice));
-            dogLeashPrice = dogLeashPrice;
 
             string quantity;
             int dogLeashQuantity;
@@ -51,13 +52,12 @@ namespace PetStore
                 quantity = Console.ReadLine();
             }
             while (!int.TryParse(quantity, out dogLeashQuantity));
-            dogLeashQuantity = dogLeashQuantity;
 
             string dogLeashDescription;
             do {
                 Console.Write("Description:");                              //Dog Leash Description
                 dogLeashDescription = Console.ReadLine();
-                } while (dogLeashDescription == null || dogLeashDescription == "");
+                } while (string.IsNullOrWhiteSpace(dogLeashDescription));
 
             string length;
             int dogLeashLength;
@@ -67,11 +67,13 @@ namespace PetStore
                 length = Console.ReadLine();
             }
             while (!int.TryParse(length.Replace("\"", ""), out dogLeashLength));
-            dogLeashLength = dogLeashLength;
 
-            Console.Write("Material:");                                 //Dog Leash Material
-            string dogLeashMaterial = Console.ReadLine();
-
+            string dogLeashMaterial;
+            do
+            {
+                Console.Write("Material:");                                 //Dog Leash Material
+                dogLeashMaterial = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(dogLeashMaterial));
             DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
             AddDogLeash(dogLeash);
             Console.WriteLine($"---------------------------------- New Product Added! ----------------------------------");
@@ -129,8 +131,13 @@ namespace PetStore
                     }
                 case "description":
                     {
-                        Console.WriteLine("Enter new description:");
-                        string newDescription = Console.ReadLine();
+                        string newDescription;
+                        do
+                        {
+                            Console.WriteLine("Enter new description:");
+                            newDescription = Console.ReadLine();
+                        }
+                        while(string.IsNullOrEmpty(newDescription));
                         dogLeashToEdit.Description = newDescription;
                         break;
                     }
@@ -181,7 +188,7 @@ namespace PetStore
                             Console.WriteLine("Enter Updated Material");
                             newMaterial = Console.ReadLine();
                         }
-                        while (newMaterial == null || newMaterial == "");
+                        while (string.IsNullOrWhiteSpace(newMaterial));
                         dogLeashToEdit.Material = newMaterial;
                         break;
                     }
@@ -209,23 +216,9 @@ namespace PetStore
                 GetDogLeashByName(dogLeashEntry.Value.Name);
             }
         }
-        //public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes()
-        //{
-        //    Dictionary<string, DogLeash> inStockDogLeashNames = new();
-        //    foreach (var dogLeashEntry in _DogLeash)
-        //    {
-        //        if (dogLeashEntry.Value.Quantity > 0) { inStockDogLeashNames.Add(dogLeashEntry.Value.Name, dogLeashEntry.Value); }
-        //    }
-        //    foreach (var inStockDL in inStockDogLeashNames)
-        //    {
-        //        Console.WriteLine(inStockDL.Value.Name);
-        //    }
-        //    return inStockDogLeashNames;
-        //}
         public List<DogLeash> GetOnlyInStockDogLeashes()
         {
             return _DogLeashList.InStockDogLeashes();
-           //return _DogLeash.Where(x => x.Value.Quantity > 0).Select(x => x.Value.Name).ToList();
         }
         public decimal GetDogLeashInventoryTotal()
         {

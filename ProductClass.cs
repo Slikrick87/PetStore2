@@ -7,5 +7,4 @@
         public int Quantity { get; set; }
         public string? Description { get; set; } // should i use a ? or =string.empty
     }
-
 }

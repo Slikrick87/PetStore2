@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace PetStore
         public DogLeash AddDogLeash(DogLeash dogLeash);
         public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash);
         //public Dictionary<string, DogLeash> GetOnlyInStockDogLeashes();
+        //public decimal DiscountThisPrice(this decimal lylaPrice);
         public List<String> GetOutOfStockDogLeashes(); //not the way assignment said to do it couldn't get it to work their way
         public List<DogLeash> GetOnlyInStockDogLeashes();
         //public List<T> InStockDogLeashes<T>();
