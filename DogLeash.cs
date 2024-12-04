@@ -218,11 +218,11 @@ namespace PetStore
         }
         public List<DogLeash> GetOnlyInStockDogLeashes()
         {
-            return _DogLeashList.InStockDogLeashes();
+            return _DogLeashList.InStock();
         }
         public decimal GetDogLeashInventoryTotal()
         {
-            return _DogLeashList.InStockDogLeashes().Select(dL => dL.Price * dL.Quantity).Sum();
+            return _DogLeashList.InStock().Select(dL => dL.Price * dL.Quantity).Sum();
         }
         public List<String> GetOutOfStockDogLeashes()  //try to get lambda to work with return somehow room to grow for sure
         {

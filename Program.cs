@@ -109,7 +109,7 @@ public class Program
                     }
                 case "7":
                     {
-                        Console.WriteLine($"\nTotal Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}\nl");
+                        Console.WriteLine($"\nTotal Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}\n");
                         continue;
                     }
                 case "8":

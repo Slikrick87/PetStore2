@@ -119,7 +119,7 @@ namespace PetStore
                         {
                             Console.WriteLine("Enter new name:");
                             newInput = Console.ReadLine();
-                        } while (string.IsNullOrWhiteSpace(newInput))
+                        } while (string.IsNullOrWhiteSpace(newInput));
                             //catFoodToEdit = _CatFood[key];
                             catFoodToEdit.Name = newInput;
                             string newKey = catFoodToEdit.Name;
@@ -247,11 +247,11 @@ namespace PetStore
         }
         public List<CatFood> GetOnlyInStockCatFood()
         {
-            return _CatFoodList.InStockCatFood();
+            return _CatFoodList.InStock();
         }
         public decimal GetCatFoodInventoryTotal()
         {
-            return _CatFoodList.InStockCatFood().Select(cF => cF.Price * cF.Quantity).Sum();
+            return _CatFoodList.InStock().Select(cF => cF.Price * cF.Quantity).Sum();
         }
         public List<String> GetOutOfStockCatFood()
         {
