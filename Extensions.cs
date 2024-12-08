@@ -27,5 +27,5 @@ namespace PetStore
             return list.Where(dL => dL.Quantity > 0).ToList();
         }
     } //Can't use generics with a dictionary have to fix edit function to update list too!!
-}
+} // use bracket using Tkey, TValue to use generics with a dictionary. just use a list for now. maybe someday
 
