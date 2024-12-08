@@ -1,6 +1,7 @@
 ﻿
 using PetStore;
 using System.ComponentModel.Design;
+using PetStore.Logic;
 
 
 
@@ -11,38 +12,21 @@ public class Program
 
     static void Main(string[] args)
     {
-        //when makin 
-        Console.Beep(392, 250);
-        Console.Beep(349, 250);
-        Console.Beep(294, 250);
-        Console.Beep(220, 250);
-        Console.Beep(196, 250);
-        Console.Beep(330, 250);
-        Console.Beep(392, 250);
-        Console.Beep(494, 250);
-        Console.WriteLine("------------------------------ Welcome To The Pet Store! -------------------------------");
-
-        Console.WriteLine($"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n                                                                |\\_/|  \r\n                                                      \t        | @ @   Woof!\r\n           __..--''``---....___   _..._    __         \t        |   <>\r\n /// //_.-'    .-/\";  `        ``<._  ``.''_ `. / // /\t        |  _/\\------____ ((| |))\r\n///_.-' _..--.'_    \\                    `( ) ) // //           |               `--' |\r\n/ (_..-' // (< _     ;_..__               ; `' / ///        ____|_       ___|   |___.'\r\n / // // //  `-._,_)' // / ``--...____..-' /// / //        /_/_____/____/_______|\r\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        var program = new ProgramLogic();
+        
+        program.OpeningSequence();
 
         string userInput = "cool";
+        var productLogic = new ProductLogic();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
         TestCode.DogLeashRepo(dogLeashClass);
         while (userInput == null || userInput.ToLower().Trim() != "exit")
         {
-            Console.WriteLine("------------------------------- [Please Select An Option] ------------------------------");
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.Write(" [1 Add Product]");
-            Console.Write(" [2 Search]");
-            Console.Write(" [7 Total Inventory Price]");
-            Console.WriteLine(" [8 View Product List]");
-            Console.Write(" [9 For In Stock Products]");
-            Console.WriteLine(" [10 For Out Of Stock Products]");
-            Console.Write(" [0 Edit Product]");
-            Console.WriteLine(" [Type 'exit' to quit]");
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            
+
+            program.DisplayMenuInputOptions();
+
             userInput = Console.ReadLine();
             switch (userInput)
             {
@@ -86,10 +70,10 @@ public class Program
                                     {
                                         Console.WriteLine("Enter Name of Dog Leash.");
                                         userInput = Console.ReadLine();
-                                        dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
+                                        dogLeashClass.GetProductByName(userInput.ToLower().Trim());
 
                                         continue;
-                                    } while (dogLeashClass.dogLeashSearchValid == false);
+                                    } while (dogLeashClass.validSearch == false);
                                     break;
                                 }
                             case "catfood":
@@ -98,10 +82,10 @@ public class Program
                                     {
                                         Console.WriteLine("Enter Name of Cat Food.");
                                         userInput = Console.ReadLine();
-                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
+                                        catFoodClass.GetProductByName(userInput.ToLower().Trim());
 
                                         continue;
-                                    } while (catFoodClass.catFoodSearchValid == false);
+                                    } while (catFoodClass.validSearch == false);
                                     break;
                                 }
                         }
@@ -114,8 +98,8 @@ public class Program
                     }
                 case "8":
                     {
-                        dogLeashClass.DisplayAllDogLeash(dogLeashClass._DogLeash);
-                        catFoodClass.DisplayAllCatFood(catFoodClass._CatFood);
+                        dogLeashClass.DisplayAllDogLeash(DogLeashLogic._DogLeash);
+                        catFoodClass.DisplayAllCatFood(CatFoodLogic._CatFood);
                         continue;
                     }
                 case "9":
