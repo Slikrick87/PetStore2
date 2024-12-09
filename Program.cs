@@ -2,22 +2,25 @@
 using PetStore;
 using System.ComponentModel.Design;
 using PetStore.Logic;
+using Microsoft.Extensions.DependencyInjection;
 
 
 
-
-
-public class Program
+public partial class Program
 {
 
     static void Main(string[] args)
     {
-        var program = new ProgramLogic();
+       
+        var serviceCollection = ServiceDependencyProvider.CreateServiceCollection();
+        var productLogic = serviceCollection.GetService<IProductLogic>();
         
+        var program = new ProgramLogic();
+
         program.OpeningSequence();
 
         string userInput = "cool";
-        var productLogic = new ProductLogic();
+        //var productLogic = new ProductLogic();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
@@ -139,5 +142,6 @@ public class Program
         }
     }
 }
+
 
     
