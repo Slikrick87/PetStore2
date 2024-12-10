@@ -12,8 +12,8 @@ namespace PetStore
     {
         public static void DogLeashRepo(DogLeashLogic TestRepositoryDogLeash)
         {
-         
-            
+
+
             DogLeash dogLeash1 = new DogLeash("Da Rizzler", 14.99m, 87, "BadAss", 12, "Leather");
             TestRepositoryDogLeash.AddDogLeash(dogLeash1);
             //_products.Add(dogLeash1);
@@ -30,8 +30,8 @@ namespace PetStore
         }
         public static void CatFoodRepo(CatFoodLogic TestRepositoryCatFood)
         {
-            CatFood Meowzler = new CatFood("Meowzer", 29.99m, 0, "CharBroiled", true);
-            TestRepositoryCatFood.AddCatFood(Meowzler);
+            CatFood catFood4 = new CatFood("Meowzer", 29.99m, 0, "CharBroiled", true);
+            TestRepositoryCatFood.AddCatFood(catFood4);
 
             CatFood catFood1 = new CatFood("Pringles", 3.99m, 24, "Sour Cream and Onion", true);
             TestRepositoryCatFood.AddCatFood(catFood1);

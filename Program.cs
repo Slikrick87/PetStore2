@@ -6,21 +6,27 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 
-public partial class Program
+public class Program
 {
 
     static void Main(string[] args)
     {
-       
-        var serviceCollection = ServiceDependencyProvider.CreateServiceCollection();
-        var productLogic = serviceCollection.GetService<IProductLogic>();
-        
-        var program = new ProgramLogic();
+        ///not certain that calling the actual Logic class was the right move here but bool valid
+        ///search didn't exist in the Interface
+        var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
+        var productLogicInterface = serviceCollection.GetService<IProductLogic>();
 
+        var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
+        var dogLeashInterface = serviceCollection.GetService<IDogLeash>();
+
+        var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
+        var catFoodInterface = serviceCollection.GetService<ICatFood>();
+        var program = new ProgramLogic();
+        
         program.OpeningSequence();
 
         string userInput = "cool";
-        //var productLogic = new ProductLogic();
+        var productLogic = new ProductLogic();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
@@ -59,6 +65,7 @@ public partial class Program
                     }
                 case "2":
                     {
+                        bool validSearch = false;
                         do
                         {
                             Console.WriteLine("Enter product type:");
@@ -73,10 +80,11 @@ public partial class Program
                                     {
                                         Console.WriteLine("Enter Name of Dog Leash.");
                                         userInput = Console.ReadLine();
-                                        dogLeashClass.GetProductByName(userInput.ToLower().Trim());
-
+                                        dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
+                                        
+                                        //can change bool validSearch to be local here
                                         continue;
-                                    } while (dogLeashClass.validSearch == false);
+                                    } while (validSearch == false);
                                     break;
                                 }
                             case "catfood":
@@ -85,10 +93,10 @@ public partial class Program
                                     {
                                         Console.WriteLine("Enter Name of Cat Food.");
                                         userInput = Console.ReadLine();
-                                        catFoodClass.GetProductByName(userInput.ToLower().Trim());
-
+                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
+                                        //and here to solve interface call issue have to change code around a bit
                                         continue;
-                                    } while (catFoodClass.validSearch == false);
+                                    } while (validSearch == false);
                                     break;
                                 }
                         }
