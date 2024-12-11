@@ -3,6 +3,8 @@ using PetStore;
 using System.ComponentModel.Design;
 using PetStore.Logic;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
+using System.Net.Http.Headers;
 
 
 
@@ -31,6 +33,10 @@ public class Program
         var dogLeashClass = new DogLeashLogic();
         TestCode.CatFoodRepo(catFoodClass);
         TestCode.DogLeashRepo(dogLeashClass);
+        
+        
+        
+        
         while (userInput == null || userInput.ToLower().Trim() != "exit")
         {
 
@@ -41,26 +47,45 @@ public class Program
             {
                 case "1":
                     {
-                        do
+                        Console.WriteLine("please enter product type(Dog Leash, Cat Food");
+                        string selection = Console.ReadLine();
+                        switch (selection.ToLower().Trim())
                         {
-                            Console.WriteLine("Select Product Type.\n[1:Dog Leash] [2:Cat Food]");
-                            Console.Write("User Input:");
-                            userInput = Console.ReadLine();
+                            case "dogleash":
+                                {
 
-                            if (userInput.ToLower().Replace(" ", "") == "1")
-                            {
-                                Console.WriteLine("You've Selected Dog Leash");
-                                dogLeashClass.NewDogLeash();
-                                break;
-                            }
-                            else if (userInput.ToLower().Replace(" ", "") == "2")
-                            {
-                                Console.WriteLine("You've Selected Cat Food.");
-                                catFoodClass.NewCatFood();
+                                    DogLeash dogLeashjson = dogLeashClass.CreateNewDogLeash();
+                                    continue;
+                                }
+                            case "catfood":
+                                {
+                                    CatFood catFoodjson = catFoodClass.CreateNewCatFood();
+                                    continue;
+                                }
 
-                                break;
-                            }
-                        } while (userInput.ToLower().Trim() != "1" && userInput.Trim() != "2");
+
+                                //do
+                                //{
+                                //    Console.WriteLine("Select Product Type.\n[1:Dog Leash] [2:Cat Food]");
+                                //    Console.Write("User Input:");
+                                //    userInput = Console.ReadLine();
+
+                                //    if (userInput.ToLower().Replace(" ", "") == "1")
+                                //    {
+                                //        Console.WriteLine("You've Selected Dog Leash");
+                                //        dogLeashClass.NewDogLeash();
+                                //        break;
+                                //    }
+                                //    else if (userInput.ToLower().Replace(" ", "") == "2")
+                                //    {
+                                //        Console.WriteLine("You've Selected Cat Food.");
+                                //        catFoodClass.NewCatFood();
+
+                                //        break;
+                                //    }
+                                //} while (userInput.ToLower().Trim() != "1" && userInput.Trim() != "2");
+                                
+                        }
                         continue;
                     }
                 case "2":

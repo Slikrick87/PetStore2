@@ -22,6 +22,7 @@ namespace PetStore
         //public List<T> InStockDogLeashes<T>();
         public decimal GetDogLeashInventoryTotal();
         public void GetDogLeashByName(string name);
+        public DogLeash CreateNewDogLeash();
         //public void DogLeashRepo(DogLeashLogic dogLeashLogic);
     }
    ///Should I put Extensions in Interface?

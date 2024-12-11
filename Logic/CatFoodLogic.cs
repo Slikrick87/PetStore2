@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace PetStore.Logic
 {
@@ -11,18 +12,7 @@ namespace PetStore.Logic
 
         public static Dictionary<string, CatFood> _CatFood = new(StringComparer.InvariantCultureIgnoreCase);
         public static List<CatFood> _CatFoodList = new();
-        //public static void CatFoodRepo(CatFoodLogic catFoodClass)
-        //{
-        //    CatFood catFood1 = new CatFood("Meowzer", 29.99m, 0, "CharBroiled", true);
-        //    CatFood catFood2 = new CatFood("Pringles", 3.99m, 24, "Sour Cream and Onion", true);
-        //    CatFood catFood3 = new CatFood("Kittie Chow", 19.99m, 24, "RoadKill", false);
-        //    CatFood catFood4 = new CatFood("Spam", 5.99m, 72, "Shelf Stable!!", true);
-        //    catFoodClass.AddCatFood(catFood1);
-        //    catFoodClass.AddCatFood(catFood2);
-        //    catFoodClass.AddCatFood(catFood3);
-        //    catFoodClass.AddCatFood(catFood4);
-        //}
-
+        
         public CatFood NewCatFood()
         {
 
@@ -144,20 +134,6 @@ namespace PetStore.Logic
                         catFoodToEdit.Quantity = newCatFoodQuantity;
                         break;
                     }
-                //case "weight":
-                //    {
-                //        string newWeight;
-                //        double Weight;
-                //        do
-                //        {
-                //            Console.WriteLine("Enter Updated Weight in pounds");
-                //            newWeight = Console.ReadLine();
-
-                //        }
-                //        while (!double.TryParse(newWeight, out Weight));
-                //        catFoodToEdit.WeightPounds = Weight;
-                //        break;
-                //    }
                 case "safe for kittens":
                     {
                         string KittenFoodAnswer = null;
@@ -187,6 +163,22 @@ namespace PetStore.Logic
             return catFoodToEdit;
         }
 
+        
+
+        public CatFood AddCatFood(CatFood catFood)
+        {
+            _CatFoodList.Add(catFood);
+            _CatFood.Add(catFood.Name, catFood as CatFood);
+            return catFood;
+        }
+        public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
+        {
+            Console.WriteLine("--------------------------------- [Cat Food Products] ----------------------------------");
+            foreach (var catFoodEntry in _CatFood)
+            {
+                GetCatFoodByName(catFoodEntry.Value.Name);
+            }
+        }
         public void GetCatFoodByName(string name)
         {
             bool validSearch;
@@ -211,21 +203,6 @@ namespace PetStore.Logic
                 Console.WriteLine("----------------------------------------------------------------------------------------");
             }
         }
-
-        public CatFood AddCatFood(CatFood catFood)
-        {
-            _CatFoodList.Add(catFood);
-            _CatFood.Add(catFood.Name, catFood as CatFood);
-            return catFood;
-        }
-        public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
-        {
-            Console.WriteLine("--------------------------------- [Cat Food Products] ----------------------------------");
-            foreach (var catFoodEntry in _CatFood)
-            {
-                GetCatFoodByName(catFoodEntry.Value.Name);
-            }
-        }
         public List<CatFood> GetOnlyInStockCatFood()
         {
             return _CatFoodList.InStock();
@@ -237,6 +214,19 @@ namespace PetStore.Logic
         public List<String> GetOutOfStockCatFood()
         {
             return _CatFood.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
+        }
+
+        public CatFood CreateNewCatFood()
+        {
+            string jsonText;
+            Console.WriteLine("Add new product using Json\nFields to enter");
+            Console.WriteLine("{ \"Price\": 58.89, \"Name\": \"Special cat food\", \"Quantity\": 23, " +
+                "\n\"Description\": \"Magical Cat Food that will keep your cat from acting wild at night\", " +
+                "\n\"KittenFood\": \"true\" }");
+            jsonText = Console.ReadLine();
+            CatFood catFood = JsonSerializer.Deserialize<CatFood>(jsonText);
+            AddCatFood(catFood);
+            return catFood;
         }
     }
 }

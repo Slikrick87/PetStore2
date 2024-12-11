@@ -3,6 +3,7 @@ using PetStore;
 using System;
 using System.Xml.Linq;
 using PetStore.Logic;
+using System.Text.Json;
 namespace PetStore
 {
     public class ProductLogic : IProductLogic
@@ -46,6 +47,14 @@ namespace PetStore
         //{
         //    Program.dogLeashClass.DisplayAllDogLeash();
         //}
+        //public T CreateNewProduct<T>(T type) where T : new()
+        //{
+        //    string jsonText;
+        //    Console.WriteLine("Add new product using Json\nFields to enter");
+        //    jsonText = Console.ReadLine();
+        //    var dogLeash = JsonSerializer.Deserialize<T>(jsonText);
+        //    return new T();
+        //} gonna try again to make a generic method to create new products using json and generics
     }
 }
 
