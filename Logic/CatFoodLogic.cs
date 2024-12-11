@@ -10,14 +10,12 @@ namespace PetStore.Logic
     public class CatFoodLogic : ProductLogic, ICatFood
     {
 
-        public static Dictionary<string, CatFood> _CatFood = new(StringComparer.InvariantCultureIgnoreCase);
-        public static List<CatFood> _CatFoodList = new();
         
         public CatFood NewCatFood()
         {
 
             Console.Write("Name:");
-            string catFoodName = Console.ReadLine().Trim();
+            string? catFoodName = Console.ReadLine().Trim();
 
             string price;
             decimal catFoodPrice;
@@ -69,21 +67,25 @@ namespace PetStore.Logic
 
             Console.WriteLine($"--------------------------------- New Product Added! ----------------------------------");
             //Console.WriteLine(JsonSerializer.Serialize(catFood));
-            GetProductByName(catFood.Name);
+            GetProductByName<CatFood>(catFood.Name);
             return catFood;
         }
+        /// <summary>
+        /// Edit Function doesn't change item in list only in Dictionary
+        /// </summary>
+        /// <returns></returns>
         public CatFood EditProductCatFood()
         {
             Console.WriteLine("Please enter name of Cat Food:");
             string key = Console.ReadLine();
-            CatFood catFoodToEdit = _CatFood[key];
+            CatFood catFoodToEdit = _catFood[key];
             Console.WriteLine("Please enter parameter to edit");
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine();
             switch (userInput.ToLower().Trim())
             {
                 case "name":
                     {
-                        _CatFood.TryGetValue(key, out var value);
+                        _catFood.TryGetValue(key, out var value);
                         string newInput;
                         do
                         {
@@ -93,8 +95,9 @@ namespace PetStore.Logic
                         //catFoodToEdit = _CatFood[key];
                         catFoodToEdit.Name = newInput;
                         string newKey = catFoodToEdit.Name;
-                        _CatFood.Remove(key);
-                        _CatFood.Add(newKey, value);
+                        _catFood.Remove(key);
+                        _catFood.Add(newKey, value);
+                        
                         break;
                     }
                 case "description":
@@ -167,56 +170,11 @@ namespace PetStore.Logic
 
         public CatFood AddCatFood(CatFood catFood)
         {
-            _CatFoodList.Add(catFood);
-            _CatFood.Add(catFood.Name, catFood as CatFood);
+            _products.Add(catFood);
+            _catFood.Add(catFood.Name, catFood as CatFood);
             return catFood;
         }
-        public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood)
-        {
-            Console.WriteLine("--------------------------------- [Cat Food Products] ----------------------------------");
-            foreach (var catFoodEntry in _CatFood)
-            {
-                GetCatFoodByName(catFoodEntry.Value.Name);
-            }
-        }
-        public void GetCatFoodByName(string name)
-        {
-            bool validSearch;
-            try
-            {
-                Console.WriteLine("----------------------------------------------------------------------------------------");
-                Console.WriteLine($"Name:                           {_CatFood[name].Name}");
-                Console.WriteLine($"Description:                    {_CatFood[name].Description}");
-                Console.WriteLine($"Price:                          {_CatFood[name].Price}");
-                Console.WriteLine($"Discounted Price:               {_CatFood[name].Price.DiscountThisPrice()}");
-                Console.WriteLine($"Quantity:                       {_CatFood[name].Quantity}");
-                Console.WriteLine($"Safe for Kittens:               {_CatFood[name].KittenFood}");
-
-                Console.WriteLine("----------------------------------------------------------------------------------------");
-
-                validSearch = true;
-            }
-            catch (KeyNotFoundException e)
-            {
-                validSearch = false;
-                Console.WriteLine("\nCat Food doesn't exist in database.\n");
-                Console.WriteLine("----------------------------------------------------------------------------------------");
-            }
-        }
-        public List<CatFood> GetOnlyInStockCatFood()
-        {
-            return _CatFoodList.InStock();
-        }
-        public decimal GetCatFoodInventoryTotal()
-        {
-            return _CatFoodList.InStock().Select(cF => cF.Price * cF.Quantity).Sum();
-        }
-        public List<String> GetOutOfStockCatFood()
-        {
-            return _CatFood.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
-        }
-
-        public CatFood CreateNewCatFood()
+        public CatFood CreateNewCatFoodJson()
         {
             string jsonText;
             Console.WriteLine("Add new product using Json\nFields to enter");

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using FluentValidation;
 using FluentValidation.Results;
 using PetStore;
 using PetStore.Validators;
+using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace PetStore.Logic
 {
     public class DogLeashLogic : ProductLogic, IDogLeash
     {
-        public static List<DogLeash> _DogLeashList = new();
-        public static Dictionary<String, DogLeash> _DogLeash = new(StringComparer.InvariantCultureIgnoreCase);
-        public DogLeashValidator validationRules = new DogLeashValidator(); 
         public DogLeash NewDogLeash()
         {
             string dogLeashName;
@@ -66,12 +66,12 @@ namespace PetStore.Logic
             DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
             AddDogLeash(dogLeash);
             Console.WriteLine($"---------------------------------- New Product Added! ----------------------------------");
-            GetDogLeashByName(dogLeash.Name);
+            GetProductByName<DogLeash>(dogLeash.Name);
             //ProductLogic.AddProduct(dog_leash);
             //Console.WriteLine(JsonSerializer.Serialize(dog_leash));
             return dogLeash;
         }
-        public DogLeash CreateNewDogLeash()
+        public DogLeash CreateNewDogLeashJson()
         {
             string jsonText;
             Console.WriteLine("Add new product using Json Using the following format as an example");
@@ -83,73 +83,50 @@ namespace PetStore.Logic
         }
         public DogLeash AddDogLeash(DogLeash dogLeash)
         {
-            _DogLeashList.Add(dogLeash);
-            _DogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
-            ValidationResult result = validationRules.Validate(dogLeash);
-            if (!result.IsValid)
-            {
-                foreach (var failure in result.Errors)
-                {
-                    Console.WriteLine($"Property: " + failure.PropertyName +
-                        " failed validation. Error was: " + failure.ErrorMessage);
-                }
-            }
-            return dogLeash;
-        }
-        
-        
-        public void DisplayAllDogLeash(Dictionary<string, DogLeash> _DogLeash)
-        {
-            Console.WriteLine("--------------------------------- [Dog Leash Products] ---------------------------------");
-            foreach (var dogLeashEntry in _DogLeash)
-            {
-                GetDogLeashByName(dogLeashEntry.Value.Name);
-            }
-        }
-
-        public void GetDogLeashByName(string name)
-        {
-            bool validSearch;
+            ValidationResult results = dogLeashValidator.Validate(dogLeash);
             try
             {
-                Console.WriteLine("----------------------------------------------------------------------------------------");
-                Console.WriteLine($"Name:                           {_DogLeash[name].Name}");
-                Console.WriteLine($"Description:                    {_DogLeash[name].Description}");
-                Console.WriteLine($"Price:                          {_DogLeash[name].Price}");
-                Console.WriteLine($"Discounted Price:               {_DogLeash[name].Price.DiscountThisPrice()}");
-                Console.WriteLine($"Quantity:                       {_DogLeash[name].Quantity}");
-                Console.WriteLine($"Length:                         {_DogLeash[name].LengthInches}\"");
-                Console.WriteLine($"Material:                       {_DogLeash[name].Material}");
-                //Console.WriteLine($"Description:                    {_DogLeash[name].Description}");
-                Console.WriteLine("----------------------------------------------------------------------------------------");
-                validSearch = true;
+                _products.Add(dogLeash);
+                _dogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
+                dogLeashValidator.ValidateAndThrow(dogLeash);
             }
-            catch (KeyNotFoundException e)
-            {
-                validSearch = false;
-                Console.WriteLine("\n                     * Dog Leash does not exist in database *                       \n");
-                Console.WriteLine("----------------------------------------------------------------------------------------");
+            catch (Exception e) {
+
+                if (!results.IsValid)
+                {
+                    foreach (var failure in results.Errors)
+                    {
+                        Console.WriteLine("\nProperty " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+                    }
+                }
             }
+            
+            return dogLeash;
         }
+
+        /// <summary>
+        /// Edit function doesn't change item in list only in dictionary
+        /// </summary>
+        /// <returns></returns>
         public DogLeash EditProductDogLeash()
         {
             Console.WriteLine("Please enter name of dog leash:");
             string key = Console.ReadLine();
-            DogLeash dogLeashToEdit = _DogLeash[key];
+            DogLeash dogLeashToEdit = _dogLeash[key];
             Console.WriteLine("Please enter parameter to edit");
             string userInput = Console.ReadLine();
             switch (userInput.ToLower().Trim())
             {
                 case "name":
                     {
-                        _DogLeash.TryGetValue(key, out var value);
+                        _dogLeash.TryGetValue(key, out var value);
                         Console.WriteLine("Enter new name:");
                         string newInput = Console.ReadLine();  ///changes and adds to list
-                        dogLeashToEdit = _DogLeash[key];
+                        dogLeashToEdit = _dogLeash[key];
                         value.Name = newInput;
                         string newKey = dogLeashToEdit.Name;
-                        _DogLeash.Remove(key);
-                        _DogLeash.Add(newKey, value);
+                        _dogLeash.Remove(key);
+                        _dogLeash.Add(newKey, value);
                         break;
                     }
                 case "description":
@@ -223,23 +200,6 @@ namespace PetStore.Logic
 
             }
             return dogLeashToEdit;
-        }
-
-
-
-        public List<DogLeash> GetOnlyInStockDogLeashes()
-        {
-            return _DogLeashList.InStock();
-        }   //move to productlogic
-        public decimal GetDogLeashInventoryTotal()
-        {
-            return _DogLeashList.InStock().Select(dL => dL.Price * dL.Quantity).Sum();
-        }  // move to productlogic
-        public List<String> GetOutOfStockDogLeashes()  //try to get lambda to work with return somehow room to grow for sure
-        {
-            return _DogLeash.Where(p => p.Value.Quantity == 0).Select(p => p.Value.Name).ToList();
-            
-            // move toproductlogic
         }
     }
 }

@@ -12,12 +12,12 @@ namespace PetStore
     {
         public CatFood NewCatFood();
         public CatFood EditProductCatFood();
-        public void GetCatFoodByName(string Name);
+        //public void GetCatFoodByName(string Name);
         public CatFood AddCatFood(CatFood catFood);
-        public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);
-        public List<String> GetOutOfStockCatFood();
-        public List<CatFood> GetOnlyInStockCatFood();
-        public decimal GetCatFoodInventoryTotal();
+        //public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);
+        //public List<String> GetOutOfStockCatFood();
+        //public List<CatFood> GetOnlyInStockCatFood();
+        //public decimal GetCatFoodInventoryTotal();
         //public void CatFoodRepo(CatFoodLogic catFoodClass);
         //public List<T> InStockCatFood<T>();
     }

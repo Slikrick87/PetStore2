@@ -31,8 +31,8 @@ public class Program
         var productLogic = new ProductLogic();
         var catFoodClass = new CatFoodLogic();
         var dogLeashClass = new DogLeashLogic();
-        TestCode.CatFoodRepo(catFoodClass);
-        TestCode.DogLeashRepo(dogLeashClass);
+        //ProductLogic.CatFoodRepo(productLogic);
+        //ProductLogic.DogLeashRepo(dogLeashClass);
         
         
         
@@ -47,43 +47,49 @@ public class Program
             {
                 case "1":
                     {
-                        Console.WriteLine("please enter product type(Dog Leash, Cat Food");
+                        Console.WriteLine("please enter product type(Dog Leash, Cat Food)");
                         string selection = Console.ReadLine();
+                        selection = selection.ToLower().Replace(" ", "");
                         switch (selection.ToLower().Trim())
                         {
                             case "dogleash":
                                 {
-
-                                    DogLeash dogLeashjson = dogLeashClass.CreateNewDogLeash();
+                                    Console.WriteLine("To use json format to enter fields press 1, \n" +
+                                        "To enter one field at a time in terminal press 2");
+                                    selection = Console.ReadLine();
+                                    if (selection == "1")
+                                    {
+                                        Console.WriteLine("You've Selected New Dog Leash Through Json input.");
+                                        dogLeashClass.CreateNewDogLeashJson();
+                                        continue;
+                                    }
+                                    else if (selection == "2")
+                                    {
+                                        Console.WriteLine("You've Selected Dog Leash");
+                                        dogLeashClass.NewDogLeash();
+                                        continue;
+                                    }
                                     continue;
                                 }
                             case "catfood":
                                 {
-                                    CatFood catFoodjson = catFoodClass.CreateNewCatFood();
+                                    Console.WriteLine("To use json format to enter fields press 1, \n" +
+                                        "To enter one field at a time in terminal press 2");
+                                    selection = Console.ReadLine();
+                                    if (selection == "1")
+                                    {
+                                        Console.WriteLine("You've Selected New Cat Food Through Json input.");
+                                        catFoodClass.CreateNewCatFoodJson();
+                                        continue;
+                                    }
+                                    else if (selection == "2")
+                                    {
+                                        Console.WriteLine("You've Selected Cat Food By Field.");
+                                        catFoodClass.NewCatFood();
+                                        continue;
+                                    }
                                     continue;
                                 }
-
-
-                                //do
-                                //{
-                                //    Console.WriteLine("Select Product Type.\n[1:Dog Leash] [2:Cat Food]");
-                                //    Console.Write("User Input:");
-                                //    userInput = Console.ReadLine();
-
-                                //    if (userInput.ToLower().Replace(" ", "") == "1")
-                                //    {
-                                //        Console.WriteLine("You've Selected Dog Leash");
-                                //        dogLeashClass.NewDogLeash();
-                                //        break;
-                                //    }
-                                //    else if (userInput.ToLower().Replace(" ", "") == "2")
-                                //    {
-                                //        Console.WriteLine("You've Selected Cat Food.");
-                                //        catFoodClass.NewCatFood();
-
-                                //        break;
-                                //    }
-                                //} while (userInput.ToLower().Trim() != "1" && userInput.Trim() != "2");
                                 
                         }
                         continue;
@@ -103,11 +109,15 @@ public class Program
                                 {
                                     do
                                     {
-                                        Console.WriteLine("Enter Name of Dog Leash.");
-                                        userInput = Console.ReadLine();
-                                        dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
+                                        try
+                                        {
+                                            Console.WriteLine("Enter Name of Dog Leash.");
+                                            userInput = Console.ReadLine();
+                                            //dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
+                                            productLogic.DisplayProduct<DogLeash>(userInput);
+                                            validSearch = true;
+                                        } catch { validSearch = false; }
                                         
-                                        //can change bool validSearch to be local here
                                         continue;
                                     } while (validSearch == false);
                                     break;
@@ -116,10 +126,15 @@ public class Program
                                 {
                                     do
                                     {
-                                        Console.WriteLine("Enter Name of Cat Food.");
-                                        userInput = Console.ReadLine();
-                                        catFoodClass.GetCatFoodByName(userInput.ToLower().Trim());
-                                        //and here to solve interface call issue have to change code around a bit
+                                        try
+                                        {
+                                            Console.WriteLine("Enter Name of Cat Food.");
+                                            userInput = Console.ReadLine();
+                                            productLogic.DisplayProduct<CatFood>(userInput);
+                                            //and here to solve interface call issue have to change code around a bit
+                                            validSearch = true;
+                                        } catch { validSearch = false; }
+                                            
                                         continue;
                                     } while (validSearch == false);
                                     break;
@@ -129,27 +144,26 @@ public class Program
                     }
                 case "7":
                     {
-                        Console.WriteLine($"\nTotal Price of Inventory: ${dogLeashClass.GetDogLeashInventoryTotal() + catFoodClass.GetCatFoodInventoryTotal()}\n");
+                        Console.WriteLine($"\nTotal Price of Inventory: ${productLogic.GetProductInventoryTotal()}\n");
                         continue;
                     }
                 case "8":
                     {
-                        dogLeashClass.DisplayAllDogLeash(DogLeashLogic._DogLeash);
-                        catFoodClass.DisplayAllCatFood(CatFoodLogic._CatFood);
+                        productLogic.DisplayAllProducts();
                         continue;
                     }
                 case "9":
                     {
-                        List <DogLeash> inStockDogLeashes = dogLeashClass.GetOnlyInStockDogLeashes();
-                        List <CatFood> inStockCatFood = catFoodClass.GetOnlyInStockCatFood();
-                        Console.WriteLine(String.Join("\n", inStockDogLeashes.Select(dL => dL.Name)));
-                        Console.WriteLine(String.Join("\n", inStockCatFood.Select(cF => cF.Name)));
+                        List <Product> inStockProducts = productLogic.GetOnlyInStockProducts();
+                        //List <CatFood> inStockCatFood = catFoodClass.GetOnlyInStockCatFood();
+                        Console.WriteLine(String.Join("\n", inStockProducts.Select(dL => dL.Name)));
+                        //Console.WriteLine(String.Join("\n", inStockCatFood.Select(cF => cF.Name)));
                         continue;
                     }
                 case "10":
                     {
-                        Console.WriteLine(String.Join("\n", dogLeashClass.GetOutOfStockDogLeashes()));
-                        Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
+                        Console.WriteLine(String.Join("\n", productLogic.GetOutOfStockProducts()));
+                        //Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
                         continue;
                     }
                 case "0":
