@@ -12,6 +12,7 @@ namespace PetStore
     {
         public CatFood NewCatFood();
         public CatFood EditProductCatFood();
+        public CatFood CreateNewCatFoodJson();
         //public void GetCatFoodByName(string Name);
         public CatFood AddCatFood(CatFood catFood);
         //public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);

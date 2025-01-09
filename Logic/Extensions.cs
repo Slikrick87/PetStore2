@@ -29,3 +29,5 @@ namespace PetStore
         } //Can't use generics with a dictionary have to fix edit function to update list too!!
     } // use bracket using Tkey, TValue to use generics with a dictionary. just use a list for now. maybe someday
 }
+// debug by printing out a list of in stock and each type
+// may be duplicating products in list

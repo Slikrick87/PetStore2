@@ -66,8 +66,8 @@ namespace PetStore.Logic
             AddCatFood(catFood);
 
             Console.WriteLine($"--------------------------------- New Product Added! ----------------------------------");
-            //Console.WriteLine(JsonSerializer.Serialize(catFood));
-            GetProductByName<CatFood>(catFood.Name);
+            Console.WriteLine(GetProductByName<CatFood>(catFood.Name));
+            //Console.WriteLine(JsonSerializer.Serialize(catFood));GetProductByName<CatFood>(catFood.Name);
             return catFood;
         }
         /// <summary>

@@ -16,27 +16,29 @@ public class Program
         ///not certain that calling the actual Logic class was the right move here but bool valid
         ///search didn't exist in the Interface
         var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
-        var productLogicInterface = serviceCollection.GetService<IProductLogic>();
+        var productLogic = serviceCollection.GetService<IProductLogic>();
 
-        var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
-        var dogLeashInterface = serviceCollection.GetService<IDogLeash>();
+        //var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
+        var dogLeashClass = serviceCollection.GetService<IDogLeash>();
 
-        var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
-        var catFoodInterface = serviceCollection.GetService<ICatFood>();
+        //var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
+        var catFoodClass = serviceCollection.GetService<ICatFood>();
         var program = new ProgramLogic();
         
         program.OpeningSequence();
 
         string userInput = "cool";
-        var productLogic = new ProductLogic();
-        var catFoodClass = new CatFoodLogic();
-        var dogLeashClass = new DogLeashLogic();
+
+        //should be replacing the instances of productLogic, Dogleashlogic, etc. with ServiceDependencyProvider.
+        //var productLogic = new ProductLogic();
+        //var catFoodClass = new CatFoodLogic();
+        //var dogLeashClass = new DogLeashLogic();
         //ProductLogic.CatFoodRepo(productLogic);
         //ProductLogic.DogLeashRepo(dogLeashClass);
-        
-        
-        
-        
+
+
+
+
         while (userInput == null || userInput.ToLower().Trim() != "exit")
         {
 

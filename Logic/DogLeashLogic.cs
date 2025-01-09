@@ -66,7 +66,7 @@ namespace PetStore.Logic
             DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
             AddDogLeash(dogLeash);
             Console.WriteLine($"---------------------------------- New Product Added! ----------------------------------");
-            GetProductByName<DogLeash>(dogLeash.Name);
+            Console.WriteLine(GetProductByName<DogLeash>(dogLeash.Name));
             //ProductLogic.AddProduct(dog_leash);
             //Console.WriteLine(JsonSerializer.Serialize(dog_leash));
             return dogLeash;
