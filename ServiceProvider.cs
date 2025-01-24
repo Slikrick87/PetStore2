@@ -17,6 +17,7 @@ namespace PetStore
             .AddTransient<IProductLogic, ProductLogic>()
             .AddTransient<IDogLeash, DogLeashLogic>()
             .AddTransient<ICatFood, CatFoodLogic>()
+
             .BuildServiceProvider();
 
         }
