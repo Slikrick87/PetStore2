@@ -20,19 +20,5 @@ namespace PetStore
             .BuildServiceProvider();
 
         }
-        public static IServiceProvider CreateDogLeashServiceCollection()
-        {
-            return new ServiceCollection()
-            .AddTransient<IDogLeash, DogLeashLogic>()
-            .BuildServiceProvider();
-
-        }
-        public static IServiceProvider CreateCatFoodServiceCollection()
-        {
-            return new ServiceCollection()
-            .AddTransient<ICatFood, CatFoodLogic>()
-            .BuildServiceProvider();
-
-        }
     }
 }
