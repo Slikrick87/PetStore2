@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PetStore.Data;
 using System.Text.Json;
 
 namespace PetStore.Logic
 {
     public class CatFoodLogic : ProductLogic, ICatFood
     {
+        //have to test and finish below code some other time
+        public CatFoodLogic(IProductRepository Repo) : base(Repo)
+        {
+        }
 
-        
         public CatFood NewCatFood()
         {
 
@@ -170,7 +169,7 @@ namespace PetStore.Logic
 
         public CatFood AddCatFood(CatFood catFood)
         {
-            _products.Add(catFood);
+            AddProduct(catFood);
             _catFood.Add(catFood.Name, catFood as CatFood);
             return catFood;
         }

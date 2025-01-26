@@ -23,6 +23,7 @@ public class Program
 
         //var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
         var catFoodClass = serviceCollection.GetService<ICatFood>();
+        var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var program = new ProgramLogic();
         
         program.OpeningSequence();

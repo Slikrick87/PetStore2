@@ -14,6 +14,7 @@ namespace PetStore
 
         public DogLeash(string Name, decimal Price, int Quantity, string Description, int LengthInches, string Material)
         {
+           // this.Id = DogLeashID;
             this.Name = Name;
             this.Price = Price;
             this.Quantity = Quantity;

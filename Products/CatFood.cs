@@ -12,6 +12,7 @@ namespace PetStore
         public bool KittenFood { get; set; }
         public CatFood(string Name, decimal Price, int Quantity, string Description, bool KittenFood)
         {
+           // this.Id = CatFoodID;
             this.Name = Name;
             this.Price = Price;
             this.Quantity = Quantity;

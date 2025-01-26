@@ -1,10 +1,11 @@
-﻿using PetStore.Logic;
+﻿using PetStore.Data;
+using PetStore.Logic;
 using PetStore.Validators;
 namespace PetStore
 {
     public class ProductLogic : IProductLogic
     {
-
+        private readonly IProductRepository _IRepo;
         public Dictionary<String, DogLeash> _dogLeash = new(StringComparer.InvariantCultureIgnoreCase);
         public Dictionary<String, CatFood> _catFood = new(StringComparer.InvariantCultureIgnoreCase);
         public Dictionary<String, DryCatFood> _dryCatFood = new(StringComparer.InvariantCultureIgnoreCase);
@@ -13,12 +14,14 @@ namespace PetStore
         public DogLeashValidator dogLeashValidator = new DogLeashValidator();
         public CatFoodValidator catFoodValidator = new CatFoodValidator();
 
-        public ProductLogic()
+        public ProductLogic(IProductRepository Repo)
         {
+            _IRepo = Repo;
             _products = new List<Product>();
             _dogLeash = new Dictionary<String, DogLeash>();
             
-                DogLeash dogLeash1 = new DogLeash("Da Rizzler", 14.99m, 87, "BadAss", 12, "Leather");
+
+            DogLeash dogLeash1 = new DogLeash("Da Rizzler", 14.99m, 87, "BadAss", 12, "Leather");
                 _dogLeash.Add(dogLeash1.Name, dogLeash1);
                 _products.Add(dogLeash1);
                 DogLeash dogLeash2 = new DogLeash("Lame AF", 9.99m, 20, "Pretty Lame", 6, "Some Lame Crap");

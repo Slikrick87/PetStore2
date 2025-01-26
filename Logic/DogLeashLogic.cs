@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using FluentValidation;
-using FluentValidation.Results;
-using PetStore;
-using PetStore.Validators;
+using PetStore.Data;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace PetStore.Logic
 {
     public class DogLeashLogic : ProductLogic, IDogLeash
     {
+        private readonly IProductRepository _IRepo;
+
+        public DogLeashLogic(IProductRepository Repo) : base(Repo)
+        {
+        }
+        //have to test above code some other day
         public DogLeash NewDogLeash()
         {
+
             string dogLeashName;
             do
             {
@@ -86,7 +84,7 @@ namespace PetStore.Logic
             ValidationResult results = dogLeashValidator.Validate(dogLeash);
             try
             {
-                _products.Add(dogLeash);
+                AddProduct(dogLeash);
                 _dogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
                 dogLeashValidator.ValidateAndThrow(dogLeash);
             }
