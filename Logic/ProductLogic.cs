@@ -13,7 +13,7 @@ namespace PetStore
 
         public DogLeashValidator dogLeashValidator = new DogLeashValidator();
         public CatFoodValidator catFoodValidator = new CatFoodValidator();
-
+        
         public ProductLogic(IProductRepository Repo)
         {
             _IRepo = Repo;
