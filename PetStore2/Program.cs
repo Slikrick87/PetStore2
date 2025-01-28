@@ -57,41 +57,19 @@ public class Program
                         {
                             case "dogleash":
                                 {
-                                    Console.WriteLine("To use json format to enter fields press 1, \n" +
-                                        "To enter one field at a time in terminal press 2");
-                                    selection = Console.ReadLine();
-                                    if (selection == "1")
-                                    {
-                                        Console.WriteLine("You've Selected New Dog Leash Through Json input.");
-                                        dogLeashClass.CreateNewDogLeashJson();
-                                        continue;
-                                    }
-                                    else if (selection == "2")
-                                    {
+                                    
                                         Console.WriteLine("You've Selected Dog Leash");
                                         dogLeashClass.NewDogLeash();
                                         continue;
-                                    }
-                                    continue;
+                                    
                                 }
                             case "catfood":
                                 {
-                                    Console.WriteLine("To use json format to enter fields press 1, \n" +
-                                        "To enter one field at a time in terminal press 2");
-                                    selection = Console.ReadLine();
-                                    if (selection == "1")
-                                    {
-                                        Console.WriteLine("You've Selected New Cat Food Through Json input.");
-                                        catFoodClass.CreateNewCatFoodJson();
-                                        continue;
-                                    }
-                                    else if (selection == "2")
-                                    {
+                                    
                                         Console.WriteLine("You've Selected Cat Food By Field.");
                                         catFoodClass.NewCatFood();
                                         continue;
-                                    }
-                                    continue;
+                                   
                                 }
                                 
                         }
@@ -117,7 +95,7 @@ public class Program
                                             Console.WriteLine("Enter Name of Dog Leash.");
                                             userInput = Console.ReadLine();
                                             //dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
-                                            productLogic.DisplayProduct<DogLeash>(userInput);
+                                            //productLogic.DisplayProduct<DogLeash>(userInput);
                                             validSearch = true;
                                         } catch { validSearch = false; }
                                         
@@ -133,7 +111,7 @@ public class Program
                                         {
                                             Console.WriteLine("Enter Name of Cat Food.");
                                             userInput = Console.ReadLine();
-                                            productLogic.DisplayProduct<CatFood>(userInput);
+                                            //productLogic.DisplayProduct<CatFood>(userInput);
                                             //and here to solve interface call issue have to change code around a bit
                                             validSearch = true;
                                         } catch { validSearch = false; }
@@ -145,14 +123,19 @@ public class Program
                         }
                         break;
                     }
-                case "7":
+                case "3":
                     {
-                        Console.WriteLine($"\nTotal Price of Inventory: ${productLogic.GetProductInventoryTotal()}\n");
+                        repo.GetNumberOfProducts();
                         continue;
                     }
+                //case "7":
+                //    {
+                //        Console.WriteLine($"\nTotal Price of Inventory: ${productLogic.GetProductInventoryTotal()}\n");
+                //        continue;
+                //    }
                 case "8":
                     {
-                        productLogic.DisplayAllProducts();
+                        repo.GetAllProducts();
                         continue;
                     }
                 case "9":
@@ -169,20 +152,20 @@ public class Program
                         //Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
                         continue;
                     }
-                case "0":
-                    {
-                        Console.WriteLine("Please Enter Product Type:");
-                        userInput = Console.ReadLine();
-                        if (userInput.ToLower().Replace(" ", "") == "dogleash")
-                        {
-                            dogLeashClass.EditProductDogLeash();
-                        }
-                        else if (userInput.ToLower().Replace(" ", "") == "catfood")
-                        {
-                            catFoodClass.EditProductCatFood();
-                        }
-                        continue;
-                    }
+                //case "0":
+                //    {
+                //        Console.WriteLine("Please Enter Product Type:");
+                //        userInput = Console.ReadLine();
+                //        if (userInput.ToLower().Replace(" ", "") == "dogleash")
+                //        {
+                //            dogLeashClass.EditProductDogLeash();
+                //        }
+                //        else if (userInput.ToLower().Replace(" ", "") == "catfood")
+                //        {
+                //            catFoodClass.EditProductCatFood();
+                //        }
+                //        continue;
+                //    }
                 default:
                     {
                         break;

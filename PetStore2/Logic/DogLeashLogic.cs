@@ -13,7 +13,7 @@ namespace PetStore.Logic
         {
         }
         //have to test above code some other day
-        public DogLeash NewDogLeash()
+        public DogLeashEntity NewDogLeash()
         {
 
             string dogLeashName;
@@ -61,143 +61,144 @@ namespace PetStore.Logic
                 Console.Write("Material:");                                 //Dog Leash Material
                 dogLeashMaterial = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(dogLeashMaterial));
-            DogLeash dogLeash = new DogLeash(dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
-            AddDogLeash(dogLeash);
+            int dogLeashId = _IRepo.GetNextProductId();
+            DogLeashEntity dogLeash = new DogLeashEntity(dogLeashId, dogLeashName, dogLeashPrice, dogLeashQuantity, dogLeashDescription, dogLeashLength, dogLeashMaterial);
+            _IRepo.AddProduct(dogLeash);
             Console.WriteLine($"---------------------------------- New Product Added! ----------------------------------");
-            Console.WriteLine(GetProductByName<DogLeash>(dogLeash.Name));
+            Console.WriteLine(GetProductById<DogLeash>(dogLeash.Id));
             //ProductLogic.AddProduct(dog_leash);
             //Console.WriteLine(JsonSerializer.Serialize(dog_leash));
             return dogLeash;
         }
-        public DogLeash CreateNewDogLeashJson()
-        {
-            string jsonText;
-            Console.WriteLine("Add new product using Json Using the following format as an example");
-            Console.WriteLine("{ \"Price\": 58.89, \"Name\": \"Special dog leash\", \"Quantity\": 23, \n\"Description\": \"Magical leash that will help your dog not pull hard when going on walks\", \n\"Material\": \"Classified\", \"LengthInches\": 12 }");
-            jsonText = Console.ReadLine();
-            DogLeash dogLeash = JsonSerializer.Deserialize<DogLeash>(jsonText);
-            AddDogLeash(dogLeash);
-            return dogLeash;
-        }
-        public DogLeash AddDogLeash(DogLeash dogLeash)
-        {
-            ValidationResult results = dogLeashValidator.Validate(dogLeash);
-            try
-            {
-                AddProduct(dogLeash);
-                _dogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
-                dogLeashValidator.ValidateAndThrow(dogLeash);
-            }
-            catch (Exception e) {
+        //public void CreateNewDogLeashJson()
+        //{
+        //    string jsonText;
+        //    Console.WriteLine("Add new product using Json Using the following format as an example");
+        //    Console.WriteLine("{ \"Price\": 58.89, \"Name\": \"Special dog leash\", \"Quantity\": 23, \n\"Description\": \"Magical leash that will help your dog not pull hard when going on walks\", \n\"Material\": \"Classified\", \"LengthInches\": 12 }");
+        //    jsonText = Console.ReadLine();
+        //    DogLeashEntity dogLeash = JsonSerializer.Deserialize<DogLeashEntity>(jsonText);
+        //    _IRepo.AddProduct<DogLeashEntity>(dogLeash);
+        //    //return dogLeash;
+        //}
+        //public DogLeash AddDogLeash(DogLeash dogLeash)
+        //{
+        //    ValidationResult results = dogLeashValidator.Validate(dogLeash);
+        //    try
+        //    {
+        //        AddProduct(dogLeash);
+        //        _dogLeash.Add(dogLeash.Name, dogLeash as DogLeash);
+        //        dogLeashValidator.ValidateAndThrow(dogLeash);
+        //    }
+        //    catch (Exception e) {
 
-                if (!results.IsValid)
-                {
-                    foreach (var failure in results.Errors)
-                    {
-                        Console.WriteLine("\nProperty " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-                    }
-                }
-            }
+        //        if (!results.IsValid)
+        //        {
+        //            foreach (var failure in results.Errors)
+        //            {
+        //                Console.WriteLine("\nProperty " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+        //            }
+        //        }
+        //    }
             
-            return dogLeash;
-        }
+        //    return dogLeash;
+        //}
 
         /// <summary>
         /// Edit function doesn't change item in list only in dictionary
         /// </summary>
         /// <returns></returns>
-        public DogLeash EditProductDogLeash()
-        {
-            Console.WriteLine("Please enter name of dog leash:");
-            string key = Console.ReadLine();
-            DogLeash dogLeashToEdit = _dogLeash[key];
-            Console.WriteLine("Please enter parameter to edit");
-            string userInput = Console.ReadLine();
-            switch (userInput.ToLower().Trim())
-            {
-                case "name":
-                    {
-                        _dogLeash.TryGetValue(key, out var value);
-                        Console.WriteLine("Enter new name:");
-                        string newInput = Console.ReadLine();  ///changes and adds to list
-                        dogLeashToEdit = _dogLeash[key];
-                        value.Name = newInput;
-                        string newKey = dogLeashToEdit.Name;
-                        _dogLeash.Remove(key);
-                        _dogLeash.Add(newKey, value);
-                        break;
-                    }
-                case "description":
-                    {
-                        string newDescription;
-                        do
-                        {
-                            Console.WriteLine("Enter new description:");
-                            newDescription = Console.ReadLine();
-                        }
-                        while (string.IsNullOrEmpty(newDescription));
-                        dogLeashToEdit.Description = newDescription;
-                        break;
-                    }
-                case "price":
-                    {
-                        string newPrice;
-                        decimal newDogLeashPrice;
-                        do
-                        {
-                            Console.WriteLine("Enter new price:");
-                            newPrice = Console.ReadLine();
-                        }
-                        while (!decimal.TryParse(newPrice, out newDogLeashPrice));
-                        dogLeashToEdit.Price = newDogLeashPrice;
-                        break;
-                    }
-                case "quantity":
-                    {
-                        string newQuantity;
-                        int newDogLeashQuantity;
-                        do
-                        {
-                            Console.WriteLine("Enter new Quantity:");
-                            newQuantity = Console.ReadLine();
-                        }
-                        while (!int.TryParse(newQuantity, out newDogLeashQuantity));
-                        dogLeashToEdit.Quantity = newDogLeashQuantity;
-                        break;
-                    }
-                case "length":
-                    {
-                        string newLength;
-                        int lengthInches;
-                        do
-                        {
-                            Console.WriteLine("Enter Length in Inches:");
-                            newLength = Console.ReadLine();
-                        }
-                        while (!int.TryParse(newLength, out lengthInches));
-                        dogLeashToEdit.LengthInches = lengthInches;
-                        break;
-                    }
-                case "material":
-                    {
-                        string newMaterial;
-                        do
-                        {
-                            Console.WriteLine("Enter Updated Material");
-                            newMaterial = Console.ReadLine();
-                        }
-                        while (string.IsNullOrWhiteSpace(newMaterial));
-                        dogLeashToEdit.Material = newMaterial;
-                        break;
-                    }
-                default:
-                    {
-                        Console.WriteLine("Error occurred.");
-                        break;
-                    }
+        //public DogLeash EditProductDogLeash()
+        //{
+        //    Console.WriteLine("Please enter name of dog leash:");
+        //    string key = Console.ReadLine();
+        //    DogLeash dogLeashToEdit = _dogLeash[key];
+        //    Console.WriteLine("Please enter parameter to edit");
+        //    string userInput = Console.ReadLine();
+        //    switch (userInput.ToLower().Trim())
+        //    {
+        //        case "name":
+        //            {
+        //                _dogLeash.TryGetValue(key, out var value);
+        //                Console.WriteLine("Enter new name:");
+        //                string newInput = Console.ReadLine();  ///changes and adds to list
+        //                dogLeashToEdit = _dogLeash[key];
+        //                value.Name = newInput;
+        //                string newKey = dogLeashToEdit.Name;
+        //                _dogLeash.Remove(key);
+        //                _dogLeash.Add(newKey, value);
+        //                break;
+        //            }
+        //        case "description":
+        //            {
+        //                string newDescription;
+        //                do
+        //                {
+        //                    Console.WriteLine("Enter new description:");
+        //                    newDescription = Console.ReadLine();
+        //                }
+        //                while (string.IsNullOrEmpty(newDescription));
+        //                dogLeashToEdit.Description = newDescription;
+        //                break;
+        //            }
+        //        case "price":
+        //            {
+        //                string newPrice;
+        //                decimal newDogLeashPrice;
+        //                do
+        //                {
+        //                    Console.WriteLine("Enter new price:");
+        //                    newPrice = Console.ReadLine();
+        //                }
+        //                while (!decimal.TryParse(newPrice, out newDogLeashPrice));
+        //                dogLeashToEdit.Price = newDogLeashPrice;
+        //                break;
+        //            }
+        //        case "quantity":
+        //            {
+        //                string newQuantity;
+        //                int newDogLeashQuantity;
+        //                do
+        //                {
+        //                    Console.WriteLine("Enter new Quantity:");
+        //                    newQuantity = Console.ReadLine();
+        //                }
+        //                while (!int.TryParse(newQuantity, out newDogLeashQuantity));
+        //                dogLeashToEdit.Quantity = newDogLeashQuantity;
+        //                break;
+        //            }
+        //        case "length":
+        //            {
+        //                string newLength;
+        //                int lengthInches;
+        //                do
+        //                {
+        //                    Console.WriteLine("Enter Length in Inches:");
+        //                    newLength = Console.ReadLine();
+        //                }
+        //                while (!int.TryParse(newLength, out lengthInches));
+        //                dogLeashToEdit.LengthInches = lengthInches;
+        //                break;
+        //            }
+        //        case "material":
+        //            {
+        //                string newMaterial;
+        //                do
+        //                {
+        //                    Console.WriteLine("Enter Updated Material");
+        //                    newMaterial = Console.ReadLine();
+        //                }
+        //                while (string.IsNullOrWhiteSpace(newMaterial));
+        //                dogLeashToEdit.Material = newMaterial;
+        //                break;
+        //            }
+        //        default:
+        //            {
+        //                Console.WriteLine("Error occurred.");
+        //                break;
+        //            }
 
-            }
-            return dogLeashToEdit;
-        }
+        //    }
+        //    return dogLeashToEdit;
+        //}
     }
 }

@@ -25,17 +25,18 @@
             //_context.Products.Add(product);
             _context.SaveChanges();
         }
-        public void GetProductById(int id)
+        public CatFoodEntity GetCatFoodById(int id)
         {
-            var product = _context.Products.Find(id);
-            if (product != null)
-            {
-                Console.WriteLine($"Product found: {product.Name}, Price: {product.Price}");
-            }
-            else
-            {
-                Console.WriteLine("Product not found.");
-            }
+            var catFood = _context.CatFoods.Find(id);
+            try { return catFood; }
+            catch { return null; }
+
+        }
+        public DogLeashEntity GetDogLeashById(int id)
+        {
+            var dogLeash = _context.DogLeashes.Find(id);
+            try { return dogLeash; }
+            catch { return null; }
         }
         public void GetAllProducts()
         {
@@ -44,6 +45,14 @@
             {
                 Console.WriteLine($"Product: {product.Name}, Price: {product.Price}");
             }
+        }
+        public int GetNumberOfProducts()
+        {
+            return _context.DogLeashes.Count() + _context.CatFoods.Count();
+        }
+        public int GetNextProductId()
+        {
+            return GetNumberOfProducts() + 1;
         }
     }
 }

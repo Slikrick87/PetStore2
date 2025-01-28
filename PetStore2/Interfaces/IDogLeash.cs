@@ -5,17 +5,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using PetStore.Data;
 
 namespace PetStore
 {
     internal interface IDogLeash : IProductLogic //IDictionary<string, DogLeash>
     {
-        public DogLeash NewDogLeash();
+        public DogLeashEntity NewDogLeash();
         //public void GetProductByName(string name);
-        public DogLeash EditProductDogLeash();
-        public DogLeash AddDogLeash(DogLeash dogLeash);
+        //public DogLeashEntity EditProductDogLeash();
+        //public DogLeashEntity AddDogLeash(DogLeashEntity dogLeash);
         //public void GetDogLeashByName(string name);
-        public DogLeash CreateNewDogLeashJson();
+        //public DogLeashEntity CreateNewDogLeashJson();
         //public void DogLeashRepo(DogLeashLogic dogLeashLogic);
     }
    ///Should I put Extensions in Interface?

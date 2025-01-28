@@ -6,13 +6,15 @@ namespace PetStore.Logic
     public class CatFoodLogic : ProductLogic, ICatFood
     {
         //have to test and finish below code some other time
+        IProductRepository _IRepo;
+
         public CatFoodLogic(IProductRepository Repo) : base(Repo)
         {
+            _IRepo = Repo;
         }
 
-        public CatFood NewCatFood()
+        public CatFoodEntity NewCatFood()
         {
-
             Console.Write("Name:");
             string? catFoodName = Console.ReadLine().Trim();
 
@@ -25,7 +27,6 @@ namespace PetStore.Logic
             }
             while (!decimal.TryParse(price, out catFoodPrice));
 
-
             string quantity;
             int catFoodQuantity;
             do
@@ -35,11 +36,10 @@ namespace PetStore.Logic
             }
             while (!int.TryParse(quantity, out catFoodQuantity));
 
-
             string catFoodDescription;
             do
             {
-                Console.Write("Description:");                      //tried using a class instead of a new instance of that classes logic. I
+                Console.Write("Description:");
                 catFoodDescription = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(catFoodDescription));
 
@@ -60,19 +60,16 @@ namespace PetStore.Logic
             }
             while (!Safe.ToLower().Replace(" ", "").StartsWith("y") && !Safe.ToLower().Replace(" ", "").StartsWith("n"));
             bool KittenFood = Safe.StartsWith("y") ? true : false;
+            int catFoodId = _IRepo.GetNumberOfProducts() + 1;
 
-            CatFood catFood = new CatFood(catFoodName, catFoodPrice, catFoodQuantity, catFoodDescription, KittenFood);
+            CatFoodEntity catFood = new CatFoodEntity(catFoodId, catFoodName, catFoodPrice, catFoodQuantity, catFoodDescription, KittenFood);
             AddCatFood(catFood);
 
             Console.WriteLine($"--------------------------------- New Product Added! ----------------------------------");
-            Console.WriteLine(GetProductByName<CatFood>(catFood.Name));
-            //Console.WriteLine(JsonSerializer.Serialize(catFood));GetProductByName<CatFood>(catFood.Name);
+            Console.WriteLine(GetProductById<CatFood>(catFood.Id));
             return catFood;
         }
-        /// <summary>
-        /// Edit Function doesn't change item in list only in Dictionary
-        /// </summary>
-        /// <returns></returns>
+
         public CatFood EditProductCatFood()
         {
             Console.WriteLine("Please enter name of Cat Food:");
@@ -91,12 +88,10 @@ namespace PetStore.Logic
                             Console.WriteLine("Enter new name:");
                             newInput = Console.ReadLine();
                         } while (string.IsNullOrWhiteSpace(newInput));
-                        //catFoodToEdit = _CatFood[key];
                         catFoodToEdit.Name = newInput;
                         string newKey = catFoodToEdit.Name;
                         _catFood.Remove(key);
                         _catFood.Add(newKey, value);
-                        
                         break;
                     }
                 case "description":
@@ -142,6 +137,7 @@ namespace PetStore.Logic
                         do
                         {
                             Console.WriteLine("Safe For Kittens: y/n?");
+                            KittenFoodAnswer = Console.ReadLine();
                             if (KittenFoodAnswer.StartsWith("y"))
                             {
                                 catFoodToEdit.KittenFood = true;
@@ -151,29 +147,27 @@ namespace PetStore.Logic
                                 catFoodToEdit.KittenFood = false;
                             }
                         }
-                        while (!KittenFoodAnswer.ToLower().StartsWith("n") || !KittenFoodAnswer.ToLower().StartsWith("y"));
+                        while (!KittenFoodAnswer.ToLower().StartsWith("n") && !KittenFoodAnswer.ToLower().StartsWith("y"));
 
                         break;
                     }
                 default:
                     {
-                        Console.WriteLine("Error occured.");
+                        Console.WriteLine("Error occurred.");
                         break;
                     }
-
             }
             return catFoodToEdit;
         }
 
-        
-
-        public CatFood AddCatFood(CatFood catFood)
+        public CatFoodEntity AddCatFood(CatFoodEntity catFood)
         {
-            AddProduct(catFood);
-            _catFood.Add(catFood.Name, catFood as CatFood);
+            //AddProduct(catFood);
+            _IRepo.AddProduct(catFood as CatFoodEntity);
             return catFood;
         }
-        public CatFood CreateNewCatFoodJson()
+
+        public CatFoodEntity CreateNewCatFoodJson()
         {
             string jsonText;
             Console.WriteLine("Add new product using Json\nFields to enter");
@@ -181,8 +175,8 @@ namespace PetStore.Logic
                 "\n\"Description\": \"Magical Cat Food that will keep your cat from acting wild at night\", " +
                 "\n\"KittenFood\": \"true\" }");
             jsonText = Console.ReadLine();
-            CatFood catFood = JsonSerializer.Deserialize<CatFood>(jsonText);
-            AddCatFood(catFood);
+            CatFoodEntity catFood = JsonSerializer.Deserialize<CatFoodEntity>(jsonText);
+            _IRepo.AddProduct<CatFoodEntity>(catFood);
             return catFood;
         }
     }

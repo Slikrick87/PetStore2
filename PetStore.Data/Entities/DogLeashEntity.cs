@@ -11,5 +11,10 @@ namespace PetStore.Data
     {
         public int LengthInches { get; set; }
         public string? Material { get; set; }
+        public DogLeashEntity(int id, string name, decimal price, int quantity, string description, int lengthInches, string? material)
+        {
+            this.LengthInches = lengthInches;
+            this.Material = material;
+        }
     }
 }

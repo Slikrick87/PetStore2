@@ -10,9 +10,9 @@ namespace PetStore
     public class CatFood : Product
     {
         public bool KittenFood { get; set; }
-        public CatFood(string Name, decimal Price, int Quantity, string Description, bool KittenFood)
+        public CatFood(int catFoodId, string Name, decimal Price, int Quantity, string Description, bool KittenFood)
         {
-           // this.Id = CatFoodID;
+            this.Id = catFoodId;
             this.Name = Name;
             this.Price = Price;
             this.Quantity = Quantity;
@@ -24,7 +24,7 @@ namespace PetStore
     {
         public double WeightPounds { get; set; }
 
-        public DryCatFood(string Name, decimal Price, int Quantity, string Description, bool KittenFood, double Weight) : base(Name, Price, Quantity, Description, KittenFood)
+        public DryCatFood(int Id, string Name, decimal Price, int Quantity, string Description, bool KittenFood, double Weight) : base(Id, Name, Price, Quantity, Description, KittenFood)
         {
             this.WeightPounds = Weight;
         }

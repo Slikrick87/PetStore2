@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using PetStore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PetStore.Data
 {
@@ -19,13 +21,19 @@ namespace PetStore.Data
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, "Product.db");
-            
+
         }
 
         // The following configures EF to create a Sqlite database file in the
         // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DbPath}");
+        {
+            if (!options.IsConfigured)
+            {
+                options.UseSqlite($"Data Source={DbPath}");
+            }
+            options.UseSqlite($"Data Source={DbPath}");
+        }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
@@ -33,5 +41,46 @@ namespace PetStore.Data
         //    modelBuilder.Entity<DogLeashEntity>().ToTable("DogLeashes");
         //    modelBuilder.Entity<CatFoodEntity>().ToTable("CatFoods");
         //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductEntity>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("INTEGER")
+                      .IsRequired();
+                entity.Property(e => e.Name)
+                      .IsRequired()
+                      .HasColumnType("TEXT");
+                entity.Property(e => e.Price)
+                      .IsRequired()
+                      .HasColumnType("TEXT");
+                entity.Property(e => e.Quantity)
+                      .IsRequired()
+                      .HasColumnType("INTEGER");
+                entity.Property(e => e.Description)
+                      .IsRequired()
+                      .HasColumnType("TEXT");
+            });
+
+            modelBuilder.Entity<CatFoodEntity>(entity =>
+            {
+                entity.HasBaseType<ProductEntity>();
+                entity.Property(e => e.KittenFood)
+                      .HasColumnType("INTEGER");
+            });
+
+            modelBuilder.Entity<DogLeashEntity>(entity =>
+            {
+                entity.HasBaseType<ProductEntity>();
+                entity.Property(e => e.LengthInches)
+                      .HasColumnType("INTEGER");
+                entity.Property(e => e.Material)
+                      .HasColumnType("TEXT");
+            });
+        }
     }
 }
+

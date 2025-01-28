@@ -16,16 +16,23 @@ namespace PetStore.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
 
-            modelBuilder.Entity("PetStore.Product", b =>
+            modelBuilder.Entity("PetStore.Data.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
@@ -36,24 +43,26 @@ namespace PetStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator().HasValue("ProductEntity");
+
+                    b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("PetStore.CatFood", b =>
+            modelBuilder.Entity("PetStore.Data.CatFoodEntity", b =>
                 {
-                    b.HasBaseType("PetStore.Product");
+                    b.HasBaseType("PetStore.Data.ProductEntity");
 
                     b.Property<bool>("KittenFood")
                         .HasColumnType("INTEGER");
 
-                    b.ToTable("CatFoods", (string)null);
+                    b.HasDiscriminator().HasValue("CatFoodEntity");
                 });
 
-            modelBuilder.Entity("PetStore.DogLeash", b =>
+            modelBuilder.Entity("PetStore.Data.DogLeashEntity", b =>
                 {
-                    b.HasBaseType("PetStore.Product");
+                    b.HasBaseType("PetStore.Data.ProductEntity");
 
                     b.Property<int>("LengthInches")
                         .HasColumnType("INTEGER");
@@ -61,25 +70,7 @@ namespace PetStore.Data.Migrations
                     b.Property<string>("Material")
                         .HasColumnType("TEXT");
 
-                    b.ToTable("DogLeashes", (string)null);
-                });
-
-            modelBuilder.Entity("PetStore.CatFood", b =>
-                {
-                    b.HasOne("PetStore.Product", null)
-                        .WithOne()
-                        .HasForeignKey("PetStore.CatFood", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PetStore.DogLeash", b =>
-                {
-                    b.HasOne("PetStore.Product", null)
-                        .WithOne()
-                        .HasForeignKey("PetStore.DogLeash", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasDiscriminator().HasValue("DogLeashEntity");
                 });
 #pragma warning restore 612, 618
         }

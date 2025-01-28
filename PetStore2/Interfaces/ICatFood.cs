@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using PetStore;
 using PetStore.Logic;
+using PetStore.Data;
 
 namespace PetStore
 {
     interface ICatFood : IProductLogic
     {
-        public CatFood NewCatFood();
-        public CatFood EditProductCatFood();
-        public CatFood CreateNewCatFoodJson();
+        public CatFoodEntity NewCatFood();
+        //public CatFoodEntity EditProductCatFood();
+        public CatFoodEntity CreateNewCatFoodJson();
         //public void GetCatFoodByName(string Name);
-        public CatFood AddCatFood(CatFood catFood);
+        public CatFoodEntity AddCatFood(CatFoodEntity catFood);
         //public void DisplayAllCatFood(Dictionary<string, CatFood> _CatFood);
         //public List<String> GetOutOfStockCatFood();
         //public List<CatFood> GetOnlyInStockCatFood();

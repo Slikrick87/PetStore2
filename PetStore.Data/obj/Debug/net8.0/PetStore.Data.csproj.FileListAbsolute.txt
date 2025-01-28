@@ -12,3 +12,4 @@ C:\CodeYou\SoftwareDevModule\PetStore2\PetStore.Data\obj\Debug\net8.0\PetStore.D
 C:\CodeYou\SoftwareDevModule\PetStore2\PetStore.Data\obj\Debug\net8.0\ref\PetStore.Data.dll
 C:\CodeYou\SoftwareDevModule\PetStore2\PetStore.Data\bin\Debug\net8.0\PetStore.Data.runtimeconfig.json
 C:\CodeYou\SoftwareDevModule\PetStore2\PetStore.Data\obj\Debug\net8.0\PetStore.Data.genruntimeconfig.cache
+C:\CodeYou\SoftwareDevModule\PetStore2\PetStore.Data\obj\Debug\net8.0\PetStore.Data.sourcelink.json

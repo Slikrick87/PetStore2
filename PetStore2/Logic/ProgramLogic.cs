@@ -38,7 +38,8 @@ namespace PetStore.Logic
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.Write(" [1 Add Product]");
             Console.Write(" [2 Search]");
-            Console.Write(" [7 Total Inventory Price]");
+            //Console.Write(" [7 Total Inventory Price]");
+            Console.Write(" [3 View Number of Products]");
             Console.WriteLine(" [8 View Product List]");
             Console.Write(" [9 For In Stock Products]");
             Console.WriteLine(" [10 For Out Of Stock Products]");
