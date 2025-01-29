@@ -1,9 +1,11 @@
-﻿namespace PetStore.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PetStore.Data
 {
     public class ProductRepository : IProductRepository
     {
         private readonly ProductContext _context;
-
+        public DbSet<ProductEntity> Products { get; set; }
         public ProductRepository(ProductContext context)
         {
             _context = context;

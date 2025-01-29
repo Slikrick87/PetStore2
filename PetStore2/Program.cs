@@ -16,6 +16,7 @@ public class Program
         ///not certain that calling the actual Logic class was the right move here but bool valid
         ///search didn't exist in the Interface
         var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
+        var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var productLogic = serviceCollection.GetService<IProductLogic>();
 
         //var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
@@ -23,7 +24,7 @@ public class Program
 
         //var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
         var catFoodClass = serviceCollection.GetService<ICatFood>();
-        var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
+        //var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var program = new ProgramLogic();
         
         program.OpeningSequence();

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using PetStore.Data;
 
 namespace PetStore.Validators
 {
-    public class CatFoodValidator : AbstractValidator<CatFood>
+    public class CatFoodValidator : AbstractValidator<CatFoodEntity>
     {
         public CatFoodValidator()
         {

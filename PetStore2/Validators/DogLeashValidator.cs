@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PetStore.Data;
 
 namespace PetStore.Validators
 {
-    public class DogLeashValidator : AbstractValidator<DogLeash>
+    public class DogLeashValidator : AbstractValidator<DogLeashEntity>
     {
         public DogLeashValidator() 
         {

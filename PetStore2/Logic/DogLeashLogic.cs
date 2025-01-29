@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using PetStore.Data;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
@@ -11,11 +12,11 @@ namespace PetStore.Logic
 
         public DogLeashLogic(IProductRepository Repo) : base(Repo)
         {
+            _IRepo = Repo;
         }
         //have to test above code some other day
         public DogLeashEntity NewDogLeash()
         {
-
             string dogLeashName;
             do
             {
