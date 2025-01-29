@@ -15,8 +15,8 @@ namespace PetStore
                 options.UseSqlite("YourConnectionString"));
 
             services.AddTransient<IProductLogic, ProductLogic>()
-            .AddTransient<IDogLeash, DogLeashLogic>()
-            .AddTransient<ICatFood, CatFoodLogic>()
+            //.AddTransient<IDogLeash, DogLeashLogic>()
+            //.AddTransient<ICatFood, CatFoodLogic>()
             .AddTransient<IProductRepository, ProductRepository>()
             .BuildServiceProvider();
 

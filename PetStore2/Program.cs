@@ -5,6 +5,7 @@ using PetStore.Logic;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
 using System.Net.Http.Headers;
+using PetStore.Data;
 
 
 
@@ -76,6 +77,18 @@ public class Program
                         }
                         continue;
                     }
+                case "11":
+                    {
+                        ProductEntity newProduct = productLogic.NewProduct();
+                        repo.AddProduct(newProduct);
+                        continue;
+                    }
+                case "12":
+                    {
+                        repo.GetAllProducts();
+                        continue;
+                    }
+
                 case "2":
                     {
                         bool validSearch = false;
@@ -139,20 +152,20 @@ public class Program
                         repo.GetAllProducts();
                         continue;
                     }
-                case "9":
-                    {
-                        List <Product> inStockProducts = productLogic.GetOnlyInStockProducts();
-                        //List <CatFood> inStockCatFood = catFoodClass.GetOnlyInStockCatFood();
-                        Console.WriteLine(String.Join("\n", inStockProducts.Select(dL => dL.Name)));
-                        //Console.WriteLine(String.Join("\n", inStockCatFood.Select(cF => cF.Name)));
-                        continue;
-                    }
-                case "10":
-                    {
-                        Console.WriteLine(String.Join("\n", productLogic.GetOutOfStockProducts()));
-                        //Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
-                        continue;
-                    }
+                //case "9":
+                //    {
+                //        //List <Product> inStockProducts = productLogic.GetOnlyInStockProducts();
+                //        //List <CatFood> inStockCatFood = catFoodClass.GetOnlyInStockCatFood();
+                //        Console.WriteLine(String.Join("\n", inStockProducts.Select(dL => dL.Name)));
+                //        //Console.WriteLine(String.Join("\n", inStockCatFood.Select(cF => cF.Name)));
+                //        continue;
+                //    }
+                //case "10":
+                //    {
+                //        Console.WriteLine(String.Join("\n", productLogic.GetOutOfStockProducts()));
+                //        //Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
+                //        continue;
+                //    }
                 //case "0":
                 //    {
                 //        Console.WriteLine("Please Enter Product Type:");
