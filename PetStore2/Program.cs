@@ -50,93 +50,93 @@ public class Program
             userInput = Console.ReadLine();
             switch (userInput)
             {
-                case "1":
-                    {
-                        Console.WriteLine("please enter product type(Dog Leash, Cat Food)");
-                        string selection = Console.ReadLine();
-                        selection = selection.ToLower().Replace(" ", "");
-                        switch (selection.ToLower().Trim())
-                        {
-                            case "dogleash":
-                                {
+                //case "1":
+                //    {
+                //        Console.WriteLine("please enter product type(Dog Leash, Cat Food)");
+                //        string selection = Console.ReadLine();
+                //        selection = selection.ToLower().Replace(" ", "");
+                //        switch (selection.ToLower().Trim())
+                //        {
+                //            case "dogleash":
+                //                {
                                     
-                                        Console.WriteLine("You've Selected Dog Leash");
-                                        dogLeashClass.NewDogLeash();
-                                        continue;
+                //                        Console.WriteLine("You've Selected Dog Leash");
+                //                        dogLeashClass.NewDogLeash();
+                //                        continue;
                                     
-                                }
-                            case "catfood":
-                                {
+                //                }
+                //            case "catfood":
+                //                {
                                     
-                                        Console.WriteLine("You've Selected Cat Food By Field.");
-                                        catFoodClass.NewCatFood();
-                                        continue;
+                //                        Console.WriteLine("You've Selected Cat Food By Field.");
+                //                        catFoodClass.NewCatFood();
+                //                        continue;
                                    
-                                }
+                //                }
                                 
-                        }
-                        continue;
-                    }
-                case "11":
+                //        }
+                //        continue;
+                //    }
+                case "1":
                     {
                         ProductEntity newProduct = productLogic.NewProduct();
                         repo.AddProduct(newProduct);
                         continue;
                     }
-                case "12":
+                case "2":
                     {
                         repo.GetAllProducts();
                         continue;
                     }
 
-                case "2":
-                    {
-                        bool validSearch = false;
-                        do
-                        {
-                            Console.WriteLine("Enter product type:");
-                            userInput = Console.ReadLine();
-                            userInput = userInput.ToLower().Replace(" ", "");
-                        } while (userInput != "dogleash" && userInput != "catfood");
-                        switch (userInput)
-                        {
-                            case "dogleash":
-                                {
-                                    do
-                                    {
-                                        try
-                                        {
-                                            Console.WriteLine("Enter Name of Dog Leash.");
-                                            userInput = Console.ReadLine();
-                                            //dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
-                                            //productLogic.DisplayProduct<DogLeash>(userInput);
-                                            validSearch = true;
-                                        } catch { validSearch = false; }
+                //case "2":
+                //    {
+                //        bool validSearch = false;
+                //        do
+                //        {
+                //            Console.WriteLine("Enter product type:");
+                //            userInput = Console.ReadLine();
+                //            userInput = userInput.ToLower().Replace(" ", "");
+                //        } while (userInput != "dogleash" && userInput != "catfood");
+                //        switch (userInput)
+                //        {
+                //            case "dogleash":
+                //                {
+                //                    do
+                //                    {
+                //                        try
+                //                        {
+                //                            Console.WriteLine("Enter Name of Dog Leash.");
+                //                            userInput = Console.ReadLine();
+                //                            //dogLeashClass.GetDogLeashByName(userInput.ToLower().Trim());
+                //                            //productLogic.DisplayProduct<DogLeash>(userInput);
+                //                            validSearch = true;
+                //                        } catch { validSearch = false; }
                                         
-                                        continue;
-                                    } while (validSearch == false);
-                                    break;
-                                }
-                            case "catfood":
-                                {
-                                    do
-                                    {
-                                        try
-                                        {
-                                            Console.WriteLine("Enter Name of Cat Food.");
-                                            userInput = Console.ReadLine();
-                                            //productLogic.DisplayProduct<CatFood>(userInput);
-                                            //and here to solve interface call issue have to change code around a bit
-                                            validSearch = true;
-                                        } catch { validSearch = false; }
+                //                        continue;
+                //                    } while (validSearch == false);
+                //                    break;
+                //                }
+                //            case "catfood":
+                //                {
+                //                    do
+                //                    {
+                //                        try
+                //                        {
+                //                            Console.WriteLine("Enter Name of Cat Food.");
+                //                            userInput = Console.ReadLine();
+                //                            //productLogic.DisplayProduct<CatFood>(userInput);
+                //                            //and here to solve interface call issue have to change code around a bit
+                //                            validSearch = true;
+                //                        } catch { validSearch = false; }
                                             
-                                        continue;
-                                    } while (validSearch == false);
-                                    break;
-                                }
-                        }
-                        break;
-                    }
+                //                        continue;
+                //                    } while (validSearch == false);
+                //                    break;
+                //                }
+                //        }
+                //        break;
+                //    }
                 case "3":
                     {
                         repo.GetNumberOfProducts();
