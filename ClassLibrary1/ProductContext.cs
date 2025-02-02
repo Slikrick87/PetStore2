@@ -10,8 +10,7 @@ namespace PetStore.Data
     public class ProductContext : DbContext
     {
         public DbSet<ProductEntity> Products { get; set; }
-        //public DbSet<DogLeashEntity> DogLeashes { get; set; }
-        //public DbSet<CatFoodEntity> CatFoods { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
 
         public string DbPath { get; }
 

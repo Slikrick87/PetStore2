@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using PetStore;
+using PetStore.Data.Entities;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace PetStore.Data
@@ -8,8 +9,7 @@ namespace PetStore.Data
     public class ProductContext : DbContext
     {
         public DbSet<ProductEntity> Products { get; set; }
-        public DbSet<DogLeashEntity> DogLeashes { get; set; }
-        public DbSet<CatFoodEntity> CatFoods { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
 
 
         public string DbPath { get; }
@@ -35,12 +35,6 @@ namespace PetStore.Data
             options.UseSqlite($"Data Source={DbPath}");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<ProductEntity>().ToTable("Products");
-        //    modelBuilder.Entity<DogLeashEntity>().ToTable("DogLeashes");
-        //    modelBuilder.Entity<CatFoodEntity>().ToTable("CatFoods");
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,20 +58,18 @@ namespace PetStore.Data
                       .IsRequired()
                       .HasColumnType("TEXT");
             });
-
-            modelBuilder.Entity<CatFoodEntity>(entity =>
+            modelBuilder.Entity<OrderEntity>(Entity =>
             {
-                entity.HasBaseType<ProductEntity>();
-                entity.Property(e => e.KittenFood)
-                      .HasColumnType("INTEGER");
-            });
-
-            modelBuilder.Entity<DogLeashEntity>(entity =>
-            {
-                entity.HasBaseType<ProductEntity>();
-                entity.Property(e => e.LengthInches)
-                      .HasColumnType("INTEGER");
-                entity.Property(e => e.Material)
+                Entity.HasKey(e => e.OrderId);
+                Entity.Property(e => e.OrderId)
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("INTEGER")
+                      .IsRequired();
+                Entity.Property(e => e.OrderDate)
+                      .IsRequired()
+                      .HasColumnType("TEXT");
+                Entity.Property(e => e.Products)
+                      .IsRequired()
                       .HasColumnType("TEXT");
             });
         }

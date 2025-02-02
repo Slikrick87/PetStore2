@@ -6,8 +6,7 @@ namespace PetStore.Data
     {
         private readonly ProductContext _context;
         public DbSet<ProductEntity> Products { get; set; }
-        //public DbSet<DogLeashEntity> DogLeashes { get; set; }
-        //public DbSet<CatFoodEntity> CatFoods { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
         public ProductRepository(ProductContext context)
         {
             _context = context;
@@ -52,7 +51,7 @@ namespace PetStore.Data
         }
         public int GetNumberOfProducts()
         {
-            return _context.DogLeashes.Count() + _context.CatFoods.Count();
+            return _context.Products.Count();
         }
         public int GetNextProductId()
         {
