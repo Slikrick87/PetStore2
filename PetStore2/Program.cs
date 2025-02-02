@@ -139,7 +139,7 @@ public class Program
                 //    }
                 case "3":
                     {
-                        repo.GetNumberOfProducts();
+                        Console.WriteLine("Products in Database:" + repo.GetNumberOfProducts());
                         continue;
                     }
                 //case "7":
