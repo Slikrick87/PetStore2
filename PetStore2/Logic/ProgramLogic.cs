@@ -36,14 +36,14 @@ namespace PetStore.Logic
         {
             Console.WriteLine("------------------------------- [Please Select An Option] ------------------------------");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.Write(" [1 Create And Add Product to Database]");
-            Console.Write(" [2 Display Products in Database]");
+            Console.Write(" [1 Add Product]");
+            Console.Write(" [2 Search]");
             //Console.Write(" [7 Total Inventory Price]");
-            Console.Write(" \n [3 View Number of Products in Database]");
-            //Console.WriteLine(" [8 View Product List]");
-            //Console.Write(" [9 For In Stock Products]");
-            //Console.WriteLine(" [10 For Out Of Stock Products]");
-            //Console.Write(" [0 Edit Product]");
+            Console.Write(" [3 View Number of Products]");
+            Console.WriteLine(" [8 View Product List]");
+            Console.Write(" [9 For In Stock Products]");
+            Console.WriteLine(" [10 For Out Of Stock Products]");
+            Console.Write(" [0 Edit Product]");
             Console.WriteLine(" [Type 'exit' to quit]");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }

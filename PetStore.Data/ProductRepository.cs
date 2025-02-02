@@ -6,22 +6,20 @@ namespace PetStore.Data
     {
         private readonly ProductContext _context;
         public DbSet<ProductEntity> Products { get; set; }
-        //public DbSet<DogLeashEntity> DogLeashes { get; set; }
-        //public DbSet<CatFoodEntity> CatFoods { get; set; }
         public ProductRepository(ProductContext context)
         {
             _context = context;
         }
-        public void AddProduct(ProductEntity product)
+        public void AddProduct<T>(T product)
         {
-            //if (product is CatFoodEntity catFood)
-            //{
-                _context.Products.Add(product);
-            //}
-            //else if (product is DogLeashEntity dogLeash)
-            //{
-            //    _context.DogLeashes.Add(dogLeash);
-            //}
+            if (product is CatFoodEntity catFood)
+            {
+                _context.CatFoods.Add(catFood);
+            }
+            else if (product is DogLeashEntity dogLeash)
+            {
+                _context.DogLeashes.Add(dogLeash);
+            }
             //else
             //{
             //    _context.Products.Add(product);
@@ -29,19 +27,19 @@ namespace PetStore.Data
             //_context.Products.Add(product);
             _context.SaveChanges();
         }
-        public ProductEntity ProductById(int id)
+        public CatFoodEntity GetCatFoodById(int id)
         {
-            var product = _context.Products.Find(id);
-            try { return product; }
+            var catFood = _context.CatFoods.Find(id);
+            try { return catFood; }
             catch { return null; }
 
         }
-        //public DogLeashEntity GetDogLeashById(int id)
-        //{
-        //    var dogLeash = _context.DogLeashes.Find(id);
-        //    try { return dogLeash; }
-        //    catch { return null; }
-        //}
+        public DogLeashEntity GetDogLeashById(int id)
+        {
+            var dogLeash = _context.DogLeashes.Find(id);
+            try { return dogLeash; }
+            catch { return null; }
+        }
         public void GetAllProducts()
         {
             var products = _context.Products.ToList();

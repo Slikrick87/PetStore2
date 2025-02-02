@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace PetStore.Data
+﻿namespace PetStore.Data
 {
     public interface IProductRepository
     {
-        public DbSet<ProductEntity> Products { get; set; }
-        public void AddProduct(ProductEntity product);
-        public ProductEntity ProductById(int id);
+        public void AddProduct<T>(T product);
+        public CatFoodEntity GetCatFoodById(int id);
+        public DogLeashEntity GetDogLeashById(int id);
         public void GetAllProducts();
         public int GetNumberOfProducts();
         public int GetNextProductId();
