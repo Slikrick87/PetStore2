@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using PetStore;
-using PetStore.Data.Entities;
+using PetStore.Data;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace PetStore.Data
@@ -32,7 +32,7 @@ namespace PetStore.Data
             {
                 options.UseSqlite($"Data Source={DbPath}");
             }
-            options.UseSqlite($"Data Source={DbPath}");
+            //options.UseSqlite($"Data Source={DbPath}");
         }
 
 
@@ -68,9 +68,9 @@ namespace PetStore.Data
                 Entity.Property(e => e.OrderDate)
                       .IsRequired()
                       .HasColumnType("TEXT");
-                Entity.Property(e => e.Products)
-                      .IsRequired()
-                      .HasColumnType("TEXT");
+                Entity.HasMany(e => e.Products)
+                      .WithOne(p => p.Order)
+                      .HasForeignKey(p => p.OrderId);
             });
         }
     }

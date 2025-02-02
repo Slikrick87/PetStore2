@@ -51,7 +51,8 @@ namespace PetStore.Data
         }
         public int GetNumberOfProducts()
         {
-            return _context.Products.Count();
+            int count = _context.Products.Count();
+            return count;
         }
         public int GetNextProductId()
         {
