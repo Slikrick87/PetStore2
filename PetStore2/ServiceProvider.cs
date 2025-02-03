@@ -12,7 +12,7 @@ namespace PetStore
             var services = new ServiceCollection();
 
             services.AddDbContext<ProductContext>(options =>
-                options.UseSqlite());
+                options.UseSqlite("YourConnectionString"));
 
             services.AddTransient<IProductLogic, ProductLogic>()
             //.AddTransient<IDogLeash, DogLeashLogic>()

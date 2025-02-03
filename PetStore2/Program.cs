@@ -21,10 +21,10 @@ public class Program
         var productLogic = serviceCollection.GetService<IProductLogic>();
 
         //var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
-        var dogLeashClass = serviceCollection.GetService<IDogLeash>();
+        //var dogLeashClass = serviceCollection.GetService<IDogLeash>();
 
         //var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
-        var catFoodClass = serviceCollection.GetService<ICatFood>();
+        //var catFoodClass = serviceCollection.GetService<ICatFood>();
         //var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var program = new ProgramLogic();
         
