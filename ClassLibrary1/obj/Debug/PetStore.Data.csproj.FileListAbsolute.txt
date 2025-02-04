@@ -1,2 +1,0 @@
-C:\CodeYou\SoftwareDevModule\PetStore2\ClassLibrary1\obj\Debug\PetStore.Data.csproj.AssemblyReference.cache
-C:\CodeYou\SoftwareDevModule\PetStore2\ClassLibrary1\obj\Debug\PetStore.Data.csproj.CoreCompileInputs.cache

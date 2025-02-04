@@ -6,7 +6,7 @@ namespace PetStore.Data
     {
         private readonly ProductContext _context;
         public DbSet<ProductEntity> Products { get; set; }
-        public DbSet<OrderEntity> Orders { get; set; }
+        //public DbSet<OrderEntity> Orders { get; set; }
         public ProductRepository(ProductContext context)
         {
             _context = context;
