@@ -79,8 +79,25 @@ public class Program
                 //    }
                 case "1":
                     {
+                        OrderEntity context;
+                        int OrderId = 0;
+                        Console.WriteLine("Please Input your OrderId. If new Order type \" NEW \" ")
+                        string? oId = "empty";
+                            do
+                        {
+                            oId = Console.ReadLine();
+                            try { OrderId = int.Parse(oId); }
+                            catch { continue; }
+
+                        } while (oId == "" || OrderId <= 0);
+                        
                         ProductEntity newProduct = productLogic.NewProduct();
                         repo.AddProduct(newProduct);
+                        if (oId.ToLower().Trim() == "new")
+                        {
+                            context = new OrderEntity();
+                           
+                        }
                         continue;
                     }
                 case "2":

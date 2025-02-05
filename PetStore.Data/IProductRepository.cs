@@ -6,10 +6,11 @@ namespace PetStore.Data
     {
         public DbSet<ProductEntity> Products { get; set; }
         //public DbSet<OrderEntity> Orders { get; set; }
-        public void AddProduct(ProductEntity product);
+        //public void AddProduct(ProductEntity product);
         public ProductEntity ProductById(int id);
         public void GetAllProducts();
         public int GetNumberOfProducts();
         public int GetNextProductId();
+        public void AddProductDb(ProductEntity product, OrderEntity order);
     }
 }

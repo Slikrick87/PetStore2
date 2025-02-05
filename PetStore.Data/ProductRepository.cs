@@ -11,21 +11,10 @@ namespace PetStore.Data
         {
             _context = context;
         }
-        public void AddProduct(ProductEntity product)
+        public void AddProductDb(ProductEntity product, OrderEntity order)
         {
-            //if (product is CatFoodEntity catFood)
-            //{
                 _context.Products.Add(product);
-            //}
-            //else if (product is DogLeashEntity dogLeash)
-            //{
-            //    _context.DogLeashes.Add(dogLeash);
-            //}
-            //else
-            //{
-            //    _context.Products.Add(product);
-            //}
-            //_context.Products.Add(product);
+            
             _context.SaveChanges();
         }
         public ProductEntity ProductById(int id)
@@ -35,12 +24,7 @@ namespace PetStore.Data
             catch { return null; }
 
         }
-        //public DogLeashEntity GetDogLeashById(int id)
-        //{
-        //    var dogLeash = _context.DogLeashes.Find(id);
-        //    try { return dogLeash; }
-        //    catch { return null; }
-        //}
+        
         public void GetAllProducts()
         {
             var products = _context.Products.ToList();
@@ -57,6 +41,48 @@ namespace PetStore.Data
         public int GetNextProductId()
         {
             return GetNumberOfProducts() + 1;
+        }
+        //public void OrderRepository(OrderContext context)
+        //{
+        //    _context = context;
+        //}
+        public void AddOrder(OrderEntity order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+        public OrderEntity GetOrderById(int id)
+        {
+            //var order = _context.Orders.Where(o => o.OrderId == id).Include(x=>x.Products);
+            //Orders.Include(x => x.Products);
+            try { return (OrderEntity)_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products); }
+            catch { return null; }
+        }
+        public void GetAllOrders()
+        {
+            var orders = _context.Orders.ToList();
+            foreach (var order in orders)
+            {
+                Console.WriteLine($"Order ID: {order.OrderId}, Order Date: {order.OrderDate}");
+            }
+        }
+        public int GetNumberOfOrders()
+        {
+            int count = _context.Orders.Count();
+            return count;
+        }
+        public int GetNextOrderId()
+        {
+            return GetNumberOfOrders() + 1;
+        }
+        public void AddProductToOrder(int orderId, ProductEntity product)
+        {
+            var order = _context.Orders.Find(orderId);
+            if (order != null)
+            {
+                order.Products.Add(product);
+                _context.SaveChanges();
+            }
         }
     }
 }

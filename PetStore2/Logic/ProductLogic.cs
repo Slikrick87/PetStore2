@@ -6,9 +6,10 @@ namespace PetStore
     public class ProductLogic : IProductLogic
     {
         private readonly IProductRepository _IRepo;
+        private readonly IOrderRepository _IOrderRepo;
 
         //public Dictionary<String, DogLeash> _dogLeash = new(StringComparer.InvariantCultureIgnoreCase);
-        
+
         public ProductValidator productValidator = new ProductValidator();
         public ProductLogic(IProductRepository Repo)
         {
@@ -22,6 +23,9 @@ namespace PetStore
         }
         public ProductEntity NewProduct()
         {
+            int id;
+            id = _IRepo.GetNextProductId();
+
             string name;
             do
             {
@@ -49,13 +53,15 @@ namespace PetStore
                 description = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(description));
             //int id = _IRepo.GetNextProductId();
+            int orderId = _IOrderRepo.GetNextOrderId();
             ProductEntity product = new ProductEntity
             {
-                //Id = id,
+                Id = id,
                 Name = name,
                 Price = productPrice,
                 Quantity = productQuantity,
-                Description = description
+                Description = description,
+                OrderId = orderId
             };
             return product;
         }
