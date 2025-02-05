@@ -25,6 +25,7 @@ public class Program
 
         string userInput = "cool";
         int WorkingOrderId;
+        OrderEntity order = repo.GetOrderById(1);
 
 
 
@@ -32,7 +33,7 @@ public class Program
         {
 
             program.DisplayMenuInputOptions();
-            OrderEntity order = null;
+            //OrderEntity order = null;
             int orderId = 0;
             userInput = Console.ReadLine();
             switch (userInput)
@@ -53,10 +54,10 @@ public class Program
                                 order = repo.NewOrder();
                                 Console.WriteLine($"OrderId: {order.OrderId}");
                             }
-                            else if (input.ToLower().Trim() == "exit")
-                            {
-                                break;
-                            }
+                            //else if (input.ToLower().Trim() == "exit")
+                            //{
+                            //    break;
+                            //}
                             else
                             {
                                 try
@@ -81,10 +82,12 @@ public class Program
                                 catch
                                 {
                                     Console.WriteLine("Order Does Not Exist! Try Again!");
+                                    break; 
                                 }
+                                
                             }
-                            
-                        } while (OrderId == 0);
+                            break;
+                        } while (input.ToLower().Trim() != "exit");
 
                         //ProductEntity newProduct = productLogic.NewProduct();
                         //repo.AddProductDb();
@@ -104,7 +107,7 @@ public class Program
                             userInput = Console.ReadLine();
                             if (userInput.ToLower().Trim() == "exit")
                             {
-                                break;
+                                continue;
                             }
                             else
                             {
@@ -120,7 +123,7 @@ public class Program
                                         if (addToCart.ToLower() == "y")
                                         {
                                             try {
-                                                repo.AddProductToOrder(order.OrderId, product);
+                                                repo.AddProductToOrder(order, product);
                                             }
                                             catch
                                             {
@@ -140,7 +143,7 @@ public class Program
                                 continue;
                             }
 
-                        } while (userInput != "exit");
+                        } while (userInput.ToLower().Trim() != "exit");
                         continue;
                     }
 
@@ -227,7 +230,23 @@ public class Program
                             //orderId = int.Parse(userInput);
                         } while (!int.TryParse(userInput, out WorkingOrderId));
                         WorkingOrderId = int.Parse(userInput);
+                        order = repo.GetOrderById(WorkingOrderId);
                         
+                        continue;
+                    }
+                case "7":
+                    {
+                        do {
+                            Console.WriteLine("Input OrderId of Order You'd Like to View.");
+                            userInput = Console.ReadLine();
+                        } while ((!int.TryParse(userInput, out WorkingOrderId) && userInput.ToLower().Trim() != "exit"));
+                        if (userInput.ToLower().Trim() == "exit")
+                        {
+                            break;
+                        }
+                        orderId = int.Parse(userInput);
+                        order = repo.GetOrderById(orderId);
+                        repo.DisplayProductsInOrder(order);
                         continue;
                     }
                 //case "9":
@@ -271,6 +290,10 @@ public class Program
                         //} while (string.IsNullOrWhiteSpace(name));
                         repo.AddProductDb(newProduct);
                         continue;
+                    }
+                case "exit":
+                    {
+                        break;
                     }
                 default:
                     {

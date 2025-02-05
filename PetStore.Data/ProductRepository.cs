@@ -6,7 +6,7 @@ namespace PetStore.Data
     {
         private readonly ProductContext _context;
         public DbSet<ProductEntity> Products { get; set; }
-        //public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
         public ProductRepository(ProductContext context)
         {
             _context = context;
@@ -63,19 +63,29 @@ namespace PetStore.Data
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
-        public OrderEntity GetOrderById(int id)
+        //public OrderEntity GetOrderById(int id)
+        //{
+        //    //var order = _context.Orders.Where(o => o.OrderId == id).Include(x=>x.Products);
+        //    //Orders.Include(x => x.Products);
+        //    if (_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products) == null)
+        //    {
+public OrderEntity GetOrderById(int id)
         {
-            //var order = _context.Orders.Where(o => o.OrderId == id).Include(x=>x.Products);
-            //Orders.Include(x => x.Products);
-            if (_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products) == null)
-            {
-                return (OrderEntity)_context.Orders.Where(o => o.OrderId == id);
-            }
-            else
-            {
-                return (OrderEntity)_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products); }
-            
+            var order = _context.Orders
+                                .Include(o => o.Products)
+                                .FirstOrDefault(o => o.OrderId == id);
+            return order;
         }
+    //}
+        //    else if
+        //        {
+
+        //    }
+        //    else
+        //    {
+        //        return (OrderEntity)_context.Orders.Where(o => o.OrderId == id)/*.Include(x => x.Products)*/; }
+            
+        //}
         public void GetAllOrders()
         {
             var orders = _context.Orders.ToList();
@@ -93,13 +103,20 @@ namespace PetStore.Data
         {
             return GetNumberOfOrders() + 1;
         }
-        public void AddProductToOrder(int orderId, ProductEntity product)
+        public void AddProductToOrder(OrderEntity order, ProductEntity product)
         {
-            var order = GetOrderById(orderId);
+            //var order = GetOrderById(orderId);
             if (order != null)
             {
                 order.Products.Add(product);
                 _context.SaveChanges();
+            }
+        }
+        public void DisplayProductsInOrder(OrderEntity order)
+        {
+            foreach (ProductEntity p in order.Products)
+            {
+                Console.WriteLine($"Product Name: " + p.Name);
             }
         }
     }

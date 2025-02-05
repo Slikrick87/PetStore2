@@ -14,9 +14,10 @@ namespace PetStore.Data
         public void AddProductDb(ProductEntity product);
         public void AddOrder(OrderEntity order);
         public OrderEntity GetOrderById(int id);
-        public void AddProductToOrder(int orderId, ProductEntity product);
+        public void AddProductToOrder(OrderEntity order, ProductEntity product);
         public void GetAllOrders();
         public OrderEntity NewOrder();
+        public void DisplayProductsInOrder(OrderEntity order);
 
     }
 }

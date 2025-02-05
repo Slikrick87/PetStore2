@@ -36,6 +36,7 @@ namespace PetStore.Logic
             Console.WriteLine(" [4 View Product List]");
             Console.WriteLine("\n[5 View Current Orders]");
             Console.Write(" [6 Change Current Order By OrderId]");
+            Console.WriteLine(" [7 View Order By OrderId]");
             //Console.Write(" [9 For In Stock Products]");
             //Console.WriteLine(" [10 For Out Of Stock Products]");
             Console.WriteLine(" [0 Add New Product]");
