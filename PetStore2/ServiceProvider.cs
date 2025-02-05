@@ -12,11 +12,13 @@ namespace PetStore
             var services = new ServiceCollection();
 
             services.AddDbContext<ProductContext>();
+            services.AddDbContext<OrderContext>();
 
             services.AddTransient<IProductLogic, ProductLogic>()
             //.AddTransient<IDogLeash, DogLeashLogic>()
             //.AddTransient<ICatFood, CatFoodLogic>()
             .AddTransient<IProductRepository, ProductRepository>()
+            .AddTransient<IOrderRepository, OrderRepository>()
             .BuildServiceProvider();
 
             return services.BuildServiceProvider();

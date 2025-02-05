@@ -17,7 +17,8 @@ public class Program
         ///not certain that calling the actual Logic class was the right move here but bool valid
         ///search didn't exist in the Interface
         var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
-        var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
+        var productRepo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
+        var orderRepo = serviceCollection.GetService<PetStore.Data.IOrderRepository>();
         var productLogic = serviceCollection.GetService<IProductLogic>();
         var program = new ProgramLogic();
         
@@ -25,7 +26,8 @@ public class Program
 
         string userInput = "cool";
         int WorkingOrderId;
-        OrderEntity order = repo.GetOrderById(1);
+        OrderEntity order = orderRepo.GetOrderById(1);
+        
 
 
 
@@ -35,6 +37,7 @@ public class Program
             program.DisplayMenuInputOptions();
             //OrderEntity order = null;
             int orderId = 0;
+            string loopInput;
             userInput = Console.ReadLine();
             switch (userInput)
             {
@@ -51,7 +54,7 @@ public class Program
                             input = Console.ReadLine();
                             if (input.ToLower().Trim() == "new")
                             {
-                                order = repo.NewOrder();
+                                order = orderRepo.NewOrder();
                                 Console.WriteLine($"OrderId: {order.OrderId}");
                             }
                             //else if (input.ToLower().Trim() == "exit")
@@ -63,7 +66,7 @@ public class Program
                                 try
                                 {
                                     OrderId = int.Parse(input);
-                                    order = repo.GetOrderById(OrderId);
+                                    order = orderRepo.GetOrderById(OrderId);
                                     if (order.Products != null)
                                     {
                                         foreach (ProductEntity p in order.Products)
@@ -90,7 +93,7 @@ public class Program
                         } while (input.ToLower().Trim() != "exit");
 
                         //ProductEntity newProduct = productLogic.NewProduct();
-                        //repo.AddProductDb();
+                        //productRepo.AddProductDb();
                         
                         continue;
                     }
@@ -104,8 +107,8 @@ public class Program
                             }
                             
                             Console.WriteLine("Input Product Id. \nTo exit input input exit");
-                            userInput = Console.ReadLine();
-                            if (userInput.ToLower().Trim() == "exit")
+                            loopInput = Console.ReadLine();
+                            if (loopInput.ToLower().Trim() == "exit")
                             {
                                 continue;
                             }
@@ -113,8 +116,8 @@ public class Program
                             {
                                 try
                                 {
-                                    int id = int.Parse(userInput);
-                                    ProductEntity product = repo.ProductById(id);
+                                    int id = int.Parse(loopInput);
+                                    ProductEntity product = productRepo.ProductById(id);
                                     if (product != null)
                                     {
                                         Console.WriteLine($"Product: {product.Name}, Price: {product.Price}");
@@ -123,7 +126,7 @@ public class Program
                                         if (addToCart.ToLower() == "y")
                                         {
                                             try {
-                                                repo.AddProductToOrder(order, product);
+                                                orderRepo.AddProductToOrder(order, product);
                                             }
                                             catch
                                             {
@@ -143,13 +146,13 @@ public class Program
                                 continue;
                             }
 
-                        } while (userInput.ToLower().Trim() != "exit");
+                        } while (loopInput.ToLower().Trim() != "exit");
                         continue;
                     }
 
                 //case "3":
                 //    {
-                //        repo.GetAllProducts();
+                //        productRepo.GetAllProducts();
                 //        continue;
                 //    }
 
@@ -203,7 +206,7 @@ public class Program
                 //    }
                 case "3":
                     {
-                        Console.WriteLine("Products in Database:" + repo.GetNumberOfProducts());
+                        Console.WriteLine("Products in Database:" + productRepo.GetNumberOfProducts());
                         continue;
                     }
                 //case "7":
@@ -213,12 +216,12 @@ public class Program
                 //    }
                 case "4":
                     {
-                        repo.GetAllProducts();
+                        productRepo.GetAllProducts();
                         continue;
                     }
                 case "5":
                     {
-                        repo.GetAllOrders();
+                        orderRepo.GetAllOrders();
                         continue;
                     }
                 case "6":
@@ -230,7 +233,7 @@ public class Program
                             //orderId = int.Parse(userInput);
                         } while (!int.TryParse(userInput, out WorkingOrderId));
                         WorkingOrderId = int.Parse(userInput);
-                        order = repo.GetOrderById(WorkingOrderId);
+                        order = orderRepo.GetOrderById(WorkingOrderId);
                         
                         continue;
                     }
@@ -245,8 +248,8 @@ public class Program
                             break;
                         }
                         orderId = int.Parse(userInput);
-                        order = repo.GetOrderById(orderId);
-                        repo.DisplayProductsInOrder(order);
+                        order = orderRepo.GetOrderById(orderId);
+                        orderRepo.DisplayProductsInOrder(order);
                         continue;
                     }
                 //case "9":
@@ -288,7 +291,7 @@ public class Program
                         //    Console.WriteLine("Input Description");
                         //    name = Console.ReadLine();
                         //} while (string.IsNullOrWhiteSpace(name));
-                        repo.AddProductDb(newProduct);
+                        productRepo.AddProductDb(newProduct);
                         continue;
                     }
                 case "exit":

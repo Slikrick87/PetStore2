@@ -17,7 +17,7 @@
 //        //public DogLeashEntity AddDogLeash(DogLeashEntity dogLeash);
 //        //public void GetDogLeashByName(string name);
 //        //public DogLeashEntity CreateNewDogLeashJson();
-//        //public void DogLeashRepo(DogLeashLogic dogLeashLogic);
+//        //public void DogLeashproductRepo(DogLeashLogic dogLeashLogic);
 //    }
 //   ///Should I put Extensions in Interface?
 //}

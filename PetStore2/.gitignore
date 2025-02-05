@@ -67,7 +67,7 @@ artifacts/
 ScaffoldingReadMe.txt
 
 # StyleCop
-StyleCopReport.xml
+StyleCopproductReport.xml
 
 # Files built by Visual Studio
 *_i.c
@@ -201,7 +201,7 @@ PublishScripts/
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
-#!**/[Pp]ackages/repositories.config
+#!**/[Pp]ackages/productRepositories.config
 # NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
@@ -251,10 +251,10 @@ orleans.codegen.cs
 # RIA/Silverlight projects
 Generated_Code/
 
-# Backup & report files from converting an old project file
+# Backup & productReport files from converting an old project file
 # to a newer Visual Studio version. Backup files are not needed,
 # because we have git ;-)
-_UpgradeReport_Files/
+_UpgradeproductReport_Files/
 Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm

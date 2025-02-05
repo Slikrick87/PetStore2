@@ -5,26 +5,26 @@ namespace PetStore
 {
     public class ProductLogic : IProductLogic
     {
-        private readonly IProductRepository _IRepo;
-        private readonly IOrderRepository _IOrderRepo;
+        private readonly IProductRepository _IproductRepo;
+        private readonly IOrderRepository _IOrderproductRepo;
 
         //public Dictionary<String, DogLeash> _dogLeash = new(StringComparer.InvariantCultureIgnoreCase);
 
         public ProductValidator productValidator = new ProductValidator();
-        public ProductLogic(IProductRepository Repo)
+        public ProductLogic(IProductRepository productRepo)
         {
-            _IRepo = Repo;
+            _IproductRepo = productRepo;
         }
         //public void AddProduct(ProductEntity product)
         public void AddProductDb(ProductEntity product)
         {
             
-            _IRepo.AddProductDb(product);
+            _IproductRepo.AddProductDb(product);
         }
         public ProductEntity NewProduct()
         {
             int id;
-            id = _IRepo.GetNextProductId();
+            id = _IproductRepo.GetNextProductId();
 
             string name;
             do
@@ -52,8 +52,8 @@ namespace PetStore
                 Console.WriteLine("Enter the description of the product: ");
                 description = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(description));
-            //int id = _IRepo.GetNextProductId();
-           // int orderId = _IOrderRepo.GetNextOrderId();
+            //int id = _IproductRepo.GetNextProductId();
+           // int orderId = _IOrderproductRepo.GetNextOrderId();
             ProductEntity product = new ProductEntity
             (name, productPrice, productQuantity, description);
             return product;
