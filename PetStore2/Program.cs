@@ -19,26 +19,12 @@ public class Program
         var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
         var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var productLogic = serviceCollection.GetService<IProductLogic>();
-
-        //var dogLeashServiceCollection = ServiceDependencyProvider.CreateDogLeashServiceCollection();
-        //var dogLeashClass = serviceCollection.GetService<IDogLeash>();
-
-        //var catFoodServiceCollection = ServiceDependencyProvider.CreateCatFoodServiceCollection();
-        //var catFoodClass = serviceCollection.GetService<ICatFood>();
-        //var repo = serviceCollection.GetService<PetStore.Data.IProductRepository>();
         var program = new ProgramLogic();
         
         program.OpeningSequence();
 
         string userInput = "cool";
-
-        //should be replacing the instances of productLogic, Dogleashlogic, etc. with ServiceDependencyProvider.
-        //var productLogic = new ProductLogic();
-        //var catFoodClass = new CatFoodLogic();
-        //var dogLeashClass = new DogLeashLogic();
-        //ProductLogic.CatFoodRepo(productLogic);
-        //ProductLogic.DogLeashRepo(dogLeashClass);
-
+        int WorkingOrderId;
 
 
 
@@ -46,65 +32,123 @@ public class Program
         {
 
             program.DisplayMenuInputOptions();
-
+            OrderEntity order = null;
+            int orderId = 0;
             userInput = Console.ReadLine();
             switch (userInput)
             {
-                //case "1":
-                //    {
-                //        Console.WriteLine("please enter product type(Dog Leash, Cat Food)");
-                //        string selection = Console.ReadLine();
-                //        selection = selection.ToLower().Replace(" ", "");
-                //        switch (selection.ToLower().Trim())
-                //        {
-                //            case "dogleash":
-                //                {
-                                    
-                //                        Console.WriteLine("You've Selected Dog Leash");
-                //                        dogLeashClass.NewDogLeash();
-                //                        continue;
-                                    
-                //                }
-                //            case "catfood":
-                //                {
-                                    
-                //                        Console.WriteLine("You've Selected Cat Food By Field.");
-                //                        catFoodClass.NewCatFood();
-                //                        continue;
-                                   
-                //                }
-                                
-                //        }
-                //        continue;
-                //    }
                 case "1":
                     {
-                        OrderEntity context;
+                        //OrderEntity context;
                         int OrderId = 0;
-                        Console.WriteLine("Please Input your OrderId. If new Order type \" NEW \" ")
-                        string? oId = "empty";
-                            do
+                        string input;
+                        //OrderEntity? order;
+                        do
                         {
-                            oId = Console.ReadLine();
-                            try { OrderId = int.Parse(oId); }
-                            catch { continue; }
+                            Console.WriteLine("Please Input your OrderId. If new Order type \" NEW \" /n to exit input input \"exit\" ");
 
-                        } while (oId == "" || OrderId <= 0);
+                            input = Console.ReadLine();
+                            if (input.ToLower().Trim() == "new")
+                            {
+                                order = repo.NewOrder();
+                                Console.WriteLine($"OrderId: {order.OrderId}");
+                            }
+                            else if (input.ToLower().Trim() == "exit")
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    OrderId = int.Parse(input);
+                                    order = repo.GetOrderById(OrderId);
+                                    if (order.Products != null)
+                                    {
+                                        foreach (ProductEntity p in order.Products)
+                                        {
+                                            Console.WriteLine($"Product Name: {p.Name}");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Order Is Empty");
+
+                                    }
+                                   
+                                    continue;
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Order Does Not Exist! Try Again!");
+                                }
+                            }
+                            
+                        } while (OrderId == 0);
+
+                        //ProductEntity newProduct = productLogic.NewProduct();
+                        //repo.AddProductDb();
                         
-                        ProductEntity newProduct = productLogic.NewProduct();
-                        repo.AddProduct(newProduct);
-                        if (oId.ToLower().Trim() == "new")
-                        {
-                            context = new OrderEntity();
-                           
-                        }
                         continue;
                     }
                 case "2":
                     {
-                        repo.GetAllProducts();
+                        do
+                        {
+                            if (order != null)
+                            {
+                                Console.WriteLine($"Current Order:" + order.OrderId);
+                            }
+                            
+                            Console.WriteLine("Input Product Id. \nTo exit input input exit");
+                            userInput = Console.ReadLine();
+                            if (userInput.ToLower().Trim() == "exit")
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    int id = int.Parse(userInput);
+                                    ProductEntity product = repo.ProductById(id);
+                                    if (product != null)
+                                    {
+                                        Console.WriteLine($"Product: {product.Name}, Price: {product.Price}");
+                                        Console.WriteLine($"Add {product.Name} to Cart? (y/n)");
+                                        string addToCart = Console.ReadLine();
+                                        if (addToCart.ToLower() == "y")
+                                        {
+                                            try {
+                                                repo.AddProductToOrder(order.OrderId, product);
+                                            }
+                                            catch
+                                            {
+                                                Console.WriteLine("Product Not Added");
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Product Not Found");
+                                    }
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Invalid Input");
+                                }
+                                continue;
+                            }
+
+                        } while (userInput != "exit");
                         continue;
                     }
+
+                //case "3":
+                //    {
+                //        repo.GetAllProducts();
+                //        continue;
+                //    }
 
                 //case "2":
                 //    {
@@ -164,9 +208,26 @@ public class Program
                 //        Console.WriteLine($"\nTotal Price of Inventory: ${productLogic.GetProductInventoryTotal()}\n");
                 //        continue;
                 //    }
-                case "8":
+                case "4":
                     {
                         repo.GetAllProducts();
+                        continue;
+                    }
+                case "5":
+                    {
+                        repo.GetAllOrders();
+                        continue;
+                    }
+                case "6":
+                    {
+                        do
+                        {
+                            Console.WriteLine("Input OrderId of Order You'd Like to work with.");
+                            userInput = Console.ReadLine();
+                            //orderId = int.Parse(userInput);
+                        } while (!int.TryParse(userInput, out WorkingOrderId));
+                        WorkingOrderId = int.Parse(userInput);
+                        
                         continue;
                     }
                 //case "9":
@@ -183,20 +244,34 @@ public class Program
                 //        //Console.WriteLine(String.Join("\n", catFoodClass.GetOutOfStockCatFood()));
                 //        continue;
                 //    }
-                //case "0":
-                //    {
-                //        Console.WriteLine("Please Enter Product Type:");
-                //        userInput = Console.ReadLine();
-                //        if (userInput.ToLower().Replace(" ", "") == "dogleash")
-                //        {
-                //            dogLeashClass.EditProductDogLeash();
-                //        }
-                //        else if (userInput.ToLower().Replace(" ", "") == "catfood")
-                //        {
-                //            catFoodClass.EditProductCatFood();
-                //        }
-                //        continue;
-                //    }
+                case "0":
+                    {
+                        Console.WriteLine("Please Input Data For New Product");
+                        ProductEntity newProduct = productLogic.NewProduct();
+                        //string name;
+                        //do 
+                        //{
+                        //    Console.WriteLine("Input Name");
+                        //    name = Console.ReadLine();
+                        //} while (string.IsNullOrWhiteSpace(name));
+                        //do
+                        //{
+                        //    Console.WriteLine("Input Price");
+                        //    userInput = Console.ReadLine();
+                        //} while (!decimal.TryParse(userInput, out decimal price));
+                        //do
+                        //{
+                        //    Console.WriteLine("Input Quantity");
+                        //    userInput = Console.ReadLine();
+                        //} while (!int.TryParse(userInput, out int quantity));
+                        //do
+                        //{
+                        //    Console.WriteLine("Input Description");
+                        //    name = Console.ReadLine();
+                        //} while (string.IsNullOrWhiteSpace(name));
+                        repo.AddProductDb(newProduct);
+                        continue;
+                    }
                 default:
                     {
                         break;

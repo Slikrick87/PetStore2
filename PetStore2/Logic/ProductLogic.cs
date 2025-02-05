@@ -19,7 +19,7 @@ namespace PetStore
         public void AddProductDb(ProductEntity product)
         {
             
-            _IRepo.AddProduct(product);
+            _IRepo.AddProductDb(product);
         }
         public ProductEntity NewProduct()
         {
@@ -53,16 +53,9 @@ namespace PetStore
                 description = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(description));
             //int id = _IRepo.GetNextProductId();
-            int orderId = _IOrderRepo.GetNextOrderId();
+           // int orderId = _IOrderRepo.GetNextOrderId();
             ProductEntity product = new ProductEntity
-            {
-                Id = id,
-                Name = name,
-                Price = productPrice,
-                Quantity = productQuantity,
-                Description = description,
-                OrderId = orderId
-            };
+            (name, productPrice, productQuantity, description);
             return product;
         }
     }

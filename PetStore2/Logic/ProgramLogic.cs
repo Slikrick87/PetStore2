@@ -10,13 +10,6 @@ namespace PetStore.Logic
 {
     public class ProgramLogic : Program
     {
-        //public IServiceProvider ServiceCreator(_interface)
-        //{
-        //    var serviceCollection = ServiceDependencyProvider.CreateProductServiceCollection();
-        //    var productLogic = serviceCollection.GetService<IProductLogic>();
-        //    return productLogic;
-            
-        //}
         public void OpeningSequence()
         {
             //when makin 
@@ -36,14 +29,16 @@ namespace PetStore.Logic
         {
             Console.WriteLine("------------------------------- [Please Select An Option] ------------------------------");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.Write(" [1 Create And Add Product to Database]");
-            Console.Write(" [2 Display Products in Database]");
+            Console.Write(" [1 Find Or Create New Order]");
+            Console.Write(" [2 Add Product To Order By Product Id]");
             //Console.Write(" [7 Total Inventory Price]");
             Console.Write(" \n [3 View Number of Products in Database]");
-            //Console.WriteLine(" [8 View Product List]");
+            Console.WriteLine(" [4 View Product List]");
+            Console.WriteLine("\n[5 View Current Orders]");
+            Console.Write(" [6 Change Current Order By OrderId]");
             //Console.Write(" [9 For In Stock Products]");
             //Console.WriteLine(" [10 For Out Of Stock Products]");
-            //Console.Write(" [0 Edit Product]");
+            Console.WriteLine(" [0 Add New Product]");
             Console.WriteLine(" [Type 'exit' to quit]");
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }

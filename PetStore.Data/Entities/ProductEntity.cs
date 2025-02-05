@@ -19,11 +19,15 @@ namespace PetStore.Data
         
         [ForeignKey("Order")]
         public int? OrderId { get; set; }
-        public OrderEntity Order { get; set; }
+        public OrderEntity? Order { get; set; }
 
-        public ProductEntity()
+        public ProductEntity(string name, decimal price, int quantity, string description)
         {
-            
+            this.Name = name;
+            this.Price = price;
+            this.Quantity = quantity;
+            this.Description = description;
+
         }
     }
 }

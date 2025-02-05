@@ -11,7 +11,7 @@ namespace PetStore.Data
         {
             _context = context;
         }
-        public void AddProductDb(ProductEntity product, OrderEntity order)
+        public void AddProductDb(ProductEntity product)
         {
                 _context.Products.Add(product);
             
@@ -30,7 +30,7 @@ namespace PetStore.Data
             var products = _context.Products.ToList();
             foreach (var product in products)
             {
-                Console.WriteLine($"Product: {product.Name}, Price: {product.Price}");
+                Console.WriteLine($"Product: {product.Name}, Price: {product.Price}, Quantity: {product.Quantity}, ID: {product.Id}");
             }
         }
         public int GetNumberOfProducts()
@@ -46,6 +46,18 @@ namespace PetStore.Data
         //{
         //    _context = context;
         //}
+        public OrderEntity NewOrder()
+        {
+            //int id = GetNextOrderId();
+            DateTime date = DateTime.Now;
+            OrderEntity order = new OrderEntity
+            {
+                //OrderId = id,
+                OrderDate = date
+            };
+            AddOrder(order);
+            return order;
+        }
         public void AddOrder(OrderEntity order)
         {
             _context.Orders.Add(order);
@@ -55,8 +67,14 @@ namespace PetStore.Data
         {
             //var order = _context.Orders.Where(o => o.OrderId == id).Include(x=>x.Products);
             //Orders.Include(x => x.Products);
-            try { return (OrderEntity)_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products); }
-            catch { return null; }
+            if (_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products) == null)
+            {
+                return (OrderEntity)_context.Orders.Where(o => o.OrderId == id);
+            }
+            else
+            {
+                return (OrderEntity)_context.Orders.Where(o => o.OrderId == id).Include(x => x.Products); }
+            
         }
         public void GetAllOrders()
         {
@@ -77,7 +95,7 @@ namespace PetStore.Data
         }
         public void AddProductToOrder(int orderId, ProductEntity product)
         {
-            var order = _context.Orders.Find(orderId);
+            var order = GetOrderById(orderId);
             if (order != null)
             {
                 order.Products.Add(product);
