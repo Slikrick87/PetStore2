@@ -11,9 +11,11 @@ namespace PetStore
         //public Dictionary<String, DogLeash> _dogLeash = new(StringComparer.InvariantCultureIgnoreCase);
 
         public ProductValidator productValidator = new ProductValidator();
-        public ProductLogic(IProductRepository productRepo)
+        public ProductLogic(IProductRepository productRepo, IOrderRepository orderRepo)
         {
             _IproductRepo = productRepo;
+            _IOrderproductRepo = orderRepo;
+                //or create third repo to inherit from both
         }
         //public void AddProduct(ProductEntity product)
         public void AddProductDb(ProductEntity product)

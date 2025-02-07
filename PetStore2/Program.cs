@@ -117,7 +117,7 @@ public class Program
                                 try
                                 {
                                     int id = int.Parse(loopInput);
-                                    ProductEntity product = productRepo.ProductById(id);
+                                    ProductEntity product = productRepo.GetProductById(id);
                                     if (product != null)
                                     {
                                         Console.WriteLine($"Product: {product.Name}, Price: {product.Price}");

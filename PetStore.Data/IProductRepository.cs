@@ -7,7 +7,7 @@ namespace PetStore.Data
         public DbSet<ProductEntity> Products { get; set; }
         //public DbSet<OrderEntity> Orders { get; set; }
         //public void AddProduct(ProductEntity product);
-        public ProductEntity ProductById(int id);
+        public ProductEntity GetProductById(int id);
         public void GetAllProducts();
         public int GetNumberOfProducts();
         public int GetNextProductId();

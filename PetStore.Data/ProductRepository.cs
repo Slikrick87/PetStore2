@@ -17,7 +17,7 @@ namespace PetStore.Data
             
             _context.SaveChanges();
         }
-        public ProductEntity ProductById(int id)
+        public ProductEntity GetProductById(int id)
         {
             var product = _context.Products.Find(id);
             try { return product; }
